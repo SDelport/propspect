@@ -1,0 +1,23 @@
+﻿@model PropSpect.Web.Models.FormModels.ReviewItemFormModel
+
+<h2>@Model.Name</h2>
+<form class="form-horizontal">
+    <input value="@Model.PageID" type="hidden" />
+    @foreach (var item in Model.ReviewItemParts)
+    {
+        <div class="form-group">
+            <div class="col-md-2"><label>@item.Name</label></div>
+            <div class="col-md-4 col-sm-5"><input type="text" class="form-control" id="" placeholder="@item.Name"></div>
+            <div class="col-md-4  col-sm-5">
+                @Form.Dropdown(x=>x.ConditionID,Model.ConditionItems)
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <button class="btn-block btn  btn-primary">Upload</button>
+            </div>
+        </div>
+    }
+
+
+    <button class="btn btn-primary">Next (Part @Model.Number of @Model.Number)</button>
+</form>
+
