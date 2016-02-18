@@ -1,4 +1,5 @@
 ﻿using PropSpect.Api.Data;
+using PropSpect.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,15 @@ namespace PropSpect.Api.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
+
+        DatabaseContext db = new DatabaseContext();
+
         public JsonResult<List<string>> Get()
         {
             List<string> values = new List<string>() { "test", "test2" };
+
+            var landlords = db.Landlords.ToList();
+        
 
             return Json(values);
         }

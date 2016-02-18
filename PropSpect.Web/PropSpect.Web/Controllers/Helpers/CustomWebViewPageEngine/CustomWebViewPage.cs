@@ -7,13 +7,16 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
-    public class CustomWebViewPage : WebViewPage
+    public abstract class CustomWebViewPage : WebViewPage
     {
-        public override void Execute()
-        {
-            throw new NotImplementedException();
-        }
+        public Form Form { get; set; }
 
-        HtmlExtensions
+
+
+        public override void InitHelpers()
+        {
+            base.InitHelpers();
+        }
     }
+
 }

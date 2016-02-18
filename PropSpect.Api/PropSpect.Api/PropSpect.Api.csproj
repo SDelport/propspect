@@ -52,21 +52,17 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework6.Npgsql, Version=3.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.0.5\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.EF6.2.0.12-pre4\lib\net45\Mono.Security.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Security.Protocol.Tls, Version=1.0.1528.33423, Culture=neutral, PublicKeyToken=4c884638a2b03853">
-      <HintPath>..\packages\Npgsql.EF6.2.0.12-pre4\lib\net45\Mono.Security.Protocol.Tls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.EF6.2.0.12-pre4\lib\net45\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=3.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.0.5\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Npgsql.EntityFramework, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
@@ -147,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\LandLord\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -185,11 +181,19 @@
     <Compile Include="Controllers\Helpers\Versioning\VersionConstraint.cs" />
     <Compile Include="Controllers\Helpers\Versioning\VersionRoute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\PropertyDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\Inspection.cs" />
+    <Compile Include="Models\InspectionArea.cs" />
+    <Compile Include="Models\LandLord.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\Tenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -124,10 +124,12 @@
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Form.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FormModels\InspectionFormModel.cs" />
+    <Compile Include="Models\FormModels\LandLord\AddLandLordFormModel.cs" />
     <Compile Include="Models\FormModels\ReviewItemCharacteristicFormModel.cs" />
     <Compile Include="Models\FormModels\ReviewItemFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,6 +173,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Inspection\CreateInspection.cshtml" />
     <Content Include="Views\Inspection\InspectionRoom.cshtml" />
+    <Content Include="Views\LandLord\AddLandLord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
