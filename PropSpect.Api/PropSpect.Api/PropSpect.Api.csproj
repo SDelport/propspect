@@ -188,11 +188,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\AreaItem.cs" />
     <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Inspection.cs" />
     <Compile Include="Models\InspectionArea.cs" />
+    <Compile Include="Models\InspectionAreaItem.cs" />
     <Compile Include="Models\LandLord.cs" />
+    <Compile Include="Models\LandlordTemplate.cs" />
+    <Compile Include="Models\LandlordTemplateArea.cs" />
+    <Compile Include="Models\LandlordTemplateAreaItem.cs" />
     <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\PropertyTenant.cs" />
     <Compile Include="Models\Tenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
