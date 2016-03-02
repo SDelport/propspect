@@ -1,0 +1,35 @@
+﻿@model List<PropSpect.Api.Models.Response.LandLordResponse>
+@{
+    ViewBag.Title = "List";
+}
+
+<h1 class="page-title">Landlords</h1>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+           <th> Name</th>
+           <th> FirstName</th>
+           <th> LastName</th>
+           <th> Type</th>
+           <th> IDNumber</th>
+           <th> TelWork</th>
+           <th> TelMobile</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var landlord in Model)
+    {
+        <tr>
+            <td>@landlord.Name</td>
+            <td>@landlord.FirstName</td>
+            <td>@landlord.LastName</td>
+            <td>@landlord.LastName</td>
+            <td>@landlord.IDNumber</td>
+            <td>@landlord.TelWork</td>
+            <td>@landlord.TelMobile</td>
+            <td><a href="/landlord/edit/@landlord.LandlordID">Edit</a></td>
+        </tr>
+    }
+</table>

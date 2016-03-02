@@ -1,0 +1,26 @@
+﻿@model PropSpect.Web.Models.FormModels.Property.AddPropertyFormModel
+@{
+    ViewBag.Title = "AddLandLord";
+}
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1 class="page-title">Add/Edit Property</h1>
+        <form action="/property/added" method="post">
+            @Form.Hidden(x => x.PropertyID)
+            @Form.Textbox(x => x.PropertyType)
+            @Form.Textbox(x => x.UnitNumber)
+            @Form.Textbox(x => x.ComplexName)
+            @Form.Textbox(x => x.StreetNumber)
+            @Form.Textbox(x => x.StreetName)
+            @Form.Textbox(x => x.Suburb)
+            @Form.Textbox(x => x.City)
+            @Form.Textbox(x => x.PostalCode)
+
+
+            @Form.SubmitButton("Save")
+        </form>
+    </div>
+</div>
+

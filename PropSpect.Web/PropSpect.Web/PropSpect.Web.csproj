@@ -122,13 +122,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\CustomWebViewPage.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Form.cs" />
+    <Compile Include="Controllers\Helpers\FormControl.cs" />
+    <Compile Include="Controllers\Helpers\HtmlExtensions.cs" />
+    <Compile Include="Controllers\Helpers\WebClientWrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FormModels\InspectionFormModel.cs" />
+    <Compile Include="Models\FormModels\Property\AddLandLordFormModel.cs" />
     <Compile Include="Models\FormModels\LandLord\AddLandLordFormModel.cs" />
     <Compile Include="Models\FormModels\ReviewItemCharacteristicFormModel.cs" />
     <Compile Include="Models\FormModels\ReviewItemFormModel.cs" />
@@ -137,6 +142,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\PropSpect.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -173,7 +179,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Inspection\CreateInspection.cshtml" />
     <Content Include="Views\Inspection\InspectionRoom.cshtml" />
-    <Content Include="Views\LandLord\AddLandLord.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Textbox.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\SubmitButton.cshtml" />
+    <Content Include="Views\LandLord\List.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Hidden.cshtml" />
+    <Content Include="Views\Property\Add.cshtml" />
+    <Content Include="Views\Property\List.cshtml" />
+    <Content Include="Views\LandLord\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

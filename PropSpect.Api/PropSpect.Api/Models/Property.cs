@@ -11,7 +11,6 @@ namespace PropSpect.Api.Models
     {
         [Column("key_id")]
         public int PropertyID { get; set; }
-
         [Column("prop_property_type")]
         public string PropertyType { get; set; }
         [Column("prop_property_address_unit_nr")]
@@ -23,7 +22,7 @@ namespace PropSpect.Api.Models
         [Column("prop_property_address_street")]
         public string StreetName { get; set; }
         [Column("prop_property_address_suburb")]
-        public int Suburb { get; set; }
+        public string Suburb { get; set; }
         [Column("prop_property_address_city")]
         public string City { get; set; }
         [Column("prop_property_address_code")]

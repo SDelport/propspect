@@ -8,7 +8,7 @@ namespace PropSpect.Api.Models.Request
 {
     public class CreateLandLordRequest
     {
-    
+        public int LandlordID { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
@@ -21,8 +21,8 @@ namespace PropSpect.Api.Models.Request
         public string ComplexName { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
-        public string CityNane { get; set; }
-        public int PostalCode { get; set; }
+        public string CityName { get; set; }
+        public int    PostalCode { get; set; }
         public string TelWork { get; set; }
         public string TelMobile { get; set; }
         public string Fax { get; set; }

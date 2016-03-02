@@ -6,11 +6,15 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
-    public static class Form
+    public class Form<TModel> 
     {
-        public static MvcHtmlString EndForm(this HtmlHelper html)
+        public HtmlHelper<TModel> Html { get; set; }
+
+        public Form(ViewContext viewContext, IViewDataContainer viewDataContainer)
         {
-            return new MvcHtmlString("</form>");
+            Html = new HtmlHelper<TModel>(viewContext, viewDataContainer);
         }
     }
+
+ 
 }

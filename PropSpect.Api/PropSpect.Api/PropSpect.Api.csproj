@@ -181,6 +181,8 @@
     <Compile Include="Controllers\Helpers\Versioning\VersionConstraint.cs" />
     <Compile Include="Controllers\Helpers\Versioning\VersionRoute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\PropertyDataController.cs" />
@@ -258,6 +260,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\PropSpect.Api.Models\PropSpect.Api.Models.csproj">
+      <Project>{1bba0bb5-de91-4626-8b3f-412ca476e512}</Project>
+      <Name>PropSpect.Api.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

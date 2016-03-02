@@ -1,0 +1,14 @@
+﻿@model FormControl
+@{
+    ViewBag.Title = "Textbox";
+}
+
+<div class="form-group row">
+    <label for="@Model.Label" class="col-sm-4 control-label">@Model.Label</label>
+    <div class="col-sm-8">
+        <input  type="text" class="form-control" name="@Model.Label" id="@Model.HtmlID"placeholder="@Model.Label" value="@Model.Value">
+        @Model.Validation
+    </div>
+</div>
+
+

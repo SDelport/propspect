@@ -18,7 +18,7 @@ namespace PropSpect.Api.Models
         [Column("prop_inspection_entity_type")]
         public string EntityType { get; set; }
         [Column("prop_inspection_entity_id")]
-        public int EntityID { get; set; }
+        public int? EntityID { get; set; }
         [Column("prop_inspection_house_clean")]
         public string HouseClean { get; set; }
         [Column("prop_inspection_house_comments")]

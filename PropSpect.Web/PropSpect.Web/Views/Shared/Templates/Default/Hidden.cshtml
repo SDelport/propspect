@@ -1,0 +1,10 @@
+﻿@model FormControl
+@{
+    ViewBag.Title = "Textbox";
+}
+
+
+<input type="hidden" class="form-control" name="@Model.Label" id="@Model.HtmlID" placeholder="@Model.Label" value="@Model.Value">
+@Model.Validation
+
+

@@ -1,0 +1,33 @@
+﻿@model List<PropSpect.Api.Models.Response.PropertyResponse>
+@{
+    ViewBag.Title = "List";
+}
+
+<h1 class="page-title">Properties</h1>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th> StreetName</th>
+            <th> StreetNumber</th>
+            <th> Suburb</th>
+            <th> City</th>
+            <th> ComplexName</th>
+            <th> UnitNumber</th>
+            <th><a class="btn btn-primary btn-sm" href="/property/add/">Add</a></th>
+        </tr>
+    </thead>
+    @foreach (var property in Model)
+    {
+        <tr>
+            <td>@property.StreetName</td>
+            <td>@property.StreetNumber</td>
+            <td>@property.Suburb</td>
+            <td>@property.City</td>
+            <td>@property.ComplexName</td>
+            <td>@property.UnitNumber</td>
+            <td><a href="/property/edit/@property.PropertyID">Edit</a></td>
+        </tr>
+    }
+</table>

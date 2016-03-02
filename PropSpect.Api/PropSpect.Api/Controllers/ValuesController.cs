@@ -20,7 +20,7 @@ namespace PropSpect.Api.Controllers
         {
             List<string> values = new List<string>() { "test", "test2" };
 
-            var landlords = db.Landlords.ToList();
+            var landlords = db.LandLords.ToList();
         
 
             return Json(values);

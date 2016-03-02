@@ -1,24 +1,29 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿#brand-image {
+    width: 180px;
+    height: auto;
+    position: absolute;
+    margin-top: -10px;
 }
 
-/* Set padding to keep content from hitting the edges */
+#brand-image-container {
+    display: inline-block;
+}
+
+.table thead tr {
+    background-color: #51A6AF;
+    color:#fff;
+}
+
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0px 50px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.page-title {
+    margin-top: 50px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.table thead .btn-sm
+{
+    padding-top:0px;
+    padding-bottom:0px;
 }
