@@ -3,32 +3,59 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header>
 
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div id="brand-image-container">
-                <img id="brand-image" src="~/Content/Images/PropSpect.png" />
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Landlords</a></li>
+        <nav class="white ">
+            <a href="#" class="center brand-logo"><img class="logo-img" src="~/Content/Images/PropSpect.png" /></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="waves-effect waves-pspt-blue"><a href="~/Landlord">Landlord</a></li>
+                <li class="waves-effect waves-pspt-blue"><a href="~/Property">Property</a></li>
+                <li class="waves-effect waves-pspt-blue"><a href="#!">JavaScript</a></li>
             </ul>
+            <ul id="slide-out" class="side-nav propspect-blue-text">
+                <li><a class="waves-effect waves-pspt-blue" href="~/Landlord">Landlord</a></li>
+                <li><a class="waves-effect waves-pspt-blue" href="~/Property">Property</a></li>
+                <li><a class="waves-effect waves-pspt-blue" href="#!">JavaScript</a></li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+        </nav>
+        <br />
+    </header>
+    <main>
+        <div class="body-content">
+            @RenderBody()
+            <hr />
         </div>
-    </nav>
+    </main>
 
-
-    <div class="body-content">
-        @RenderBody()
-        <hr />
-
-    </div>
+    <footer class="page-footer propspect-blue-background">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">PropSpect</h5>                   
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Paideia Solutions
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/materialize")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(".button-collapse").sideNav();
+    </script>
 </body>
 </html>

@@ -20,11 +20,13 @@ namespace PropSpect.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
+                      "~/Content/materialize-v0.97.1/js/materialize.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/materialize-v0.97.1/css/materialize.css",
                       "~/Content/site.css"));
         }
     }

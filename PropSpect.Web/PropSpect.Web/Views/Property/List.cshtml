@@ -3,31 +3,43 @@
     ViewBag.Title = "List";
 }
 
-<h1 class="page-title">Properties</h1>
+<div class="long-container propspect-blue-background z-depth-1">
+    <div class="">
+        <h3 class="center white-text padding-2">Properties</h3>
+    </div>
+</div>
 
-<table class="table table-striped">
-
-    <thead>
-        <tr>
-            <th> StreetName</th>
-            <th> StreetNumber</th>
-            <th> Suburb</th>
-            <th> City</th>
-            <th> ComplexName</th>
-            <th> UnitNumber</th>
-            <th><a class="btn btn-primary btn-sm" href="/property/add/">Add</a></th>
-        </tr>
-    </thead>
-    @foreach (var property in Model)
-    {
-        <tr>
-            <td>@property.StreetName</td>
-            <td>@property.StreetNumber</td>
-            <td>@property.Suburb</td>
-            <td>@property.City</td>
-            <td>@property.ComplexName</td>
-            <td>@property.UnitNumber</td>
-            <td><a href="/property/edit/@property.PropertyID">Edit</a></td>
-        </tr>
-    }
-</table>
+<div class="long-container white z-depth-1">
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th> #</th>
+                        <th> StreetName</th>                        
+                        <th> Suburb</th>
+                        <th> City</th>
+                        <th> ComplexName</th>
+                        <th> UnitNumber</th>
+                        <th><a href="/property/add/" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add Property"><i class="material-icons">add</i></a></th>
+                      
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var property in Model)
+                    {
+                        <tr>
+                            <td>@property.StreetNumber</td>
+                            <td>@property.StreetName</td>                            
+                            <td>@property.Suburb</td>
+                            <td>@property.City</td>
+                            <td>@property.ComplexName</td>
+                            <td>@property.UnitNumber</td>
+                            <td><a href="/property/edit/@property.PropertyID"> Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

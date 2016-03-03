@@ -1,17 +1,63 @@
-﻿#brand-image {
-    width: 180px;
-    height: auto;
-    position: absolute;
-    margin-top: -10px;
+﻿/* ======= THEME  ========= */
+body {
+    background: #F2F2F2;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+
+main {
+    flex: 1 0 auto;
+}
+
+/* ====== Navbar CSS ====== */
+.button-collapse {
+    color: #51A8B1;
+}
+
+.logo-img {
+    height: 60px;
+}
+
+nav ul a {
+    color: #51A8B1 !important;
+}
+
+
+
+/* ====== General Usage ====== */
+.propspect-blue-background {
+    background: #51A8B1 !important;
+}
+
+.propspect-blue-text {
+    color: #51A8B1 !important;
+}
+
+.waves-effect.waves-pspt-blue .waves-ripple {
+    background-color: rgba(81,168,177, 0.7);
+}
+
+.long-container {
+    width: 95%;
+}
+
+.padding-2 {
+    padding: 2px;
+}
+
+.font-12 {
+    font-size: 12px !important;
+}
+
+
+
+
+
 
 #brand-image-container {
     display: inline-block;
-}
-
-.table thead tr {
-    background-color: #51A6AF;
-    color:#fff;
 }
 
 .body-content {
@@ -20,10 +66,4 @@
 
 .page-title {
     margin-top: 50px;
-}
-
-.table thead .btn-sm
-{
-    padding-top:0px;
-    padding-bottom:0px;
 }
