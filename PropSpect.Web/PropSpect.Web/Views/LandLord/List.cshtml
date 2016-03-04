@@ -9,16 +9,48 @@
     </div>
 </div>
 
+<div id="form-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4 class="center">Modal Header</h4>
+        <form class="col s12">
+            <div class="row">
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+                @Form.Textbox(x => x.Control.Label)
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+<a class="waves-effect waves-light btn modal-trigger" href="#form-modal">Modal</a>
 
 @Form.ListAsync(Model)
 
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
-@Form.Textbox(x => x.Control.Label)
+<script>
+    $(document).ready(function () {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+</script>
+
+
+
+
+
 
 
 
