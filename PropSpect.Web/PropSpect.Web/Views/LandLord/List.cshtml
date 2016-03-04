@@ -11,7 +11,7 @@
 
 <div id="form-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4 class="center">Modal Header</h4>
+        <h4 class="center">Edit</h4>
         <form class="col s12">
             <div class="row">
                 @Form.Textbox(x => x.Control.Label)
@@ -31,8 +31,9 @@
             </div>
         </form>
     </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    <div class="modal-footer">        
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Save</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
     </div>
 </div>
 
@@ -43,7 +44,15 @@
 <script>
     $(document).ready(function () {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal-trigger').leanModal();
+        $('.modal-trigger').leanModal({
+            dismissible: true,           // Modal can be dismissed by clicking outside of the modal
+            opacity: .5,                 // Opacity of modal background
+            in_duration: 300,            // Transition in duration
+            out_duration: 200,           // Transition out duration
+            ready: function () { },      // Callback for Modal open
+            complete: function () { }    // Callback for Modal close
+        }
+  );
     });
 </script>
 
