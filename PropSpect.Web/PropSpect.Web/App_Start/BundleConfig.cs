@@ -22,6 +22,10 @@ namespace PropSpect.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                      "~/Scripts/knockout-{version}.js",
+                      "~/Scripts/knockout.mapping-latest.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
                       "~/Content/materialize-v0.97.1/js/materialize.min.js"));
 

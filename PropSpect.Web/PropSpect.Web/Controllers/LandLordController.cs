@@ -2,7 +2,9 @@
 using PropSpect.Api.Models.Request;
 using PropSpect.Api.Models.Response;
 using PropSpect.Web.Controllers.Helpers;
-using PropSpect.Web.Models.FormModels.LandLord;
+using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
+using PropSpect.Web.Models.FormModels;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +22,7 @@ namespace PropSpect.Web.Controllers
         [Route("landlord/edit/{landlordID?}")]
         public ActionResult AddLandLord(int landlordID = 0)
         {
-            AddLandLordFormModel formModel = new AddLandLordFormModel();
+            LandLordResponse formModel = new LandLordResponse();
 
             if (landlordID != 0)
             {
@@ -52,7 +54,7 @@ namespace PropSpect.Web.Controllers
         }
 
         [Route("landlord/added")]
-        public ActionResult AddedLandLord(AddLandLordFormModel model)
+        public ActionResult AddedLandLord(LandLordResponse model)
         {
             CreateLandLordRequest request = new CreateLandLordRequest();
             request.LandlordID = model.LandlordID;
@@ -84,11 +86,14 @@ namespace PropSpect.Web.Controllers
         [Route("landlord")]
         public ActionResult List()
         {
-            List<LandLordResponse> landlords = new List<LandLordResponse>();
+            List<LandLord> landlords = new List<LandLord>();
 
-            landlords = ApiWrapper.Get<List<LandLordResponse>>("api/landlord");
+            landlords = LandLord.CreateList(ApiWrapper.Get<List<LandLordResponse>>("api/landlord"));
 
-            return View("List", landlords);
+            ListAsyncFormModel formModel = ListAsyncFormModel.Create(landlords);
+            
+
+            return View("List", formModel);
         }
     }
 }

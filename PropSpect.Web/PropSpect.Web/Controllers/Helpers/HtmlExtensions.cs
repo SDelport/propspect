@@ -1,9 +1,12 @@
 ﻿using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
+using PropSpect.Web.Models.FormModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -11,9 +14,10 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
     public static class HtmlExtensions
     {
-        public static MvcHtmlString EndForm(this Form<object> form)
+        public static MvcHtmlString ListAsync<TModel>(this Form<TModel> form, ListAsyncFormModel control)
         {
-            return new MvcHtmlString("</form>");
+
+            return form.Html.Partial("Templates/Default/ListAsync", control);
         }
 
         public static MvcHtmlString Textbox<TModel, TValue>(this Form<TModel> form, Expression<Func<TModel, TValue>> expression) where TModel : class
@@ -49,6 +53,16 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             return control;
         }
 
+        public static FormControl GetControl(PropertyInfo info, object currentObject)
+        {
+            FormControl control = new FormControl();
+
+            control.Label = new MvcHtmlString(info.Name);
+            control.Value = new MvcHtmlString(info.GetValue(currentObject, null).ToString());
+
+            return control;
+        }
+
         public static ModelMetadata GetModelData<TModel, TValue>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> expression)
           where TModel : class
         {
@@ -67,6 +81,33 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
             return val.ToString();
         }
+
+        #region Lists
+        public static ListAsyncFormModel GetListAsyncModel<T>(List<T> items)
+        {
+            ListAsyncFormModel control = new ListAsyncFormModel();
+
+            ListAsyncControl listControl = new ListAsyncControl();
+
+            foreach (var property in typeof(T).GetProperties())
+            {
+                ListOptions listOptions = property.GetCustomAttribute(typeof(ListOptions), false) as ListOptions;
+
+                if (listOptions != null && listOptions.Hide)
+                    continue;
+
+                HeaderControl headerControl = new HeaderControl();
+                headerControl.Label = new MvcHtmlString(property.Name);
+
+                listControl.Headers.Add(headerControl);
+            }
+            control.Control = listControl;
+            control.Control.Label = new MvcHtmlString(typeof(T).Name);
+            control.EncodedItems = new MvcHtmlString(Json.Encode(items));
+
+            return control;
+        }
+        #endregion
 
     }
 }

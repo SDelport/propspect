@@ -120,10 +120,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Attributes.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\CustomWebViewPage.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Form.cs" />
     <Compile Include="Controllers\Helpers\FormControl.cs" />
     <Compile Include="Controllers\Helpers\HtmlExtensions.cs" />
+    <Compile Include="Controllers\Helpers\HeaderControl.cs" />
+    <Compile Include="Controllers\Helpers\ListAsyncControl.cs" />
     <Compile Include="Controllers\Helpers\WebClientWrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
@@ -132,11 +135,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FormModels\InspectionFormModel.cs" />
-    <Compile Include="Models\FormModels\Property\AddLandLordFormModel.cs" />
-    <Compile Include="Models\FormModels\LandLord\AddLandLordFormModel.cs" />
-    <Compile Include="Models\FormModels\ReviewItemCharacteristicFormModel.cs" />
-    <Compile Include="Models\FormModels\ReviewItemFormModel.cs" />
+    <Compile Include="Controllers\Helpers\ListAsyncFormModel.cs" />
+    <Compile Include="Models\FormModels\LandLord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +170,7 @@
     <Content Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.ttf" />
     <Content Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\baseknockout.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -177,6 +178,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -206,6 +211,7 @@
     <Content Include="Views\Property\Add.cshtml" />
     <Content Include="Views\Property\List.cshtml" />
     <Content Include="Views\LandLord\Add.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\ListAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
