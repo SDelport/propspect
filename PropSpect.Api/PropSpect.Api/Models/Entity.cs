@@ -7,7 +7,7 @@ using System.Web;
 namespace PropSpect.Api.Models
 {
     [Table("prop_property_entity")]
-    public class PropertyEntity
+    public class Entity
     {
         [Column("key_id")]
         public int PropertyEntityID { get; set; }

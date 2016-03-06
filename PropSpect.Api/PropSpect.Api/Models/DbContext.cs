@@ -16,6 +16,9 @@ namespace PropSpect.Api.Models
         public DbSet<Landlord> LandLords { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
         public DbSet<Property> Properties { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<AreaItem> AreaItems { get; set; }
+        public DbSet<Entity> Enities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
