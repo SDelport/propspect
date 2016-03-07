@@ -19,6 +19,13 @@ namespace PropSpect.Api.Models
         public DbSet<Area> Areas { get; set; }
         public DbSet<AreaItem> AreaItems { get; set; }
         public DbSet<Entity> Enities { get; set; }
+        public DbSet<InspectionArea> InspectionAreas { get; set; }
+        public DbSet<InspectionAreaItem> InspectionAreaItems { get; set; }
+        public DbSet<LandlordTemplate> LandlordTemplates { get; set; }
+        public DbSet<LandlordTemplateArea> LandlordTemplateAreas { get; set; }
+        public DbSet<LandlordTemplateAreaItem> LandlordTemplateAreaItems { get; set; }
+        public DbSet<PropertyTenant> PropertyTenants { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

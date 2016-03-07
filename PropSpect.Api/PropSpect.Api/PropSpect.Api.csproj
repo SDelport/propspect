@@ -146,7 +146,14 @@
     <Folder Include="Views\AreaItem\" />
     <Folder Include="Views\Area\" />
     <Folder Include="Views\Entity\" />
+    <Folder Include="Views\InspectionAreaItem\" />
+    <Folder Include="Views\InspectionArea\" />
+    <Folder Include="Views\LandlordTemplateAreaItem\" />
+    <Folder Include="Views\LandlordTemplateArea\" />
+    <Folder Include="Views\LandlordTemplate\" />
     <Folder Include="Views\LandLord\" />
+    <Folder Include="Views\PropertyTenant\" />
+    <Folder Include="Views\Tenant\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -187,9 +194,16 @@
     <Compile Include="Controllers\Helpers\Versioning\VersionConstraint.cs" />
     <Compile Include="Controllers\Helpers\Versioning\VersionRoute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InspectionAreaController.cs" />
+    <Compile Include="Controllers\InspectionAreaItemController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\LandlordTemplateAreaController.cs" />
+    <Compile Include="Controllers\LandlordTemplateAreaItemController.cs" />
+    <Compile Include="Controllers\LandlordTemplateController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
+    <Compile Include="Controllers\PropertyTenantController.cs" />
+    <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\PropertyDataController.cs" />
     <Compile Include="Global.asax.cs">
