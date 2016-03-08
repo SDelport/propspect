@@ -1,4 +1,5 @@
-﻿using PropSpect.Api.Models;
+﻿using PropSpect.Api.Authorize;
+using PropSpect.Api.Models;
 using PropSpect.Api.Models.Request;
 using PropSpect.Api.Models.Response;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Api.Controllers
 {
+   
     public class AreaController : Controller
     {
         DatabaseContext db = new DatabaseContext();
