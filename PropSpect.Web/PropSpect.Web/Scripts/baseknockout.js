@@ -36,7 +36,7 @@ function SearchViewModel(modelName, items) {
     this.domName = modelName.toString().toLowerCase();
 
     this.Add = function () {
-        $('#edit-modal-' + that.domName).openModal();
+        that.EditTemplate(null);
     }
 
     this.Items = ko.observableArray();
@@ -68,18 +68,50 @@ function EditViewModel(modelName, itemtemplate) {
     this.modelName = modelName;
     this.domName = modelName.toString().toLowerCase();
     this.EditItem = ko.observable(ko.mapping.fromJSON(itemtemplate));
+    this.template = itemtemplate;
 
-
-    this.OpenEdit = function(item)
-    {
+    this.OpenEdit = function (item) {
+        if (item)
+            this.EditItem(ko.mapping.fromJS(item));
+        else
+            this.EditItem(ko.mapping.fromJS(itemtemplate));
         $('#edit-modal-' + that.domName).openModal();
-        this.EditItem(ko.mapping.fromJS(item));
+
     }
 
-    this.Save= function(item)
+    this.Save = function (item) {
+
+        ServiceProxy.Post('/' + that.domName + '/add', ko.mapping.toJSON(that.EditItem), this.SaveSuccess);
+    }
+
+    this.SaveSuccess= function(result)
     {
-        console.log(item)
+        console.log(result)
     }
 
     return this;
 }
+
+
+var ServiceProxy =
+    {
+        Post: function (url, data, success) {
+            return $.ajax(
+                {
+                    url: url,
+                    data: data,
+                    type: "POST",
+                    context: this,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        this.success(result);
+                    },
+                    error: function (result) {
+                        console.log(result)
+                    }
+                });
+
+
+        }
+    }

@@ -18,7 +18,7 @@ namespace PropSpect.Web.Controllers
 {
     public class LandLordController : Controller
     {
-        [Route("landlord/add")]
+
         [Route("landlord/edit/{landlordID?}")]
         public ActionResult AddLandLord(int landlordID = 0)
         {
@@ -53,7 +53,7 @@ namespace PropSpect.Web.Controllers
             return View("Add", formModel);
         }
 
-        [Route("landlord/added")]
+        [Route("landlord/add")]
         public ActionResult AddedLandLord(LandLordResponse model)
         {
             CreateLandLordRequest request = new CreateLandLordRequest();

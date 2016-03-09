@@ -9,14 +9,14 @@ namespace PropSpect.Api.Controllers
 {
     public class UserController : Controller
     {
-        public RoleType GetUserRole(string identifier)
+        public AuthorizationLevel.RoleType GetUserRole(string identifier)
         {
-            RoleType type = RoleType.Unknown;
+            AuthorizationLevel.RoleType type = AuthorizationLevel.RoleType.Unknown;
 
             //Try get from db
-            type = RoleType.Tenant;
+            type = AuthorizationLevel.RoleType.Tenant;
 
-            return RoleType.Tenant;
+            return type;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace PropSpect.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/landlord/add")]
+        [Route("api/inspection/add")]
         public JsonResult Add(CreateLandLordRequest request)
         {
             if (request.LandlordID <= 0)

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Api.Controllers
 {
-    [AuthorizationLevel(RoleType.Tenant, RoleType.Landlord)]
+
     public class LandLordController : Controller
     {
         DatabaseContext db = new DatabaseContext();
