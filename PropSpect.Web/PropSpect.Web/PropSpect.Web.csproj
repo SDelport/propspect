@@ -124,6 +124,7 @@
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\CustomWebViewPage.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Form.cs" />
     <Compile Include="Controllers\Helpers\FormControl.cs" />
+    <Compile Include="Controllers\Helpers\EditControl.cs" />
     <Compile Include="Controllers\Helpers\HtmlExtensions.cs" />
     <Compile Include="Controllers\Helpers\HeaderControl.cs" />
     <Compile Include="Controllers\Helpers\ListAsyncControl.cs" />

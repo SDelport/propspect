@@ -11,7 +11,8 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
     public abstract class CustomWebViewPage<TModel> : WebViewPage<TModel>
     {
         public Form<TModel> Form { get; set; }
-       
+
+        public string Title { get; set; }
 
 
         public override void InitHelpers()

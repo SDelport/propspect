@@ -12,11 +12,13 @@ using System.Web.Mvc.Html;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
+    public enum ControlType { Textbox, Hidden, Dropdown }
+
     public static class HtmlExtensions
     {
+
         public static MvcHtmlString ListAsync<TModel>(this Form<TModel> form, ListAsyncFormModel control)
         {
-
             return form.Html.Partial("Templates/Default/ListAsync", control);
         }
 
@@ -24,14 +26,14 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         {
             FormControl control = GetControl(form, expression);
 
-            return form.Html.Partial("Templates/Default/Textbox", control);
+            return form.Html.Partial("Textbox", control);
         }
 
         public static MvcHtmlString Hidden<TModel, TValue>(this Form<TModel> form, Expression<Func<TModel, TValue>> expression) where TModel : class
         {
             FormControl control = GetControl(form, expression);
 
-            return form.Html.Partial("Templates/Default/Hidden", control);
+            return form.Html.Partial("Hidden", control);
         }
 
         public static MvcHtmlString SubmitButton<TModel>(this Form<TModel> form, string text)
@@ -39,6 +41,11 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             return form.Html.Partial("Templates/Default/SubmitButton", text as object);
         }
 
+
+        public static MvcHtmlString RenderTemplate<TModel>(this Form<TModel> form, FormControl control, string templateName)
+        {
+            return form.Html.Partial("Templates/Default/" + templateName, control);
+        }
 
 
 
@@ -83,7 +90,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         }
 
         #region Lists
-        public static ListAsyncFormModel GetListAsyncModel<T>(List<T> items)
+        public static ListAsyncFormModel GetListAsyncModel<T>(List<T> items)where T : new()
         {
             ListAsyncFormModel control = new ListAsyncFormModel();
 
@@ -101,9 +108,31 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
                 listControl.Headers.Add(headerControl);
             }
+
+            foreach (var property in typeof(T).GetProperties())
+            {
+                EditOptions editOptions = property.GetCustomAttribute(typeof(EditOptions), false) as EditOptions;
+
+                EditControl editControl = new EditControl();
+                editControl.Label = new MvcHtmlString(property.Name);
+
+                if (editOptions != null)
+                {
+                    editControl.Type = editOptions.Type;
+                
+                }
+
+                editControl.IsAsync = true;
+
+                listControl.EditControls.Add(editControl);
+            }
+
             control.Control = listControl;
             control.Control.Label = new MvcHtmlString(typeof(T).Name);
             control.EncodedItems = new MvcHtmlString(Json.Encode(items));
+         
+            T item = new T();
+            control.EncodedTemplate = new MvcHtmlString(Json.Encode(item));
 
             return control;
         }

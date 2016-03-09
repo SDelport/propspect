@@ -12,9 +12,10 @@ namespace PropSpect.Web.Models.FormModels
     {
         public ListAsyncControl Control;
         public MvcHtmlString EncodedItems;
+        public MvcHtmlString EncodedTemplate;
 
 
-        public static ListAsyncFormModel Create<T>(List<T> items)
+        public static ListAsyncFormModel Create<T>(List<T> items) where T :new()
         {
             return HtmlExtensions.GetListAsyncModel(items);
         }

@@ -1,7 +1,8 @@
 ﻿@model ListAsyncFormModel
 
 @{
-    MvcHtmlString itemsPropertyName = new MvcHtmlString(Model.Control.VariableName + "Items");
+    MvcHtmlString ItemsPropertyName = new MvcHtmlString(Model.Control.VariableName + "Items");
+    MvcHtmlString TemplatePropertyName = new MvcHtmlString(Model.Control.VariableName + "Template");
 }
 
 
@@ -15,7 +16,7 @@
                         {
                             <th> @header.Label</th>
                         }
-                        <th><a href="/property/add/" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                        <th><a data-bind="click:Add" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
                     </tr>
                 </thead>
                 <tbody class="font-12" data-bind="foreach: Items">
@@ -24,7 +25,7 @@
                         {
                             <td data-bind="text: @header.VariableName"></td>
                         }
-                        <td><a href="#">Edit</a></td>
+                        <td><a data-bind="click: Edit">Edit</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -33,6 +34,36 @@
     </div>
 </div>
 <script>
-    var @itemsPropertyName= @Model.EncodedItems;
+    var @ItemsPropertyName= @Model.EncodedItems;
+    var @TemplatePropertyName= @Model.EncodedTemplate;
 </script>
 
+
+<div id="edit-modal-@Model.Control.HtmlID" class="modal modal-fixed-footer knockout-edit" data-bindname="@Model.Control.VariableName">
+    @*Need fixed header with content: Add/Edit @Model.Control.Label*@
+    <div class="modal-content">
+       
+        <form class="col s12">
+            <div class="row">
+                @foreach (var field in Model.Control.EditControls)
+                {
+                    switch (field.Type)
+                    {
+                        case ControlType.Textbox:
+                            @Form.RenderTemplate(field,"Textbox")
+                            break;
+                        case ControlType.Hidden:
+                            @Form.RenderTemplate(field, "Hidden")
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a data-bind="click:Save" class=" modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+        <a class=" modal-action modal-close waves-effect waves-green btn-flat">Don't Save</a>
+    </div>
+</div>

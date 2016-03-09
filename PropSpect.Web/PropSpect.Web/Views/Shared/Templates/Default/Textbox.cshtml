@@ -1,6 +1,13 @@
 ﻿@model FormControl
 @{
     ViewBag.Title = "Textbox";
+
+    MvcHtmlString binding = new MvcHtmlString("");
+
+    if (Model.IsAsync)
+    {
+        binding = new MvcHtmlString(string.Format("data-bind=\"value: EditItem().{0}\"", Model.VariableName));
+    }
 }
 
 @*<div class="form-group row">
@@ -13,7 +20,7 @@
 
 
 <div class="input-field col s12">
-    <input value="@Model.Value" id="@Model.HtmlID" type="text" class="validate">
+    <input value="@Model.Value" id="@Model.HtmlID" type="text" class="validate" @binding>
     <label for="@Model.HtmlID">@Model.Label</label>
     @Model.Validation
 </div>

@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
+using System.Web.Mvc;
 
 namespace PropSpect.Web.Models.FormModels
 {
     public class LandLord
     {
+        [EditOptions(Type = ControlType.Hidden)]
         public int LandlordID { get; set; }
         [ListOptions(Hide = true)]
+
         public string Type { get; set; }
         public string Name { get; set; }
         public string AddressUnitNr { get; set; }
         public string ComplexName { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
+        [EditOptions(Type = ControlType.Dropdown)]
         public string Suburb { get; set; }
         public string CityName { get; set; }
         public int PostalCode { get; set; }
@@ -31,6 +35,8 @@ namespace PropSpect.Web.Models.FormModels
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public string IDNumber { get; set; }
+
+        public List<SelectListItem> Suburbs { get; set; }
 
         public static LandLord Create(LandLordResponse response)
         {

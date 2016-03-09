@@ -13,8 +13,14 @@ namespace PropSpect.Api.Authorize
         UserController User = new UserController();
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            UserController userController = new UserController();
+            RoleType role = userController.GetUserRole("LOLWTFWHEREISKITTIES");
 
-            if (AuthRoleType.Contains(User.GetUserRole("I dont know what to put in here...")))
+            if (role == RoleType.Unknown)
+                return false;
+
+
+            if (AuthRoleType.Contains(role))
             {
                 return true;
             }
@@ -32,6 +38,7 @@ namespace PropSpect.Api.Authorize
         SuperAdmin,
         Admin,
         Tenant,
-        Landlord
+        Landlord,
+        Unknown
     }
 }

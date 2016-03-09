@@ -6,14 +6,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
-    public class ListOptions : Attribute
-    {
-        public bool Hide { get; set; }
-    }
-
-    
-
-    public class EditOptions : Attribute
+    public class EditControl : FormControl
     {
         public ControlType Type { get; set; }
     }
