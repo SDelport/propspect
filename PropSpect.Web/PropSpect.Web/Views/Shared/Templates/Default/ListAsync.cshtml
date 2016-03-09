@@ -42,7 +42,7 @@
 <div id="edit-modal-@Model.Control.HtmlID" class="modal modal-fixed-footer knockout-edit" data-bindname="@Model.Control.VariableName">
     @*Need fixed header with content: Add/Edit @Model.Control.Label*@
     <div class="modal-content">
-       
+        <h4 class="modal-header">Add/Edit @Model.Control.Label</h4>
         <form class="col s12">
             <div class="row">
                 @foreach (var field in Model.Control.EditControls)

@@ -11,6 +11,26 @@ main {
     flex: 1 0 auto;
 }
 
+.input-field label {
+    color: #000000;
+}
+
+ .modal.modal-fixed-footer .modal-header {    
+    position: fixed;
+    top: 10px; 
+    z-index:5;
+ }
+
+ .modal.modal-fixed-footer .modal-content {
+    position: absolute;
+    max-height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    margin-top: +56px;
+    height: calc(100% - 112px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+ }
+
 /* ====== Navbar CSS ====== */
 .button-collapse {
     color: #51A8B1;
