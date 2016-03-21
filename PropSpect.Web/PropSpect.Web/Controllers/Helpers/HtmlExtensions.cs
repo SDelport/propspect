@@ -12,7 +12,7 @@ using System.Web.Mvc.Html;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
-    public enum ControlType { Textbox, Hidden, Dropdown }
+    public enum ControlType { Textbox, Hidden, Dropdown ,Signature,Number,File}
 
     public static class HtmlExtensions
     {
@@ -98,6 +98,9 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
             foreach (var property in typeof(T).GetProperties())
             {
+                if (property.PropertyType == typeof(List<SelectListItem>))
+                    continue;
+
                 ListOptions listOptions = property.GetCustomAttribute(typeof(ListOptions), false) as ListOptions;
 
                 if (listOptions != null && listOptions.Hide)
@@ -111,6 +114,9 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
             foreach (var property in typeof(T).GetProperties())
             {
+                if (property.PropertyType == typeof(List<SelectListItem>))
+                    continue;
+
                 EditOptions editOptions = property.GetCustomAttribute(typeof(EditOptions), false) as EditOptions;
 
                 EditControl editControl = new EditControl();
@@ -119,7 +125,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
                 if (editOptions != null)
                 {
                     editControl.Type = editOptions.Type;
-                
+                    editControl.Source = new MvcHtmlString(editOptions.SourceName);
                 }
 
                 editControl.IsAsync = true;

@@ -13,6 +13,14 @@
     @Scripts.Render("~/Scripts/baseknockout.js")
     @Scripts.Render("~/bundles/materialize")
     @RenderSection("scripts", required: false)
+    <style>
+        /*Eckardt why select display none?*/
+        select
+        {
+            display:block !important;
+            height: auto !important;
+        }
+    </style>
 </head>
 <body>
     <header>

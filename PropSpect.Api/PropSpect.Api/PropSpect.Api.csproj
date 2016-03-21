@@ -143,18 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AreaItem\" />
-    <Folder Include="Views\Area\" />
-    <Folder Include="Views\Entity\" />
-    <Folder Include="Views\InspectionAreaItem\" />
-    <Folder Include="Views\InspectionArea\" />
-    <Folder Include="Views\LandlordTemplateAreaItem\" />
-    <Folder Include="Views\LandlordTemplateArea\" />
-    <Folder Include="Views\LandlordTemplate\" />
-    <Folder Include="Views\LandLord\" />
-    <Folder Include="Views\PropertyTenant\" />
-    <Folder Include="Views\Tenant\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -193,6 +181,7 @@
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\AreaItemController.cs" />
     <Compile Include="Controllers\EntityController.cs" />
+    <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\Helpers\Versioning\VersionConstraint.cs" />
     <Compile Include="Controllers\Helpers\Versioning\VersionRoute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -203,7 +192,7 @@
     <Compile Include="Controllers\LandlordTemplateAreaItemController.cs" />
     <Compile Include="Controllers\LandlordTemplateController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
-    <Compile Include="Controllers\LandLordController.cs" />
+    <Compile Include="Controllers\LandlordController.cs" />
     <Compile Include="Controllers\PropertyTenantController.cs" />
     <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -216,6 +205,7 @@
     <Compile Include="Models\AreaItem.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\EnvironmentValue.cs" />
     <Compile Include="Models\Inspection.cs" />
     <Compile Include="Models\InspectionArea.cs" />
     <Compile Include="Models\InspectionAreaItem.cs" />

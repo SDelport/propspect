@@ -16,7 +16,7 @@ namespace PropSpect.Api.Controllers
         [Route("api/inspection/{id}")]
         public JsonResult Get(int id)
         {
-            LandLordResponse response = null;
+            LandlordResponse response = null;
 
 
 

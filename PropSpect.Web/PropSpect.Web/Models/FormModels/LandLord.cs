@@ -20,9 +20,10 @@ namespace PropSpect.Web.Models.FormModels
         public string ComplexName { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
-        [EditOptions(Type = ControlType.Dropdown)]
         public string Suburb { get; set; }
+        [EditOptions(Type = ControlType.Dropdown, SourceName = "CityItems")]
         public string CityName { get; set; }
+        [EditOptions(Type = ControlType.Number)]
         public int PostalCode { get; set; }
         public string TelWork { get; set; }
         public string TelMobile { get; set; }
@@ -36,9 +37,9 @@ namespace PropSpect.Web.Models.FormModels
         public string LastName { get; set; }
         public string IDNumber { get; set; }
 
-        public List<SelectListItem> Suburbs { get; set; }
+       
 
-        public static LandLord Create(LandLordResponse response)
+        public static LandLord Create(LandlordResponse response)
         {
             if (response == null)
                 return null;
@@ -70,7 +71,7 @@ namespace PropSpect.Web.Models.FormModels
 
         }
 
-        public static List<LandLord> CreateList(List<LandLordResponse> response)
+        public static List<LandLord> CreateList(List<LandlordResponse> response)
         {
             if (response == null)
                 return null;

@@ -1,5 +1,7 @@
 ﻿$(function () {
 
+
+
     setTimeout(function () {
         $('.knockout-search').each(function (i, e) {
 
@@ -17,11 +19,22 @@
 
         $('.knockout-edit').each(function (i, e) {
 
+
             var viewModelName = $(e).attr('data-bindname')
 
             var itemTemplate = window[viewModelName + 'Template'];
 
             var viewModel = new EditViewModel(viewModelName, itemTemplate);
+
+
+            if (DropdownItems) {
+                for (var property in DropdownItems) {
+                    if (DropdownItems.hasOwnProperty(property)) {
+                        viewModel[property] = ko.observableArray(DropdownItems[property]);
+                    }
+                }
+            }
+
             window[viewModelName + 'EditModel'] = viewModel;
             ko.applyBindings(viewModel, $(e)[0]);
         })
@@ -54,7 +67,7 @@ function SearchViewModel(modelName, items) {
 
     this.EditTemplate = function (item) {
         if (window[that.modelName + 'EditModel'])
-            window[that.modelName + 'EditModel'].OpenEdit(item);
+            window[that.modelName + 'EditModel'].OpenEdit(ko.mapping.toJS(item));
     }
 
     this.Items(items)
@@ -84,9 +97,14 @@ function EditViewModel(modelName, itemtemplate) {
         ServiceProxy.Post('/' + that.domName + '/add', ko.mapping.toJSON(that.EditItem), this.SaveSuccess);
     }
 
-    this.SaveSuccess= function(result)
-    {
-        console.log(result)
+    this.SaveSuccess = function (result) {
+        $('#edit-modal-' + that.domName).closeModal();
+
+    }
+
+    this.AddSuccess = function (result) {
+        $('#edit-modal-' + that.domName).closeModal();
+
     }
 
     return this;
@@ -95,7 +113,7 @@ function EditViewModel(modelName, itemtemplate) {
 
 var ServiceProxy =
     {
-        Post: function (url, data, success) {
+        Post: function (url, data, successmethod) {
             return $.ajax(
                 {
                     url: url,
@@ -105,7 +123,7 @@ var ServiceProxy =
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
-                        this.success(result);
+                        successmethod(result);
                     },
                     error: function (result) {
                         console.log(result)

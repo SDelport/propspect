@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PropSpect.Api.Models.Response
 {
-    public class LandLordResponse
+    public class LandlordResponse
     {
         public int LandlordID { get; set; }
         public string Type { get; set; }

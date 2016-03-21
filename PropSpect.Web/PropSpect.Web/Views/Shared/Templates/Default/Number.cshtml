@@ -1,0 +1,26 @@
+﻿@model FormControl
+@{
+    ViewBag.Title = "Textbox";
+
+    MvcHtmlString binding = new MvcHtmlString("");
+
+    if (Model.IsAsync)
+    {
+        binding = new MvcHtmlString(string.Format("data-bind=\"value: EditItem().{0}\"", Model.VariableName));
+    }
+}
+
+@*<div class="form-group row">
+        <label for="@Model.Label" class="col-sm-4 control-label">@Model.Label</label>
+        <div class="col-sm-8">
+            <input  type="text" class="form-control" name="@Model.Label" id="@Model.HtmlID"placeholder="@Model.Label" value="@Model.Value">
+            @Model.Validation
+        </div>
+    </div>*@
+
+
+<div class="input-field col s12">
+    <input placeholder="@Model.Label" id="@Model.HtmlID" type="text" class="validate" @binding>
+    <label for="@Model.HtmlID">@Model.Label</label>
+    @Model.Validation    
+</div>

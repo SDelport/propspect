@@ -14,6 +14,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         public MvcHtmlString Validation { get; set; }
         public MvcHtmlString Value { get; set; }
         public bool IsAsync { get; set; }
+        public Dictionary<string,object> Extras { get; set; }
 
         public MvcHtmlString HtmlID
         {

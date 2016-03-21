@@ -36,6 +36,11 @@
 <script>
     var @ItemsPropertyName= @Model.EncodedItems;
     var @TemplatePropertyName= @Model.EncodedTemplate;
+    var DropdownItems = {};
+    @foreach (var list in Model.ItemLists)
+    {
+        @Html.Raw("DropdownItems."+ list.Key + " = " + Json.Encode( list.Value));
+    }
 </script>
 
 
@@ -47,17 +52,7 @@
             <div class="row">
                 @foreach (var field in Model.Control.EditControls)
                 {
-                    switch (field.Type)
-                    {
-                        case ControlType.Textbox:
-                            @Form.RenderTemplate(field,"Textbox")
-                            break;
-                        case ControlType.Hidden:
-                            @Form.RenderTemplate(field, "Hidden")
-                            break;
-                        default:
-                            break;
-                    }
+                    @Form.RenderTemplate(field, field.Type.ToString())
                 }
             </div>
         </form>

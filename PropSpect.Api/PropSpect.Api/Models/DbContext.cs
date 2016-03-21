@@ -26,6 +26,7 @@ namespace PropSpect.Api.Models
         public DbSet<LandlordTemplateAreaItem> LandlordTemplateAreaItems { get; set; }
         public DbSet<PropertyTenant> PropertyTenants { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<EnvironmentValue> EnvironmentValues { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

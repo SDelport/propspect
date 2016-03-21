@@ -57,10 +57,11 @@
     <Compile Include="Response\AreaItemResponse.cs" />
     <Compile Include="Response\AreaResponse.cs" />
     <Compile Include="Response\EntityResponse.cs" />
+    <Compile Include="Response\EnvironmentValueResponse.cs" />
     <Compile Include="Response\InspectionAreaItemResponse.cs" />
     <Compile Include="Response\InspectionAreaResponse.cs" />
     <Compile Include="Response\InspectionResponse.cs" />
-    <Compile Include="Response\LandLordResponse.cs" />
+    <Compile Include="Response\LandlordResponse.cs" />
     <Compile Include="Response\LandlordTemplateAreaItemResponse.cs" />
     <Compile Include="Response\LandlordTemplateAreaResponse.cs" />
     <Compile Include="Response\LandlordTemplateResponse.cs" />

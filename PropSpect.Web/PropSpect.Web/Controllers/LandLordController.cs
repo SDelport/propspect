@@ -22,11 +22,11 @@ namespace PropSpect.Web.Controllers
         [Route("landlord/edit/{landlordID?}")]
         public ActionResult AddLandLord(int landlordID = 0)
         {
-            LandLordResponse formModel = new LandLordResponse();
+            LandlordResponse formModel = new LandlordResponse();
 
             if (landlordID != 0)
             {
-                LandLordResponse landlord = ApiWrapper.Get<LandLordResponse>("api/landlord/" + landlordID);
+                LandlordResponse landlord = ApiWrapper.Get<LandlordResponse>("api/landlord/" + landlordID);
                 formModel.LandlordID = landlord.LandlordID;
                 formModel.Title = landlord.Title;
                 formModel.Name = landlord.Name;
@@ -54,7 +54,7 @@ namespace PropSpect.Web.Controllers
         }
 
         [Route("landlord/add")]
-        public ActionResult AddedLandLord(LandLordResponse model)
+        public JsonResult AddedLandLord(LandlordResponse model)
         {
             CreateLandLordRequest request = new CreateLandLordRequest();
             request.LandlordID = model.LandlordID;
@@ -78,9 +78,9 @@ namespace PropSpect.Web.Controllers
             request.Email = model.Email;
             request.Website = model.Website;
 
-            ApiWrapper.Post<bool>("api/landlord/add", request);
+            var result = ApiWrapper.Post<bool>("api/landlord/add", request);
 
-            return Redirect("/landlord");
+            return Json(result);
         }
 
         [Route("landlord")]
@@ -88,10 +88,16 @@ namespace PropSpect.Web.Controllers
         {
             List<LandLord> landlords = new List<LandLord>();
 
-            landlords = LandLord.CreateList(ApiWrapper.Get<List<LandLordResponse>>("api/landlord"));
+            landlords = LandLord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord"));
 
             ListAsyncFormModel formModel = ListAsyncFormModel.Create(landlords);
-            
+
+
+            formModel.ItemLists.Add("CityItems",EnvironmentCache.GetDisplayValues("CITY").Select(x => new SelectListItem()
+            {
+                Text = x.Display,
+                Value = x.ID
+            }).ToList());
 
             return View("List", formModel);
         }

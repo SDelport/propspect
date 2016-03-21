@@ -9,5 +9,6 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
     public class EditControl : FormControl
     {
         public ControlType Type { get; set; }
+        public MvcHtmlString Source { get; set; }
     }
 }

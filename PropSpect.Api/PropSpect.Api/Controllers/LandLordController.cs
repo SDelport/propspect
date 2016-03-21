@@ -11,20 +11,20 @@ using System.Web.Mvc;
 namespace PropSpect.Api.Controllers
 {
 
-    public class LandLordController : Controller
+    public class LandlordController : Controller
     {
         DatabaseContext db = new DatabaseContext();
 
         [Route("api/landlord/{id}")]
         public JsonResult Get(int id)
         {
-            LandLordResponse response = null;
+            LandlordResponse response = null;
 
             Landlord landlord = db.LandLords.Where(x => x.LandlordID == id).FirstOrDefault();
 
             if (landlord != null)
             {
-                response = new LandLordResponse();
+                response = new LandlordResponse();
                 response.LandlordID = landlord.LandlordID;
                 response.Title = landlord.Title;
                 response.Name = landlord.Name;
@@ -121,7 +121,7 @@ namespace PropSpect.Api.Controllers
         {
 
 
-            return Json(db.LandLords.ToList().Select(x => new LandLordResponse()
+            return Json(db.LandLords.ToList().Select(x => new LandlordResponse()
             {
                 AddressUnitNr = x.AddressUnitNr,
                 CityName = x.CityName,
