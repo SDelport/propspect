@@ -3,14 +3,11 @@
     Title = "List";
 }
 
-<div class="long-container propspect-blue-background z-depth-1">
-    <div class="">
-        <h3 class="center white-text padding-2">LandLords</h3>
-    </div>
-</div>
-
 
 @Form.ListAsync(Model)
+
+
+
 
 <script>
     $(document).ready(function () {
@@ -22,8 +19,12 @@
             out_duration: 200,           // Transition out duration
             ready: function () { },      // Callback for Modal open
             complete: function () { }    // Callback for Modal close
-        }
-  );
+        });
+        
+    });
+    $(window).load(function () {
+         $('select').material_select();
+         $('select').addClass('hide');
     });
 </script>
 
