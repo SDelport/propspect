@@ -23,7 +23,14 @@
                     <tr>
                         @foreach (var header in Model.Control.Headers)
                         {
-                            <td data-bind="text: @header.VariableName"></td>
+                            if (header.UseSource)
+                            {
+                                <td data-bind="text:  $root.GetSource('@header.Source',$data.@(header.VariableName)())  "></td>
+                            }
+                            else
+                            {
+                        <td data-bind="text: @header.VariableName"></td>
+                            }
                         }
                         <td><a data-bind="click: Edit">Edit</a></td>
                     </tr>

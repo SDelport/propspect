@@ -22,6 +22,7 @@ namespace PropSpect.Web.Models.FormModels
         public string StreetName { get; set; }
         public string Suburb { get; set; }
         [EditOptions(Type = ControlType.Dropdown, SourceName = "CityItems")]
+        [ListOptions(SourceName = "CityItems")]
         public string CityName { get; set; }
         [EditOptions(Type = ControlType.Number)]
         public int PostalCode { get; set; }

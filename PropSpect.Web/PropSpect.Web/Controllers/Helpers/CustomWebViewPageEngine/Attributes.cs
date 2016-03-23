@@ -9,6 +9,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
     public class ListOptions : Attribute
     {
         public bool Hide { get; set; }
+        public string SourceName { get; set; }
     }
 
     

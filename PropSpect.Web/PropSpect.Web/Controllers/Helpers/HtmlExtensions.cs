@@ -12,7 +12,7 @@ using System.Web.Mvc.Html;
 
 namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
-    public enum ControlType { Textbox, Hidden, Dropdown ,Signature,Number,File}
+    public enum ControlType { Textbox, Hidden, Dropdown, Signature, Number, File }
 
     public static class HtmlExtensions
     {
@@ -90,7 +90,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         }
 
         #region Lists
-        public static ListAsyncFormModel GetListAsyncModel<T>(List<T> items)where T : new()
+        public static ListAsyncFormModel GetListAsyncModel<T>(List<T> items) where T : new()
         {
             ListAsyncFormModel control = new ListAsyncFormModel();
 
@@ -108,6 +108,15 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
                 HeaderControl headerControl = new HeaderControl();
                 headerControl.Label = new MvcHtmlString(property.Name);
+
+                if (listOptions != null)
+                {
+                    if (!string.IsNullOrEmpty(listOptions.SourceName))
+                    {
+                        headerControl.Source = new MvcHtmlString(listOptions.SourceName);
+                        headerControl.UseSource = true;
+                    }
+                }
 
                 listControl.Headers.Add(headerControl);
             }
@@ -136,7 +145,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             control.Control = listControl;
             control.Control.Label = new MvcHtmlString(typeof(T).Name);
             control.EncodedItems = new MvcHtmlString(Json.Encode(items));
-         
+
             T item = new T();
             control.EncodedTemplate = new MvcHtmlString(Json.Encode(item));
 

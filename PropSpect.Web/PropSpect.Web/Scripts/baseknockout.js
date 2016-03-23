@@ -9,10 +9,21 @@
 
             var items = window[viewModelName + 'Items'];
 
+
+
             if (!items)
                 items = [];
 
             var viewModel = new SearchViewModel(viewModelName, items);
+
+            if (DropdownItems) {
+                for (var property in DropdownItems) {
+                    if (DropdownItems.hasOwnProperty(property)) {
+                        viewModel[property] = ko.observableArray(DropdownItems[property]);
+                    }
+                }
+            }
+
             window[viewModelName + 'SearchModel'] = viewModel;
             ko.applyBindings(viewModel, $(e)[0]);
         })
@@ -25,7 +36,6 @@
             var itemTemplate = window[viewModelName + 'Template'];
 
             var viewModel = new EditViewModel(viewModelName, itemTemplate);
-
 
             if (DropdownItems) {
                 for (var property in DropdownItems) {
@@ -67,7 +77,21 @@ function SearchViewModel(modelName, items) {
 
     this.EditTemplate = function (item) {
         if (window[that.modelName + 'EditModel'])
-            window[that.modelName + 'EditModel'].OpenEdit(ko.mapping.toJS(item));
+            if (item)
+                window[that.modelName + 'EditModel'].OpenEdit(ko.mapping.toJS(item));
+            else
+                window[that.modelName + 'EditModel'].OpenEdit(null);
+    }
+
+    this.GetSource= function(source, value)
+    {
+        if (!that[source])
+            return '';
+
+        for (var i = 0; i < that[source]().length; i++) {
+            if (that[source]()[i].Value == value)
+                return that[source]()[i].Name;
+        }
     }
 
     this.Items(items)

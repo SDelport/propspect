@@ -8,6 +8,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 {
     public class HeaderControl : FormControl
     {
-
+        public MvcHtmlString Source { get; set; }
+        public bool UseSource { get;  set; }
     }
 }
