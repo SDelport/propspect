@@ -7,6 +7,11 @@
 
 
 <div class="long-container white z-depth-1 knockout-search" data-bindname="@Model.Control.VariableName">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">LandLords</h3>
+        </div>
+    </div>
     <div class="row">
         <div class="col s12">
             <table class="highlight bordered">
@@ -31,6 +36,7 @@
                             {
                         <td data-bind="text: @header.VariableName"></td>
                             }
+
                         }
                         <td><a data-bind="click: Edit">Edit</a></td>
                     </tr>
@@ -51,7 +57,7 @@
 </script>
 
 
-<div id="edit-modal-@Model.Control.HtmlID" class="modal modal-fixed-footer knockout-edit" data-bindname="@Model.Control.VariableName">
+<div id="edit-modal-@Model.Control.HtmlID" class="modal modal-fixed-footer knockout-edit modal-tall-wide" data-bindname="@Model.Control.VariableName">
     @*Need fixed header with content: Add/Edit @Model.Control.Label*@
     <div class="modal-content">
         <h4 class="modal-header">Add/Edit @Model.Control.Label</h4>
@@ -66,6 +72,6 @@
     </div>
     <div class="modal-footer">
         <a data-bind="click:Save" class=" modal-action waves-effect waves-green btn-flat">Save</a>
-        <a class=" modal-action modal-close waves-effect waves-green btn-flat">Don't Save</a>
+        <a class=" modal-action modal-close waves-effect waves-red btn-flat">Don't Save</a>
     </div>
 </div>

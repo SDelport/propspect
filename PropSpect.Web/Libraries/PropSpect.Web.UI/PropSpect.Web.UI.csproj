@@ -45,33 +45,38 @@
     <Compile Include="UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\materialize-v0.97.1\css\materialize.css" />
-    <Content Include="Content\materialize-v0.97.1\css\materialize.min.css" />
-    <Content Include="Content\materialize-v0.97.1\font\material-design-icons\LICENSE.txt" />
-    <Content Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.svg" />
-    <Content Include="Content\materialize-v0.97.1\js\materialize.js" />
-    <Content Include="Content\materialize-v0.97.1\js\materialize.min.js" />
+    <Content Include="Content\materialize-v0.97.5\css\materialize.css" />
+    <Content Include="Content\materialize-v0.97.5\css\materialize.min.css" />
+    <Content Include="Content\materialize-v0.97.5\font\material-design-icons\LICENSE.txt" />
+    <Content Include="Content\materialize-v0.97.5\font\material-design-icons\Material-Design-Icons.svg" />
+    <Content Include="Content\materialize-v0.97.5\js\materialize.js" />
+    <Content Include="Content\materialize-v0.97.5\js\materialize.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.eot" />
-    <None Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.woff" />
-    <None Include="Content\materialize-v0.97.1\font\material-design-icons\Material-Design-Icons.woff2" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Bold.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Bold.woff" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Bold.woff2" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Light.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Light.woff" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Light.woff2" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Medium.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Medium.woff" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Medium.woff2" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Regular.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Regular.woff" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Regular.woff2" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Thin.ttf" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Thin.woff" />
-    <None Include="Content\materialize-v0.97.1\font\roboto\Roboto-Thin.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\material-design-icons\Material-Design-Icons.eot" />
+    <None Include="Content\materialize-v0.97.5\font\material-design-icons\Material-Design-Icons.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\material-design-icons\Material-Design-Icons.woff" />
+    <None Include="Content\materialize-v0.97.5\font\material-design-icons\Material-Design-Icons.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Bold.eot" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Bold.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Bold.woff" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Bold.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Light.eot" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Light.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Light.woff" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Light.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Medium.eot" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Medium.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Medium.woff" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Medium.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Regular.eot" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Regular.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Regular.woff" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Regular.woff2" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Thin.eot" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Thin.ttf" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Thin.woff" />
+    <None Include="Content\materialize-v0.97.5\font\roboto\Roboto-Thin.woff2" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

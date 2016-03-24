@@ -10,32 +10,40 @@ namespace PropSpect.Web.Models.FormModels
 {
     public class LandLord
     {
-        [EditOptions(Type = ControlType.Hidden)]
-        public int LandlordID { get; set; }
         [ListOptions(Hide = true)]
-
+        [EditOptions(Type = ControlType.Hidden)]
+        public int LandlordID { get; set; }   
         public string Type { get; set; }
         public string Name { get; set; }
+        [ListOptions(Hide = true)]
         public string AddressUnitNr { get; set; }
+        [ListOptions(Hide = true)]
         public string ComplexName { get; set; }
+        [ListOptions(Hide = true)]
         public string StreetNumber { get; set; }
+        [ListOptions(Hide = true)]
         public string StreetName { get; set; }
+        [ListOptions(Hide = true)]
         public string Suburb { get; set; }
         [EditOptions(Type = ControlType.Dropdown, SourceName = "CityItems")]
         [ListOptions(SourceName = "CityItems")]
         public string CityName { get; set; }
         [EditOptions(Type = ControlType.Number)]
+        [ListOptions(Hide = true)]
         public int PostalCode { get; set; }
         public string TelWork { get; set; }
         public string TelMobile { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
+        [ListOptions(Hide = true)]
         public string Website { get; set; }
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        [ListOptions(Hide = true)]
         public string ThirdName { get; set; }
         public string LastName { get; set; }
+        [ListOptions(Hide = true)]
         public string IDNumber { get; set; }
 
        

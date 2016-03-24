@@ -27,10 +27,10 @@ namespace PropSpect.Web
                       "~/Scripts/knockout.mapping-latest.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
-                      "~/Content/materialize-v0.97.1/js/materialize.min.js"));
+                      "~/Content/materialize-v0.97.5/js/materialize.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/materialize-v0.97.1/css/materialize.css",
+                      "~/Content/materialize-v0.97.5/css/materialize.css",
                       "~/Content/site.css"));
         }
     }

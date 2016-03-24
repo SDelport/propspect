@@ -6,7 +6,6 @@ body {
     flex-direction: column;
 }
 
-
 main {
     flex: 1 0 auto;
 }
@@ -71,6 +70,12 @@ nav ul a {
     font-size: 12px !important;
 }
 
+.modal-tall-wide{
+      max-height: 90%;
+      width: 70%;
+      top: 5% !important;
+      height: 90% !important;
+}
 
 
 
