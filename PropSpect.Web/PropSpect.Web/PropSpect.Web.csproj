@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EnvironmentCache.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Attributes.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\CustomWebViewPage.cs" />
@@ -129,16 +130,20 @@
     <Compile Include="Controllers\Helpers\HtmlExtensions.cs" />
     <Compile Include="Controllers\Helpers\HeaderControl.cs" />
     <Compile Include="Controllers\Helpers\ListAsyncControl.cs" />
-    <Compile Include="Controllers\Helpers\WebClientWrapper.cs" />
+    <Compile Include="Controllers\Helpers\ApiWrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Helpers\ListAsyncFormModel.cs" />
+    <Compile Include="Models\FormModels\Dashboard.cs" />
     <Compile Include="Models\FormModels\LandLord.cs" />
+    <Compile Include="Models\FormModels\Login.cs" />
+    <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +226,11 @@
     <Content Include="Views\Shared\Templates\Default\ListAsync.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Dropdown.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Number.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Inspection\Confirm.cshtml" />
+    <Content Include="Views\Inspection\PreInspectionChecks.cshtml" />
+    <Content Include="Views\Login\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

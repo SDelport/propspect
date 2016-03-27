@@ -14,13 +14,13 @@ main {
     color: #000000;
 }
 
- .modal.modal-fixed-footer .modal-header {    
+.modal.modal-fixed-footer .modal-header {
     position: fixed;
-    top: 10px; 
-    z-index:5;
- }
+    top: 10px;
+    z-index: 5;
+}
 
- .modal.modal-fixed-footer .modal-content {
+.modal.modal-fixed-footer .modal-content {
     position: absolute;
     max-height: 100%;
     width: 100%;
@@ -28,7 +28,7 @@ main {
     margin-top: +56px;
     height: calc(100% - 112px);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
- }
+}
 
 /* ====== Navbar CSS ====== */
 .button-collapse {
@@ -70,11 +70,11 @@ nav ul a {
     font-size: 12px !important;
 }
 
-.modal-tall-wide{
-      max-height: 90%;
-      width: 70%;
-      top: 5% !important;
-      height: 90% !important;
+.modal-tall-wide {
+    max-height: 90%;
+    width: 70%;
+    top: 5% !important;
+    height: 90% !important;
 }
 
 
@@ -91,4 +91,11 @@ nav ul a {
 
 .page-title {
     margin-top: 50px;
+}
+
+
+
+.btn-block {
+    width: 100%;
+    height: 100%;
 }

@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/Scripts/baseknockout.js")
     @Scripts.Render("~/bundles/materialize")
-    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
     <style>
         /*Eckardt why select display none?*/
         select
@@ -42,9 +42,9 @@
         <br />
     </header>
     <main>
-        <div class="body-content">
+       
             @RenderBody()
-        </div>
+  
     </main>
 
     <footer class="page-footer propspect-blue-background">
@@ -62,8 +62,10 @@
         </div>
     </footer>   
 
+    @RenderSection("scripts", required: false)
     <script>
         $(".button-collapse").sideNav();
     </script>
 </body>
 </html>
+

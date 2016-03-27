@@ -1,0 +1,11 @@
+﻿@model Login
+@{
+    ViewBag.Title = "Login";
+}
+
+     <form action="/login/post" method="POST">
+         @Form.Textbox(x=>x.Username)
+         @Form.Textbox(x=>x.Password)
+         @Form.SubmitButton("Login")
+     </form>
+

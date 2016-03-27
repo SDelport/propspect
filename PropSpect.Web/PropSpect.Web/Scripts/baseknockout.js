@@ -89,8 +89,8 @@ function SearchViewModel(modelName, items) {
             return '';
 
         for (var i = 0; i < that[source]().length; i++) {
-            if (that[source]()[i].Value == value)
-                return that[source]()[i].Name;
+            if (that[source]()[i].Value == value.toString())
+                return that[source]()[i].Text;
         }
     }
 

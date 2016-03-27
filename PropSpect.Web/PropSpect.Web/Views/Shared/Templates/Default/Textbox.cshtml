@@ -20,7 +20,7 @@
 
 
 <div class="input-field col s12">
-    <input placeholder="@Model.Label" id="@Model.HtmlID" type="text" class="validate" @binding>
+    <input placeholder="@Model.Label" id="@Model.HtmlID" type="text" class="validate" @binding name="@Model.VariableName">
     <label for="@Model.HtmlID">@Model.Label</label>
     @Model.Validation    
 </div>

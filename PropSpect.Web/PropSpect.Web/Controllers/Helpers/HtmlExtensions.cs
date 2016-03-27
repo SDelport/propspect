@@ -26,14 +26,14 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         {
             FormControl control = GetControl(form, expression);
 
-            return form.Html.Partial("Textbox", control);
+            return form.Html.Partial("Templates/Default/Textbox", control);
         }
 
         public static MvcHtmlString Hidden<TModel, TValue>(this Form<TModel> form, Expression<Func<TModel, TValue>> expression) where TModel : class
         {
             FormControl control = GetControl(form, expression);
 
-            return form.Html.Partial("Hidden", control);
+            return form.Html.Partial("Templates/Default/Hidden", control);
         }
 
         public static MvcHtmlString SubmitButton<TModel>(this Form<TModel> form, string text)

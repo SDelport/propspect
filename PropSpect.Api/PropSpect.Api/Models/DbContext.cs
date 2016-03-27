@@ -27,6 +27,7 @@ namespace PropSpect.Api.Models
         public DbSet<PropertyTenant> PropertyTenants { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<EnvironmentValue> EnvironmentValues { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

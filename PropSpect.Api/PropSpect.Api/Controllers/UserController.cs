@@ -1,7 +1,13 @@
 ﻿using PropSpect.Api.Authorize;
+using PropSpect.Api.Models;
+using PropSpect.Api.Models.Helpers;
+using PropSpect.Api.Models.Request;
+using PropSpect.Api.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,14 +15,136 @@ namespace PropSpect.Api.Controllers
 {
     public class UserController : Controller
     {
-        public AuthorizationLevel.RoleType GetUserRole(string identifier)
+
+        DatabaseContext db = new DatabaseContext();
+
+        public LoginRole GetUserRole(string identifier)
         {
-            AuthorizationLevel.RoleType type = AuthorizationLevel.RoleType.Unknown;
+            LoginRole type = LoginRole.None;
 
             //Try get from db
-            type = AuthorizationLevel.RoleType.Tenant;
+            type = LoginRole.Tenant;
 
             return type;
         }
+
+
+        [Route("login")]
+        public JsonResult Login(LoginRequest request)
+        {
+            LoginResponse response = new LoginResponse();
+
+            var k = db.Users.Where(x => x.Username.ToLower() == request.Username.ToLower());
+            var users = k.ToList();
+
+            string encoded = "";
+            bool found = false;
+
+            User loggedInUser = null;
+
+            foreach (var user in users)
+            {
+                if (request.Password != null && user.Salt != null)
+                    encoded = Encode(request.Password + user.Salt);
+
+                if (encoded == user.Password || user.Password == null)
+                {
+                    found = true;
+                    loggedInUser = user;
+                    break;
+                }
+
+            }
+
+            if (loggedInUser != null)
+            {
+                response.Username = loggedInUser.Username;
+                response.Role = Associations.GetLoginRole(loggedInUser.Type);
+                response.UserID = encoded;
+            }
+
+
+            return Json(response);
+        }
+
+
+        public static string Encode(string password)
+        {
+            byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
+
+            byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
+            string encoded = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
+
+            return encoded;
+        }
+
+
+        [Route("api/user/{id}")]
+        public JsonResult Get(int id)
+        {
+            UserResponse response = null;
+
+            User user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+
+            if (user != null)
+            {
+                response = new UserResponse();
+                response.UserID = user.UserID;
+                response.Username = user.Username;
+                response.Language = user.Language;
+                response.IsPasswordChanged = user.IsPasswordChanged == 'Y';
+                if (!response.IsPasswordChanged)
+                    response.Password = user.Password;
+                response.Type = user.Type;
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Route("api/user/add")]
+        public JsonResult Add(CreateUserRequest request)
+        {
+            if (request.UserID <= 0)
+            {
+                User user = new User();
+                user.UserID = request.UserID;
+                user.Type = request.Type;
+                user.Username = request.Username;
+
+
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+            else
+            {
+                User user = db.Users.Where(x => x.UserID == request.UserID).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Type = request.Type;
+                    user.Username = request.Username;
+
+                    db.SaveChanges();
+                }
+
+            }
+
+            return Json("true");
+        }
+
+        [Route("api/user")]
+        public JsonResult List()
+        {
+            return Json(db.Users.ToList().Select(x => new UserResponse()
+            {
+                Username = x.Username,
+                Language = x.Language,
+                IsPasswordChanged = x.IsPasswordChanged == 'Y',
+                Password = x.Password,
+                Type = x.Type,
+                UserID = x.UserID
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

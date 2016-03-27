@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "SelectProperty";
+}
+
+<h2>SelectProperty</h2>
+
+@*This should be a checklist*@
+<div>
+
+    <div>
+        <h3>Confirm time and date</h3>
+        <p>Choose the property which to inspect</p>
+        <button class="btn ">Choose</button>
+    </div>
+
+    <div>
+        <h3>Add Property</h3>
+        <p>Choose the property which to inspect</p>
+        <button class="btn ">Choose</button>
+    </div>
+
+</div>
+
+
+
+<form action="/inspection/selectproperty/post" method="post">
+    <div class="modal modal-fixed-footer knockout-edit modal-tall-wide">
+
+        <div class="modal-content">
+            <h4 class="modal-header"></h4>
+            <form class="col s12">
+                <div class="row">
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action waves-effect waves-green btn-flat">Yes</a>
+            <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+        </div>
+    </div>
+</form>

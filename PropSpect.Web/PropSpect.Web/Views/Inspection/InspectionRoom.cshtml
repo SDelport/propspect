@@ -1,23 +1,103 @@
-﻿@model PropSpect.Web.Models.FormModels.ReviewItemFormModel
+﻿@{
+    List<string> roomParts = new List<string>() { "Door", "Door Stopper", "Door Bell", "Door kettle", "Door Door" };
+}
 
-<h2>@Model.Name</h2>
-<form class="form-horizontal">
-    <input value="@Model.PageID" type="hidden" />
-    @foreach (var item in Model.ReviewItemParts)
-    {
-        <div class="form-group">
-            <div class="col-md-2"><label>@item.Name</label></div>
-            <div class="col-md-4 col-sm-5"><input type="text" class="form-control" id="" placeholder="@item.Name"></div>
-            <div class="col-md-4  col-sm-5">
-                @Form.Dropdown(x=>x.ConditionID,Model.ConditionItems)
-            </div>
-            <div class="col-md-2 col-sm-2">
-                <button class="btn-block btn  btn-primary">Upload</button>
-            </div>
+@section styles
+{
+    <style>
+        #wrap .col {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 60px !important;
+            border-bottom: 1px solid black !important;
+            border-right: 1px solid black !important;
+        }
+
+            #wrap .col:first-child {
+                border-left: 1px solid black !important;
+            }
+
+        #wrap .row {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+            #wrap .row:first-child {
+                border-top: 1px solid black !important;
+            }
+
+        .signature-cell {
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+        }
+
+    </style>
+}
+<div id="wrap">
+
+
+    <div class="row">
+
+        <div class="col s3">
+            Item
         </div>
-    }
+        <div class="col s3">
+            Condition
+        </div>
+        <div class="col s3">
+            Picture
+        </div>
+        <div class="col s3">
+            Signature
+        </div>
+    </div>
 
+    <div class="wrap1">
+        @foreach (var part in roomParts)
+        {
+            <div class="row">
 
-    <button class="btn btn-primary">Next (Part @Model.Number of @Model.Number)</button>
-</form>
+                <div class="col s3">
+                    @part
+                </div>
+                <div class="col s3">
+                    <select>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col s3">
 
+                </div>
+                <div class="col s3 signature-cell">
+                    <div class="col s8">
+                        <canvas class="signature"></canvas>
+                    </div>
+                    <div class="col s4">
+                        <button class="btn btn-block">Clear</button>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Content/Scripts/signature_pad.min.js"></script>
+    <script>
+        var canvas = $('.signature');
+
+        $(canvas).each(function (i, e) {
+            var signaturePad = new SignaturePad(e,
+                {
+                    minWidth: 0.3,
+                    maxWidth: 1.5
+                });
+        })
+    </script>
+
+}

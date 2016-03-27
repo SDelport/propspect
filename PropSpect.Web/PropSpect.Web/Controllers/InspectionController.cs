@@ -9,16 +9,23 @@ namespace PropSpect.Web.Controllers
 {
     public class InspectionController : Controller
     {
-        [Route("inspection/create")]
+        [Route("inspection/")]
         public ActionResult CreateInspection()
         {
-            return View();
+            return View("InspectionRoom");
         }
 
-        [Route("inspection/{inspectionID}")]
-        public ActionResult ViewInspection(int inspectionID)
+        [Route("inspection/start-inspection")]
+        public ActionResult SelectProperty()
         {
-            return View();
+            return View("PreInspectionChecks");
+        }
+
+
+        [Route("inspection/confirmdetails")]
+        public ActionResult ConfirmDetails()
+        {
+            return View("Confirm");
         }
 
 
