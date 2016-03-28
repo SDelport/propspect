@@ -1,5 +1,4 @@
-﻿using PropSpect.Web.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +10,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
     public abstract class CustomWebViewPage<TModel> : WebViewPage<TModel>
     {
         public Form<TModel> Form { get; set; }
+        public UI<TModel> UI { get; set; }
 
         public string Title { get; set; }
 
@@ -19,7 +19,8 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         {
             base.InitHelpers();
             Form = new Form<TModel>(this.ViewContext, this);
-         
+            UI = new UI<TModel>(this.ViewContext, this);
+
         }
     }
 

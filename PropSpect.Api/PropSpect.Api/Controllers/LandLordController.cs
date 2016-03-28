@@ -54,9 +54,10 @@ namespace PropSpect.Api.Controllers
         [Route("api/landlord/add")]
         public JsonResult Add(CreateLandLordRequest request)
         {
-            if(request.LandlordID<=0)
+            Landlord landlord = null;
+            if (request.LandlordID<=0)
             { 
-            Landlord landlord = new Landlord();
+            landlord = new Landlord();
             landlord.Title = request.Title;
             landlord.Name = request.Name;
             landlord.FirstName = request.FirstName;
@@ -84,7 +85,7 @@ namespace PropSpect.Api.Controllers
             }
             else
             {
-                Landlord landlord = db.LandLords.Where(x => x.LandlordID == request.LandlordID).FirstOrDefault();
+                landlord = db.LandLords.Where(x => x.LandlordID == request.LandlordID).FirstOrDefault();
                 if(landlord!= null)
                 {
                     landlord.Title = request.Title;
@@ -112,7 +113,7 @@ namespace PropSpect.Api.Controllers
 
             }
 
-            return Json("true");
+            return Json(landlord);
         }
 
 

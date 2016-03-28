@@ -78,7 +78,7 @@ namespace PropSpect.Web.Controllers
             request.Email = model.Email;
             request.Website = model.Website;
 
-            var result = ApiWrapper.Post<bool>("api/landlord/add", request);
+            var result = ApiWrapper.Post<Landlord>("api/landlord/add", request);
 
             return Json(result);
         }
@@ -86,9 +86,9 @@ namespace PropSpect.Web.Controllers
         [Route("landlord")]
         public ActionResult List()
         {
-            List<LandLord> landlords = new List<LandLord>();
+            List<Landlord> landlords = new List<Landlord>();
 
-            landlords = LandLord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord"));
+            landlords = Landlord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord"));
 
             ListAsyncFormModel formModel = ListAsyncFormModel.Create(landlords);
 

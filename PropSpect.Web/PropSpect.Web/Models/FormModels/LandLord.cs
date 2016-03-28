@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Models.FormModels
 {
-    public class LandLord
+    public class Landlord
     {
         [ListOptions(Hide = true)]
         [EditOptions(Type = ControlType.Hidden)]
@@ -48,12 +48,12 @@ namespace PropSpect.Web.Models.FormModels
 
        
 
-        public static LandLord Create(LandlordResponse response)
+        public static Landlord Create(LandlordResponse response)
         {
             if (response == null)
                 return null;
 
-            LandLord landlord = new LandLord();
+            Landlord landlord = new Landlord();
             landlord.LandlordID = response.LandlordID;
             landlord.Type = response.Type;
             landlord.Name = response.Name;
@@ -80,12 +80,12 @@ namespace PropSpect.Web.Models.FormModels
 
         }
 
-        public static List<LandLord> CreateList(List<LandlordResponse> response)
+        public static List<Landlord> CreateList(List<LandlordResponse> response)
         {
             if (response == null)
                 return null;
 
-            List<LandLord> landlords = new List<LandLord>();
+            List<Landlord> landlords = new List<Landlord>();
             foreach (var landlord in response)
             {
                 landlords.Add(Create(landlord));

@@ -83,8 +83,7 @@ function SearchViewModel(modelName, items) {
                 window[that.modelName + 'EditModel'].OpenEdit(null);
     }
 
-    this.GetSource= function(source, value)
-    {
+    this.GetSource = function (source, value) {
         if (!that[source])
             return '';
 
@@ -101,7 +100,7 @@ function SearchViewModel(modelName, items) {
 
 function EditViewModel(modelName, itemtemplate) {
     var that = this;
-
+    this.IsLoading = ko.observable(false);
     this.modelName = modelName;
     this.domName = modelName.toString().toLowerCase();
     this.EditItem = ko.observable(ko.mapping.fromJSON(itemtemplate));
@@ -117,17 +116,26 @@ function EditViewModel(modelName, itemtemplate) {
     }
 
     this.Save = function (item) {
-
-        ServiceProxy.Post('/' + that.domName + '/add', ko.mapping.toJSON(that.EditItem), this.SaveSuccess);
+        that.IsLoading(true);
+        ServiceProxy.Post('/' + that.domName + '/add', ko.mapping.toJSON(that.EditItem), item.EditItem()[that.modelName + "ID"]() == 0 || !item.EditItem()[that.modelName + "ID"] ? this.AddSuccess : this.SaveSuccess);
     }
 
     this.SaveSuccess = function (result) {
         $('#edit-modal-' + that.domName).closeModal();
+        that.IsLoading(false);
+        for (var i = 0; i < window[that.modelName + 'SearchModel'].Items().length; i++) {
+            if (window[that.modelName + 'SearchModel'].Items()[i][that.modelName + 'ID']() == result[that.modelName + 'ID']) {
+                window[that.modelName + 'SearchModel'].Items.replace(window[that.modelName + 'SearchModel'].Items()[i], ko.mapping.fromJS(result));
+            }
+        }
+
 
     }
 
     this.AddSuccess = function (result) {
         $('#edit-modal-' + that.domName).closeModal();
+        that.IsLoading(false);
+        window[that.modelName + 'SearchModel'].Items.push(result);
 
     }
 
@@ -150,6 +158,7 @@ var ServiceProxy =
                         successmethod(result);
                     },
                     error: function (result) {
+                        alert("An error occured")
                         console.log(result)
                     }
                 });

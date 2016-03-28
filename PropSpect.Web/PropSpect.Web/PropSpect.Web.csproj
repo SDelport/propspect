@@ -124,6 +124,7 @@
     <Compile Include="Controllers\EnvironmentCache.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Attributes.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\CustomWebViewPage.cs" />
+    <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\UI.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Form.cs" />
     <Compile Include="Controllers\Helpers\FormControl.cs" />
     <Compile Include="Controllers\Helpers\EditControl.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Controllers\Helpers\HeaderControl.cs" />
     <Compile Include="Controllers\Helpers\ListAsyncControl.cs" />
     <Compile Include="Controllers\Helpers\ApiWrapper.cs" />
+    <Compile Include="Controllers\Helpers\NavLinkControl.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -233,6 +235,7 @@
     <Content Include="Views\Inspection\Confirm.cshtml" />
     <Content Include="Views\Inspection\PreInspectionChecks.cshtml" />
     <Content Include="Views\Login\List.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -247,10 +250,6 @@
     <ProjectReference Include="..\..\PropSpect.Api\Libraries\PropSpect.Api.Models\PropSpect.Api.Models.csproj">
       <Project>{1bba0bb5-de91-4626-8b3f-412ca476e512}</Project>
       <Name>PropSpect.Api.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\PropSpect.Web.UI\PropSpect.Web.UI.csproj">
-      <Project>{1100571f-6b38-418c-909c-7df695d59320}</Project>
-      <Name>PropSpect.Web.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

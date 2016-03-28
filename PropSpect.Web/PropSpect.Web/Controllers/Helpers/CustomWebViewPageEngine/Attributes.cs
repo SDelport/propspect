@@ -19,6 +19,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         public ControlType Type { get; set; }
         public string SourceName { get; set; }
         public string DependancyName { get; set; }
+        
     }
 
    
