@@ -41,6 +41,11 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             return form.Html.Partial("Templates/Default/SubmitButton", text as object);
         }
 
+        public static MvcHtmlString Button<TModel>(this Form<TModel> form, string text)
+        {
+            return form.Html.Partial("Templates/Default/Button", text as object);
+        }
+
 
         public static MvcHtmlString RenderTemplate<TModel>(this Form<TModel> form, FormControl control, string templateName)
         {
