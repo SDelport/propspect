@@ -27,7 +27,8 @@ namespace PropSpect.Web
                       "~/Scripts/knockout.mapping-latest.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
-                      "~/Scripts/materialize/materialize.min.js"));
+                      "~/Scripts/materialize/materialize.min.js",
+                      "~/Scripts/site.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/materialize/css/materialize.css",

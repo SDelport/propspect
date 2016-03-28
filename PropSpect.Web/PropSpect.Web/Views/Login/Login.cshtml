@@ -3,9 +3,33 @@
     ViewBag.Title = "Login";
 }
 
-     <form action="/login/post" method="POST">
-         @Form.Textbox(x=>x.Username)
-         @Form.Textbox(x=>x.Password)
-         @Form.SubmitButton("Login")
-     </form>
+@*<form action="/login/post" method="POST">
+    @Form.Textbox(x => x.Username)
+    @Form.Textbox(x => x.Password)
+    @Form.SubmitButton("Login")
+</form>*@
+<div class="row">
+    <div class="col s12 m10 l6  offset-m1 offset-l3">
+        <form action="/login/post" method="POST" class="z-depth-1 white">
+            <div class="lg-upper-form">
+                <h5 class="center-align">Please Log In</h5>
+            </div>
+            <div class="lg-lower-form">
+                <div class="row">
+                   @Form.Textbox(x => x.Username)
+                </div>
+                <div class="row">
+                   @Form.Textbox(x => x.Password)
+                </div>
+                <a class="propspect-blue-text" href="#">Forgot Password?</a>
+                <div class="divider"></div>
+                <span class="right-align"><br />
+                    @Form.Button("Login")
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
 
+
+<img src="~/Content/Images/PropSpect.png" class="img-max-500 center" />

@@ -3,7 +3,7 @@
     ViewBag.Title = "Dashboard";
 }
 
-<h2>Dashboard</h2>
+@*<h2>Dashboard</h2>
 
 <a href="/">Add/Edit User</a><br />
 <br />
@@ -16,4 +16,75 @@
 <a href="/">Add/Edit Companies</a><br />
 <a href="/">Add/Edit Inspections</a><br />
 <a href="/">View/Export Reports</a><br />
-<a href="/">Do Inspections</a>
+<a href="/">Do Inspections</a>*@
+
+
+<div class="row">
+    <div class="col s6 m4 l2" onclick="change_url('#')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">assignment_ind</i></h5>
+            <h5 class="center">Add/Edit User</h5>
+        </div>
+    </div>
+
+    <div class="col s6 m4 l2" onclick="change_url('Property')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">store</i></h5>
+            <h5 class="center">Add/Edit Properties</h5>
+        </div>
+    </div>
+
+    <div class="col s6 m4 l2" onclick="change_url('Landlord')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">business</i></h5>
+            <h5 class="center">Add/Edit Companies</h5>
+        </div>
+    </div>
+
+    <div class="col s6 m4 l2" onclick="change_url('Inspection')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">youtube_searched_for</i></h5>
+            <h5 class="center">Add/Edit Inspections</h5>
+        </div>
+    </div>
+
+    <div class="col s6 m4 l2" onclick="change_url('Report')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">description</i></h5>
+            <h5 class="center">View/Export Reports</h5>
+        </div>
+    </div>
+
+    <div class="col s6 m4 l2" onclick="change_url('Inspection')">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">input</i></h5>
+            <h5 class="center">Do Inspections</h5>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function change_url(href)
+    {
+        window.location.href = "/" + href;
+    }
+
+
+    //make tiles equal height
+    var maxHeight = 0 
+    $().ready()
+    {
+        $('.menu-item').each(function () {
+            if (maxHeight < $(this)[0].clientHeight) {
+                maxHeight = $(this)[0].clientHeight;
+            }            
+            console.log(maxHeight);
+        })
+
+        $('.menu-item').height(maxHeight- 40);
+    }
+</script>

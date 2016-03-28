@@ -201,6 +201,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -235,7 +236,8 @@
     <Content Include="Views\Inspection\Confirm.cshtml" />
     <Content Include="Views\Inspection\PreInspectionChecks.cshtml" />
     <Content Include="Views\Login\List.cshtml" />
-    <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
+   <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Button.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
