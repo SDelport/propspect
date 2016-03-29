@@ -70,11 +70,11 @@
             </div>
         </form>
     </div>
-    <div class="modal-footer modal-foot">
-        <div class="progress no-margin-border" data-bind="css: {hide:IsLoading()}">
-            <div class="indeterminate"></div>
-        </div>       
+    <div class="modal-footer modal-foot">         
         <a data-bind="click:Save" class=" modal-action waves-effect waves-green btn-flat">Save</a>
         <a class=" modal-action modal-close waves-effect waves-red btn-flat">Don't Save</a>
+        <div class="progress no-margin-border" data-bind="css: {hide:!IsLoading()}">
+            <div class="indeterminate"></div>
+        </div>      
     </div>
 </div>

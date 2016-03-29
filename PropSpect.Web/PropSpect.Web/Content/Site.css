@@ -34,6 +34,19 @@ main {
     height: 58px !important;
 }
 
+.active-link{
+    background:#51A8B1 !important;
+    color: #fff !important;
+}
+
+.normal-link{
+    background:#fff !important;
+}
+
+.normal-link a {
+    color: #51A8B1 !important;
+}
+
 .waves-effect.waves-propspect .waves-ripple {
   background-color: rgba(81, 168, 177, 0.6);
 }
@@ -47,9 +60,16 @@ main {
     height: 60px;
 }
 
-nav ul a {
-    color: #51A8B1 !important;
+.verticalLine-left {
+    border-left:  thick solid #51A8B1 !important;
+    min-height: 100%;
 }
+
+.verticalLine-right {
+    border-right:  thick solid #51A8B1 !important;
+    min-height: 100%;
+}
+
 
 
 
@@ -143,4 +163,10 @@ nav ul a {
 .no-margin-border{
     margin: 0 !important;
     border: 0 !important;
+}
+
+
+/* ====== Dashboard ====== */
+.dashboard-logo{
+    max-height: 130px;
 }

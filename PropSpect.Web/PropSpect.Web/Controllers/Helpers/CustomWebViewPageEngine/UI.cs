@@ -19,7 +19,9 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         public MvcHtmlString NavLink(string label, string link = "", string linkClass = "")
         {
             if (string.Compare(HttpContext.Current.Request.RawUrl, link, true) == 0)
-                linkClass += "active ";
+                linkClass += "active-link waves-light";
+            else
+                linkClass += "normal-link waves-pspt-blue";
 
             if (string.IsNullOrEmpty(link))
                 link = "/" + label.ToLower().Replace(" ", "");
@@ -33,6 +35,16 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             control.LinkClass = new MvcHtmlString(linkClass);
 
             return this.Html.Partial("Templates/Default/Navlink", control);
+        }
+
+        public MvcHtmlString Tile(string label, string icon = "polymer", string url = "/#!")
+        {
+            TileControl control = new TileControl();
+            control.Lable = new MvcHtmlString(label);
+            control.Icon = new MvcHtmlString(icon);
+            control.RedirectLocation = new MvcHtmlString(url);
+
+            return this.Html.Partial("Templates/Default/Tile", control);
         }
     }
 

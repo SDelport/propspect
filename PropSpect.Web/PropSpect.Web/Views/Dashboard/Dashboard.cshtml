@@ -18,49 +18,21 @@
 <a href="/">View/Export Reports</a><br />
 <a href="/">Do Inspections</a>*@
 
-
+@* Company Logo *@
 <div class="row">
-    <div class="col s6 m4 l2" onclick="change_url('#')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">assignment_ind</i></h5>
-            <h5 class="center">Add/Edit User</h5>
-        </div>
+    <div class="center">
+        <img class="dashboard-logo" src="~/Content/Images/olea.png" />
     </div>
+</div>
 
-    <div class="col s6 m4 l2" onclick="change_url('Property')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">store</i></h5>
-            <h5 class="center">Add/Edit Properties</h5>
-        </div>
-    </div>
-
-    <div class="col s6 m4 l2" onclick="change_url('Landlord')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">business</i></h5>
-            <h5 class="center">Add/Edit Companies</h5>
-        </div>
-    </div>
-
-    <div class="col s6 m4 l2" onclick="change_url('Inspection')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">youtube_searched_for</i></h5>
-            <h5 class="center">Add/Edit Inspections</h5>
-        </div>
-    </div>
-
-    <div class="col s6 m4 l2" onclick="change_url('Report')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">description</i></h5>
-            <h5 class="center">View/Export Reports</h5>
-        </div>
-    </div>
-
-    <div class="col s6 m4 l2" onclick="change_url('Inspection')">
-        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-            <h5 class="center"><i class="medium material-icons">input</i></h5>
-            <h5 class="center">Do Inspections</h5>
-        </div>
-    </div>
+<div class="row">   
+    @*@UI.Tile("Lable Field", "Icon Field", "Url Field without the /")*@
+    @UI.Tile("Add/Edit User", "assignment_ind")
+    @UI.Tile("Add/Edit Properties", "store","Property")
+    @UI.Tile("Add/Edit Companies", "business", "Landlord")
+    @UI.Tile("Add/Edit Inspections", "youtube_searched_for", "Inspection")
+    @UI.Tile("View/Export Reports", "description", "Report")
+    @UI.Tile("Do Inspections", "input", "Inspection")    
 </div>
 
 
@@ -68,6 +40,8 @@
 
 
 <script>
+
+    //redirect function
     function change_url(href)
     {
         window.location.href = "/" + href;

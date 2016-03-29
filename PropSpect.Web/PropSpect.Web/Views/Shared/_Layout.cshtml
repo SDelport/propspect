@@ -28,10 +28,14 @@
         <nav class="white ">
             <a href="#" class="center brand-logo"><img class="logo-img" src="~/Content/Images/PropSpect.png" /></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class=" propspect-blue-background waves-effect waves-light" ><a class="white-text" href="~/Landlord">Landlord</a></li>
-                @UI.NavLink("Landlord")
-                <li class="waves-effect waves-pspt-blue"><a href="~/Property">Property</a></li>
-                <li class="waves-effect waves-pspt-blue"><a href="#!">JavaScript</a></li>
+                @*<li class=" propspect-blue-background waves-effect waves-light" ><a class="white-text" href="~/Landlord">Landlord</a></li>*@
+                @UI.NavLink("Dashboard", "/")
+                @UI.NavLink("Company", "/Landlord")
+                @UI.NavLink("Property", "/Property")
+                @UI.NavLink("Users", "/User")
+                @UI.NavLink("Inspection", "/Inspection")
+                @UI.NavLink("Logout", "/Logout")
+                @*<li class="waves-effect active-link"><a href="~/Property">Property</a></li>*@
             </ul>
             <ul id="slide-out" class="side-nav propspect-blue-text">
                 <li><a class="waves-effect waves-pspt-blue" href="~/Landlord">Landlord</a></li>

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\Helpers\ApiWrapper.cs" />
     <Compile Include="Controllers\Helpers\LoggedIn.cs" />
     <Compile Include="Controllers\Helpers\NavLinkControl.cs" />
+    <Compile Include="Controllers\Helpers\TileControl.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\olea.png" />
     <Content Include="Content\Images\PropSpect.png" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
@@ -239,9 +241,10 @@
     <Content Include="Views\Login\List.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Button.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Tile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Start\App_Data\" />
     <Folder Include="Controllers\Api\" />
     <Folder Include="Controllers\Data\" />
   </ItemGroup>

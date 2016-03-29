@@ -33,61 +33,103 @@
             -webkit-user-select: none;
             -o-user-select: none;
         }
-
     </style>
 }
-<div id="wrap" class="white z-depth-1">
 
-
-    <div class="row">
-
-        <div class="col s3">
-            Item
+@foreach (var part in roomParts)
+{
+    <div class="row z-depth-1 long-container white">
+        <div class="col s12 m2">
+            <div class="col s12 propspect-blue-text"><h4>@part</h4></div>
         </div>
-        <div class="col s3">
-            Condition
-        </div>
-        <div class="col s3">
-            Picture
-        </div>
-        <div class="col s3">
-            Signature
-        </div>
-    </div>
-
-    <div class="wrap1">
-        @foreach (var part in roomParts)
-        {
-            <div class="row">
-
-                <div class="col s3">
-                    @part
-                </div>
-                <div class="col s3">
-                    <select>
-                        <option>Great</option>
-                        <option>Good</option>
-                        <option>Bad</option>
-                        <option>Shit</option>
-                        <option>Stefan</option>
-                    </select>
-                </div>
-                <div class="col s3">
-
-                </div>
-                <div class="col s3 signature-cell">
-                    <div class="col s8">
-                        <canvas class="signature"></canvas>
-                    </div>
-                    <div class="col s4">
-                        <button class="btn btn-block propspect-blue-background waves-effect waves-light">Clear</button>
-                    </div>
-                </div>
-
+        <div class="col s12 m5">
+            <div class="input-field col s12">
+                <select>
+                    <option>Great</option>
+                    <option>Good</option>
+                    <option>Bad</option>
+                    <option>Shit</option>
+                    <option>Stefan</option>
+                </select>
             </div>
-        }
+            <div class="col s12">
+                <div class="file-field input-field">
+                    <div class="btn propspect-blue-background">
+                        <span>Image</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m5 verticalLine-left">
+            <div class="col s8 propspect-blue-text"><h4>Signature</h4></div>
+            <a class="btn-floating btn-large waves-effect waves-light right propspect-blue-background"><i class="material-icons">not_interested</i></a>
+            <div class="signature-cell">
+                <canvas class="signature"></canvas>
+            </div>
+        </div>
     </div>
-</div>
+}
+
+
+
+@*<div id="wrap" class="white z-depth-1">
+
+
+        <div class="row">
+
+            <div class="col s3">
+                Item
+            </div>
+            <div class="col s3">
+                Condition
+            </div>
+            <div class="col s3">
+                Picture
+            </div>
+            <div class="col s3">
+                Signature
+            </div>
+        </div>
+
+
+        <div class="wrap1">
+            @foreach (var part in roomParts)
+            {
+                <div class="row">
+
+                    <div class="col s3">
+                        @part
+                    </div>
+                    <div class="col s3">
+                        <select>
+                            <option>Great</option>
+                            <option>Good</option>
+                            <option>Bad</option>
+                            <option>Shit</option>
+                            <option>Stefan</option>
+                        </select>
+                    </div>
+                    <div class="col s3">
+
+                    </div>
+                    <div class="col s3 signature-cell">
+                        <div class="col s8">
+                            <canvas class="signature"></canvas>
+                        </div>
+                        <div class="col s4">
+                            <button class="btn btn-block propspect-blue-background waves-effect waves-light">Clear</button>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>*@
 
 @section scripts
 {
