@@ -16,6 +16,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers
 {
+    [LoggedIn]
     public class LandLordController : Controller
     {
 

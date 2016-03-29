@@ -24,15 +24,22 @@ namespace PropSpect.Web.Controllers
         {
             LoginResponse response = ApiWrapper.Post<LoginResponse>("login", loginModel);
 
+
+
             if (response.Role == LoginRole.None)
                 return Redirect("/login");
             else
+            {
+                HttpContext.Response.Cookies.Add(new HttpCookie("userID", response.UserID));
+                HttpContext.Response.Cookies.Add(new HttpCookie("role", Associations.GetLoginRole(response.Role)));
+                HttpContext.Response.Cookies.Add(new HttpCookie("username", response.Username));
+
                 return Redirect("/");
 
-
+            }
         }
 
-
+        [LoggedIn]
         [Route("users")]
         public ActionResult List()
         {
@@ -52,6 +59,7 @@ namespace PropSpect.Web.Controllers
             return View("List", formModel);
         }
 
+        [LoggedIn]
         [Route("user/add")]
         public JsonResult AddedUser(UserResponse model)
         {

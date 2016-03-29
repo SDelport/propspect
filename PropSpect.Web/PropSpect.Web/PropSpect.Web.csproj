@@ -132,6 +132,7 @@
     <Compile Include="Controllers\Helpers\HeaderControl.cs" />
     <Compile Include="Controllers\Helpers\ListAsyncControl.cs" />
     <Compile Include="Controllers\Helpers\ApiWrapper.cs" />
+    <Compile Include="Controllers\Helpers\LoggedIn.cs" />
     <Compile Include="Controllers\Helpers\NavLinkControl.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
@@ -236,7 +237,7 @@
     <Content Include="Views\Inspection\Confirm.cshtml" />
     <Content Include="Views\Inspection\PreInspectionChecks.cshtml" />
     <Content Include="Views\Login\List.cshtml" />
-   <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Button.cshtml" />
   </ItemGroup>
   <ItemGroup>

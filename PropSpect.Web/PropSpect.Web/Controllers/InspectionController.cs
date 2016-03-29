@@ -1,4 +1,5 @@
-﻿using PropSpect.Web.Models.FormModels;
+﻿using PropSpect.Web.Controllers.Helpers;
+using PropSpect.Web.Models.FormModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers
 {
+    [LoggedIn]
     public class InspectionController : Controller
     {
         [Route("inspection/")]
