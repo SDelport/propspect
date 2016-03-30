@@ -3,41 +3,349 @@
     ViewBag.Title = "SelectProperty";
 }
 
-<h2>SelectProperty</h2>
 
-@*This should be a checklist*@
-<div>
+<div class="row long-container">
+    <div class="col m4">
+        <div class="z-depth-1 white">
+            <div class="propspect-blue-background z-depth-1">
+                <div class="">
+                    <h5 class="center white-text padding-2">Progress</h5>
+                </div>
+            </div>
+            <div class="long-container">
+                <form action="#">
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step1" />
+                        <label for="progress-step1">Step 1: Confirm Type</label>
+                    </p>
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step2" />
+                        <label for="progress-step2">Step 2: Confirm Location</label>
+                    </p>
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step3" />
+                        <label for="progress-step3">Step 3: Property Selection</label>
+                    </p>
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step4" />
+                        <label for="progress-step4">Step 4: Tenant Selection</label>
+                    </p>
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step5" />
+                        <label for="progress-step5">Step 5: Owner Selection</label>
+                    </p>
+                    <p class="progress-check">
+                        <input type="checkbox" id="progress-step6" />
+                        <label for="progress-step6">Step 6: Property Set Up</label>
+                    </p>
+                </form>
+            </div>
+            <div class="progress">
+                <div id="progress-p" class="determinate" style="width: 0%"></div>
+            </div>
 
-    <div>
-        <h3>Confirm time and date</h3>
-        <p>Choose the property which to inspect</p>
-        <button class="btn ">Choose</button>
+        </div>
     </div>
+    <div class="col m8">
+        <div class="z-depth-1 white">
+            <div class="propspect-blue-background z-depth-1">
+                <div class="">
+                    <h5 class="center white-text padding-2">Pre Inspection Checks</h5>
+                </div>
+            </div>
+            @*  ==============   STEP 1 ================ *@
+            <div id="step1" class="hide">
+                <h5 class="center">Inspection Type</h5>
+                <div class="col s6 m4 offset-m1 " onclick="step_change('step1','next','InOut')">
+                    <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+                        <h5 class="center"><i class="medium material-icons">repeat</i></h5>
+                        <h5 class="center">In/Out Inspection</h5>
+                    </div>
+                </div>
 
-    <div>
-        <h3>Add Property</h3>
-        <p>Choose the property which to inspect</p>
-        <button class="btn ">Choose</button>
+                <div class="col s6 m4 offset-m2 " onclick="step_change('step1', 'next', 'Quaterly')">
+                    <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+                        <h5 class="center"><i class="medium material-icons">restore</i></h5>
+                        <h5 class="center">Quaterly Inspection</h5>
+                    </div>
+                </div>
+            </div>
+
+            @*  ==============   STEP 2 ================ *@
+            <div id="step2" class="hide">
+                <h5 class="center">Location</h5>
+                <h5> to do</h5>
+
+                <div class="col s12 m10 offset-m1" >
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step2', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step2', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>                    
+                </div>                
+            </div>
+
+          
+
+            @*  ==============   STEP 3 ================ *@
+            <div id="step3" class="hide">
+                <h5 class="center">Property Selection</h5>
+                <h5> to do</h5>
+
+                <div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step3', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>
+            </div>
+
+           
+
+            @*  ==============   STEP 4 ================ *@
+            <div id="step4" class="hide">
+                <h5 class="center">Tennat Selection</h5>
+                <h5> to do</h5>
+
+                <div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step4', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>
+            </div>
+
+
+            @*  ==============   STEP 5 ================ *@
+            <div id="step5" class="hide">
+                <h5 class="center">Owner Selection</h5>
+                <h5> to do</h5>
+
+                <div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step5', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>
+            </div>
+
+
+            @*  ==============   STEP 6 ================ *@
+            <div id="step6" class="">
+                <h5 class="center">Property Set Up</h5>
+                 <div class="col s12 m10">
+                     <div class="col s4 ">
+                         <h5>Front Door: </h5>
+                     </div>
+                     <div class="col s4">
+                         <p>
+                             <input type="checkbox" class="filled-in" id="checkDoor" checked="checked" />
+                             <label for="checkDoor">Required</label>
+                         </p>
+                     </div>
+                     <div class="col s4">
+                         <div class="input-field col s12 no-margin-border">
+                             <input placeholder="Amount" id="amountDoor" type="text" class="validate" >
+                         </div>
+                     </div>
+                 </div>
+
+                <div class="col s12 m10">
+                    <div class="col s4 ">
+                        <h5>Kitchen: </h5>
+                    </div>
+                    <div class="col s4">
+                        <p>
+                            <input type="checkbox" class="filled-in" id="checkKitchen" checked="checked" />
+                            <label for="checkKitchen">Required</label>
+                        </p>
+                    </div>
+                    <div class="col s4">
+                        <div class="input-field col s12 no-margin-border">
+                            <input placeholder="Amount" id="amountKitchen" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m10">
+                    <div class="col s4 ">
+                        <h5>Living Room: </h5>
+                    </div>
+                    <div class="col s4">
+                        <p>
+                            <input type="checkbox" class="filled-in" id="checkLiving" checked="checked" />
+                            <label for="checkLiving">Required</label>
+                        </p>
+                    </div>
+                    <div class="col s4">
+                        <div class="input-field col s12 no-margin-border">
+                            <input placeholder="Amount" id="amountLiving" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m10">
+                    <div class="col s4 ">
+                        <h5>Bathroom: </h5>
+                    </div>
+                    <div class="col s4">
+                        <p>
+                            <input type="checkbox" class="filled-in" id="checkBathroom" checked="checked" />
+                            <label for="checkBathroom">Required</label>
+                        </p>
+                    </div>
+                    <div class="col s4">
+                        <div class="input-field col s12 no-margin-border">
+                            <input placeholder="Amount" id="amountBathroom" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step6', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step6', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>
+            </div>
+
+            @*  ==============   STEP 7: Details ================ *@
+            <div id="step7" class="hide">
+                <h5 class="center">Final Details</h5>
+                <h5> to do</h5>
+
+                <div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step7', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step7', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>
+            </div>
+
+            <p class="white-text">.</p>
+            <div class="progress">
+                <div id="progress-p" class="determinate" style="width: 100%"></div>
+            </div>
+
+
+        </div>
     </div>
 
 </div>
 
+<script>
+
+    var itemCount;
+    var checkItemCount = 0;
+
+    var inspectionType = "";
 
 
-<form action="/inspection/selectproperty/post" method="post">
-    <div class="modal modal-fixed-footer knockout-edit modal-tall-wide">
+    function mark_item_check(step, check) {
+        $('progress-step' + step).addClass("Changing");
+        document.getElementById('progress-step' + step).checked = check;
+        $('progress-step' + step).removeClass("Changing");
 
-        <div class="modal-content">
-            <h4 class="modal-header"></h4>
-            <form class="col s12">
-                <div class="row">
+        checkItemCount = 0;
+        $('.progress-check').each(function () {
+            if ($(this).context.children[0].checked)
+                checkItemCount++;
+        });
 
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-action waves-effect waves-green btn-flat">Yes</a>
-            <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
-        </div>
-    </div>
-</form>
+        var percentage = Math.round(checkItemCount / itemCount * 100, 0);
+        document.getElementById("progress-p").style.width = percentage + "%";
+
+    }
+
+    $().ready(function () {
+        itemCount = $('.progress-check').length;
+
+        //Prevent checkbox changed
+        $('.progress-check').change(function () {
+            var id = $(this).context.children[0].id;
+            var checked = $(this).context.children[0].checked;
+            var change = $(this).context.children[0].className;
+
+            if (change != "Changing") {
+                if (checked)
+                    checked = false;
+                else
+                    checked = true;
+                document.getElementById(id).checked = checked;
+            }
+        })
+    });
+
+    function step_change(currentStep, direction, additionalInfo)
+    {
+        if (direction == 'next') {
+            if (currentStep == 'step1') {
+                inspectionType = additionalInfo;
+                change_step_up(1);
+            }
+            if (currentStep == 'step2') {                
+                change_step_up(2);
+
+                //put code here
+            }
+            if (currentStep == 'step3') {
+                change_step_up(3);
+
+                //put code here
+            }
+            if (currentStep == 'step4') {
+                change_step_up(4);
+
+                //put code here
+            }
+            if (currentStep == 'step5') {
+                change_step_up(5);
+
+                //put code here
+            }
+            if (currentStep == 'step6') {
+                change_step_up(6);
+
+                //put code here
+            }
+        }
+
+        if (direction == 'back') {
+            if (currentStep == 'step2') {
+                change_step_down(2);
+                //put code here
+            }
+            if (currentStep == 'step3') {
+                change_step_down(3);
+                //put code here
+            }
+            if (currentStep == 'step4') {
+                change_step_down(4);
+                //put code here
+            }
+            if (currentStep == 'step5') {
+                change_step_down(5);
+                //put code here
+            }
+            if (currentStep == 'step6') {
+                change_step_down(6);
+                //put code here
+            }
+            if (currentStep == 'step7') {
+                change_step_down(7);
+                //put code here
+            }
+
+        }
+
+    }
+
+
+    function change_step_up(step)
+    {
+        $('#step' + step).addClass('hide');
+        $('#step' + (step + 1)).removeClass('hide');
+        mark_item_check(step, true);
+    }
+
+    function change_step_down(step) {
+        $('#step' + (step - 1)).removeClass('hide');
+        $('#step' + step).addClass('hide');
+        mark_item_check(step - 1, false);
+    }
+
+</script>
+
+
+
+
+
+
+
