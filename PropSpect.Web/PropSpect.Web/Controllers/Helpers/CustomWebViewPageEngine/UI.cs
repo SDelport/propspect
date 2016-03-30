@@ -16,7 +16,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             Html = new HtmlHelper<TModel>(viewContext, viewDataContainer);
         }
 
-        public MvcHtmlString NavLink(string label, string link = "", string linkClass = "")
+        public MvcHtmlString NavLink(string label, string link = "", string linkClass = "", bool mobile = false)
         {
             if (string.Compare(HttpContext.Current.Request.RawUrl, link, true) == 0)
                 linkClass += "active-link waves-light";
@@ -33,6 +33,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             control.Label = new MvcHtmlString(label);
             control.Link = new MvcHtmlString(link);
             control.LinkClass = new MvcHtmlString(linkClass);
+            control.Mobile = mobile;
 
             return this.Html.Partial("Templates/Default/Navlink", control);
         }

@@ -111,7 +111,7 @@ namespace PropSpect.Api.Controllers
                 user.UserID = request.UserID;
                 user.Type = request.Type;
                 user.Username = request.Username;
-                user.IsPasswordChanged = false;
+                user.IsPasswordChanged = 'N';
                 user.Language = request.Language;
 
                 db.Users.Add(user);

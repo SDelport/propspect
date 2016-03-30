@@ -8,16 +8,15 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/Scripts/baseknockout.js")
     @Scripts.Render("~/bundles/materialize")
     @RenderSection("styles", required: false)
     <style>
         /*Eckardt why select display none?*/
-        select
-        {
-            display:block !important;
+        select {
+            display: block !important;
             height: auto !important;
         }
     </style>
@@ -27,36 +26,46 @@
 
         <nav class="white ">
             <a href="#" class="center brand-logo"><img class="logo-img" src="~/Content/Images/PropSpect.png" /></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                @*<li class=" propspect-blue-background waves-effect waves-light" ><a class="white-text" href="~/Landlord">Landlord</a></li>*@
-                @UI.NavLink("Dashboard", "/")
-                @UI.NavLink("Company", "/Landlord")
-                @UI.NavLink("Property", "/Property")
-                @UI.NavLink("Users", "/User")
-                @UI.NavLink("Inspection", "/Inspection")
-                @UI.NavLink("Logout", "/Logout")
-                @*<li class="waves-effect active-link"><a href="~/Property">Property</a></li>*@
-            </ul>
-            <ul id="slide-out" class="side-nav propspect-blue-text">
-                <li><a class="waves-effect waves-pspt-blue" href="~/Landlord">Landlord</a></li>
-                <li><a class="waves-effect waves-pspt-blue" href="~/Property">Property</a></li>
-                <li><a class="waves-effect waves-pspt-blue" href="#!">JavaScript</a></li>
-            </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            @if (HttpContext.Current.Request.RawUrl.ToLower() != "/login")
+            {
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    @*<li class=" propspect-blue-background waves-effect waves-light" ><a class="white-text" href="~/Landlord">Landlord</a></li>*@
+
+                    @UI.NavLink("Dashboard", "/")
+                    @UI.NavLink("Company", "/Landlord")
+                    @UI.NavLink("Property", "/Property")
+                    @UI.NavLink("Users", "/User")
+                    @UI.NavLink("Inspection", "/Inspection")
+                    @UI.NavLink("Logout", "/Logout")
+
+                    @*<li class="waves-effect active-link"><a href="~/Property">Property</a></li>*@
+                </ul>
+
+                <ul id="slide-out" class="side-nav propspect-blue-text">
+                    @UI.NavLink("Dashboard", "/")
+                    @UI.NavLink("Company", "/Landlord", "", true)
+                    @UI.NavLink("Property", "/Property", "", true)
+                    @UI.NavLink("Users", "/User", "", true)
+                    @UI.NavLink("Inspection", "/Inspection", "", true)
+                    @UI.NavLink("Logout", "/Logout", "", true)
+                    @*<li><a class="waves-effect waves-pspt-blue" href="#!">JavaScript</a></li>*@
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            }
         </nav>
         <br />
     </header>
     <main>
-       
-            @RenderBody()
-  
+
+        @RenderBody()
+
     </main>
 
     <footer class="page-footer propspect-blue-background">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">PropSpect</h5>                   
+                    <h5 class="white-text">PropSpect</h5>
                 </div>
             </div>
         </div>
@@ -65,7 +74,7 @@
                 © 2016 Paideia Solutions
             </div>
         </div>
-    </footer>   
+    </footer>
 
     @RenderSection("scripts", required: false)
     <script>
