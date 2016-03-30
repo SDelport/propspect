@@ -15,7 +15,7 @@ namespace PropSpect.Api.Controllers
     {
         DatabaseContext db = new DatabaseContext();
 
-        [Route("api/area/{id}")]
+        [Route("api/area/get/{id}")]
         public JsonResult Get(int id)
         {
             AreaResponse response = null;
@@ -36,9 +36,10 @@ namespace PropSpect.Api.Controllers
         [Route("api/area/add")]
         public JsonResult Add(CreateAreaRequest request)
         {
+            Area area = null;
             if (request.AreaID <= 0)
             {
-                Area area = new Area();
+                area = new Area();
                 area.AreaID = request.AreaID;
                 area.Name = request.Name;
 
@@ -47,7 +48,7 @@ namespace PropSpect.Api.Controllers
             }
             else
             {
-                Area area = db.Areas.Where(x => x.AreaID == request.AreaID).FirstOrDefault();
+                 area = db.Areas.Where(x => x.AreaID == request.AreaID).FirstOrDefault();
                 if (area != null)
                 {
                     area.AreaID = request.AreaID;
@@ -58,10 +59,10 @@ namespace PropSpect.Api.Controllers
 
             }
 
-            return Json("true");
+            return Json(area);
         }
 
-        [Route("api/area")]
+        [Route("api/area/list")]
         public JsonResult List()
         {
             return Json(db.Areas.ToList().Select(x => new AreaResponse()
