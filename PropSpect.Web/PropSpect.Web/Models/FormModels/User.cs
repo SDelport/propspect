@@ -3,6 +3,7 @@ using PropSpect.Api.Models.Response;
 using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace PropSpect.Web.Models.FormModels
     {
         [ListOptions(Hide = true)]
         public int UserID { get; set; }
+        [EmailAddress]
         public string Username { get; set; }
         [EditOptions(Type = ControlType.Dropdown, SourceName = "RoleItems")]
         [ListOptions(SourceName = "RoleItems")]
