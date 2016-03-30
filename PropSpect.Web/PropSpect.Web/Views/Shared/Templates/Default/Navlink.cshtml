@@ -1,3 +1,7 @@
 ﻿@model NavLinkControl
 
-<li class="waves-effect  @Model.LinkClass"><a href="@Model.Link" class="">@Model.Label</a></li>
+@if (Model.Mobile){<li><a class="waves-effect waves-pspt-blue" href="@Model.Link">@Model.Label</a></li>}
+else
+{<li class="waves-effect  @Model.LinkClass"><a href="@Model.Link" class="">@Model.Label</a></li>}
+
+

@@ -11,5 +11,6 @@ namespace PropSpect.Web.Controllers.Helpers
         public MvcHtmlString Label { get; set; }
         public MvcHtmlString Link { get; set; }
         public MvcHtmlString LinkClass { get; set; }
+        public bool Mobile { get; set; }
     }
 }
