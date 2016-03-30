@@ -9,10 +9,12 @@ namespace PropSpect.Api.Models.Response
     public enum LoginRole
     {
         SuperAdmin = 0,
-        Admin,
+        Agent,
         Tenant,
         Landlord,
-        None
+        None,
+        Owner,
+        Admin
     }
 
     public class LoginResponse

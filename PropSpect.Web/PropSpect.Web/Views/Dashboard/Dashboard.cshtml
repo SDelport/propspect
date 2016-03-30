@@ -27,7 +27,16 @@
 
 <div class="row">   
     @*@UI.Tile("Lable Field", "Icon Field", "Url Field without the /")*@
-    @UI.Tile("Add/Edit User", "assignment_ind")
+
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Agent)
+    {
+        @UI.Tile("Add Admins", url: "/user/add/admin")
+        @UI.Tile("Add/Edit Agents", url: "/user/add/agent")
+        @UI.Tile("Add/Edit Tenant", url: "/user/add/tenant")
+        @UI.Tile("Add/Edit Owner", url: "/user/add/owner")
+    }
+
+    
     @UI.Tile("Add/Edit Properties", "store","Property")
     @UI.Tile("Add/Edit Companies", "business", "Landlord")
     @UI.Tile("Add/Edit Inspections", "youtube_searched_for", "Inspection")

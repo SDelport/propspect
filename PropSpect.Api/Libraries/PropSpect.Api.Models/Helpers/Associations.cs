@@ -19,8 +19,12 @@ namespace PropSpect.Api.Models.Helpers
                 return LoginRole.SuperAdmin;
             if (role == "t" || role == "tenant")
                 return LoginRole.Tenant;
-            if (role == "l" || role == "landlord")
-                return LoginRole.Landlord;
+            if (role == "ag" || role == "agent")
+                return LoginRole.Agent;
+            if (role == "o" || role == "owner")
+                return LoginRole.Owner;
+            if (role == "t" || role == "tenant")
+                return LoginRole.Tenant;
 
             return LoginRole.None;
         }
@@ -40,22 +44,26 @@ namespace PropSpect.Api.Models.Helpers
 
         public static string GetLoginRole(LoginRole role)
         {
-
             switch (role)
             {
                 case LoginRole.SuperAdmin:
                     return "sa";
-                case LoginRole.Admin:
-                    return "a";
+                case LoginRole.Agent:
+                    return "ag";
                 case LoginRole.Tenant:
                     return "t";
                 case LoginRole.Landlord:
                     return "l";
                 case LoginRole.None:
                     return "";
+                case LoginRole.Owner:
+                    return "o";
+                case LoginRole.Admin:
+                    return "a";
                 default:
                     return "";
             }
+           
         }
 
         public static int GetLoginRoleIndex(string role)

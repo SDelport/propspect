@@ -1,10 +1,12 @@
 ﻿@model TileControl
 
 <div class="col s6 m4 l2" onclick="change_url('@Model.RedirectLocation')">
-    <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
-        <h5 class="center"><i class="medium material-icons">@Model.Icon</i></h5>
-        <h5 class="center">@Model.Lable</h5>
-    </div>
+    <a href="@Model.RedirectLocation">
+        <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
+            <h5 class="center"><i class="medium material-icons">@Model.Icon</i></h5>
+            <h5 class="center">@Model.Lable</h5>
+        </div>
+    </a>
 </div>
 
 

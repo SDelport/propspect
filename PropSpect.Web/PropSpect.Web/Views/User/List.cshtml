@@ -1,0 +1,42 @@
+﻿@model List<User>
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="long-container white z-depth-1 knockout-search">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">LandLords</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Type</th>
+                        <th>Language</th>
+                        <th>Password</th>
+                        <th>Password Changed</th>
+                        <th><a class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Username</td>
+                            <td>@user.Type</td>
+                            <td>@user.Language</td>
+                            <td>@user.Password</td>
+                            <td>@user.IsPasswordChanged</td>
+                            <td><a>Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

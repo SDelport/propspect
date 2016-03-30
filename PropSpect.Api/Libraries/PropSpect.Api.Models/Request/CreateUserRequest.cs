@@ -11,5 +11,6 @@ namespace PropSpect.Api.Models.Request
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Type { get; set; }
+        public string Language { get; set; }
     }
 }

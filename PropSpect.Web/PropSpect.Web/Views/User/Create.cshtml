@@ -1,0 +1,13 @@
+﻿@model User
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add @Model.Type</h2>
+
+<form method="POST" action="/user/add-user">
+    @Form.Textbox(x=>x.Username)
+    @Form.Hidden(x=>x.Type)
+    @Form.SubmitButton("Create");
+</form>
+

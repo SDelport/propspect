@@ -33,7 +33,7 @@ namespace PropSpect.Api.Controllers
         public JsonResult Login(LoginRequest request)
         {
             LoginResponse response = new LoginResponse();
-
+            response.Role = LoginRole.None;
             var k = db.Users.Where(x => x.Username.ToLower() == request.Username.ToLower());
             var users = k.ToList();
 
@@ -79,7 +79,7 @@ namespace PropSpect.Api.Controllers
         }
 
 
-        [Route("api/user/{id}")]
+        [Route("api/user/get/{id}")]
         public JsonResult Get(int id)
         {
             UserResponse response = null;
@@ -111,7 +111,8 @@ namespace PropSpect.Api.Controllers
                 user.UserID = request.UserID;
                 user.Type = request.Type;
                 user.Username = request.Username;
-
+                user.IsPasswordChanged = false;
+                user.Language = request.Language;
 
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -132,10 +133,12 @@ namespace PropSpect.Api.Controllers
             return Json("true");
         }
 
-        [Route("api/user")]
-        public JsonResult List()
+        [Route("api/user/list/{type?}")]
+        public JsonResult List(string type = "")
         {
-            return Json(db.Users.ToList().Select(x => new UserResponse()
+            string realType = Associations.GetLoginRole(Associations.GetLoginRole(type));
+
+            return Json(db.Users.Where(x => x.Type == realType || type == "").ToList().Select(x => new UserResponse()
             {
                 Username = x.Username,
                 Language = x.Language,

@@ -134,12 +134,14 @@
     <Compile Include="Controllers\Helpers\ApiWrapper.cs" />
     <Compile Include="Controllers\Helpers\LoggedIn.cs" />
     <Compile Include="Controllers\Helpers\NavLinkControl.cs" />
+    <Compile Include="Controllers\Helpers\ProfileInfo.cs" />
     <Compile Include="Controllers\Helpers\TileControl.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +244,8 @@
     <Content Include="Views\Shared\Templates\Default\Navlink.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Button.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Tile.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

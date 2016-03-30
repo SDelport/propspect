@@ -39,13 +39,29 @@ namespace PropSpect.Web.Controllers
             }
         }
 
+
+        [Route("logout")]
+        public ActionResult Logout()
+        {
+            if (HttpContext.Response.Cookies["userID"] != null)
+                HttpContext.Response.Cookies["userID"].Expires = DateTime.Now.AddMinutes(-1);
+
+            if (HttpContext.Response.Cookies["role"] != null)
+                HttpContext.Response.Cookies["role"].Expires = DateTime.Now.AddMinutes(-1);
+
+            if (HttpContext.Response.Cookies["username"] != null)
+                HttpContext.Response.Cookies["username"].Expires = DateTime.Now.AddMinutes(-1);
+
+            return Redirect("/");
+        }
+
         [LoggedIn]
         [Route("users")]
         public ActionResult List()
         {
             List<User> users = new List<User>();
 
-            users = PropSpect.Web.Models.FormModels.User.CreateList(ApiWrapper.Get<List<UserResponse>>("api/user"));
+            users = PropSpect.Web.Models.FormModels.User.CreateList(ApiWrapper.Get<List<UserResponse>>("api/user/list"));
 
             ListAsyncFormModel formModel = ListAsyncFormModel.Create(users);
 
@@ -72,6 +88,21 @@ namespace PropSpect.Web.Controllers
             var result = ApiWrapper.Post<bool>("api/user/add", request);
 
             return Json(result);
+        }
+
+        [LoggedIn]
+        [Route("user/add-user")]
+        public ActionResult AddUser(UserResponse model)
+        {
+            CreateUserRequest request = new CreateUserRequest();
+            request.UserID = model.UserID;
+            request.Username = model.Username;
+            request.Type = model.Type;
+
+
+            var result = ApiWrapper.Post<bool>("api/user/add", request);
+
+            return Redirect("/");
         }
     }
 }
