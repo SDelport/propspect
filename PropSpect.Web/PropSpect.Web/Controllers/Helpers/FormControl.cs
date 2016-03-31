@@ -13,6 +13,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         public MvcHtmlString CssClass { get; set; }
         public MvcHtmlString Validation { get; set; }
         public MvcHtmlString Value { get; set; }
+        public MvcHtmlString PropertyName { get; set; }
         public bool IsAsync { get; set; }
         public Dictionary<string,object> Extras { get; set; }
 
@@ -20,7 +21,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         {
             get
             {
-                return new MvcHtmlString(Label.ToString().Replace(" ", "").ToLower());
+                return new MvcHtmlString(PropertyName.ToString().Replace(" ", "").ToLower());
             }
         }
 
@@ -28,7 +29,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         {
             get
             {
-                return new MvcHtmlString(Label.ToString().Replace(" ", "").Replace("/", ""));
+                return new MvcHtmlString(PropertyName.ToString().Replace(" ", "").Replace("/", ""));
             }
         }
     }

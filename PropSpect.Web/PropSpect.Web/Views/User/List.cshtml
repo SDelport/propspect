@@ -1,43 +1,43 @@
-﻿@model List<User>
+﻿@model AdminAddUser
 @{
     ViewBag.Title = "Create";
 }
 
 @* took class: knockout-search out *@
 <div class="long-container white z-depth-1  col s12">
-        <div class="propspect-blue-background z-depth-1">
-            <div class="">
-                <h3 class="center white-text padding-2">LandLords</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <table class="highlight bordered">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Type</th>
-                            <th>Language</th>
-                            <th>Password</th>
-                            <th>Password Changed</th>
-                            <th><a class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
-                        </tr>
-                    </thead>
-                    <tbody class="font-12">
-                        @foreach (var user in Model)
-                        {
-                            <tr>
-                                <td>@user.Username</td>
-                                <td>@user.Type</td>
-                                <td>@user.Language</td>
-                                <td>@user.Password</td>
-                                <td>@user.IsPasswordChanged</td>
-                                <td><a>Edit</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-
-            </div>
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Add/Edit @Model.Type.ToString()</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Type</th>
+                        <th>Language</th>
+                        <th>Password</th>
+                        <th>Password Changed</th>
+                        <th><a href="/user/add/@Model.Type" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.Username</td>
+                            <td>@user.Type</td>
+                            <td>@user.Language</td>
+                            <td>@user.Password</td>
+                            <td>@user.IsPasswordChanged</td>
+                            <td><a href="/user/add/@user.Type.ToLower()/@user.UserID">Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -60,6 +60,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             ModelMetadata modelData = GetModelData(form.Html, expression);
             string value = GetValueFromModelData(modelData, expression);
             control.Label = new MvcHtmlString(modelData.DisplayName ?? modelData.PropertyName);
+            control.PropertyName = new MvcHtmlString(modelData.PropertyName);
             control.Value = new MvcHtmlString(value);
 
             return control;
@@ -70,6 +71,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             FormControl control = new FormControl();
 
             control.Label = new MvcHtmlString(info.Name);
+            control.PropertyName = new MvcHtmlString(info.Name);
             control.Value = new MvcHtmlString(info.GetValue(currentObject, null).ToString());
 
             return control;
@@ -112,15 +114,22 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
                     continue;
 
                 HeaderControl headerControl = new HeaderControl();
+
                 headerControl.Label = new MvcHtmlString(property.Name);
+                headerControl.PropertyName = new MvcHtmlString(property.Name);
 
                 if (listOptions != null)
                 {
+                    if (!string.IsNullOrEmpty(listOptions.Display))
+                        headerControl.Label = new MvcHtmlString(listOptions.Display);
+
                     if (!string.IsNullOrEmpty(listOptions.SourceName))
                     {
                         headerControl.Source = new MvcHtmlString(listOptions.SourceName);
                         headerControl.UseSource = true;
                     }
+      
+                       
                 }
 
                 listControl.Headers.Add(headerControl);
@@ -135,12 +144,18 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
                 EditControl editControl = new EditControl();
                 editControl.Label = new MvcHtmlString(property.Name);
+                editControl.PropertyName = new MvcHtmlString(property.Name);
 
                 if (editOptions != null)
                 {
+                    if (!string.IsNullOrEmpty(editOptions.Display))
+                        editControl.Label = new MvcHtmlString(editOptions.Display);
+
                     editControl.Type = editOptions.Type;
                     editControl.Source = new MvcHtmlString(editOptions.SourceName);
+          
                 }
+
 
                 editControl.IsAsync = true;
 
@@ -149,14 +164,19 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
             control.Control = listControl;
             control.Control.Label = new MvcHtmlString(typeof(T).Name);
+            control.Control.PropertyName = new MvcHtmlString(typeof(T).Name);
             control.EncodedItems = new MvcHtmlString(Json.Encode(items));
 
             T item = new T();
+
+
             control.EncodedTemplate = new MvcHtmlString(Json.Encode(item));
 
             return control;
         }
+
         #endregion
+
 
     }
 }

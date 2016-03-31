@@ -9,7 +9,7 @@ namespace PropSpect.Web.Controllers
 {
     public class UserController : Controller
     {
-        [Route("user/add/admin")]
+        [Route("user/add/a")]
         public ActionResult AddAdmin()
         {
             Models.FormModels.User user = new Models.FormModels.User();
@@ -18,7 +18,7 @@ namespace PropSpect.Web.Controllers
             return View("Create", user);
         }
 
-        [Route("user/add/tenant")]
+        [Route("user/add/t")]
         public ActionResult AddTenant()
         {
             Models.FormModels.User user = new Models.FormModels.User();
@@ -27,7 +27,7 @@ namespace PropSpect.Web.Controllers
             return View("Create", user);
         }
 
-        [Route("user/add/agent")]
+        [Route("user/add/ag")]
         public ActionResult AddAgent()
         {
             User user = new Models.FormModels.User();
@@ -36,7 +36,7 @@ namespace PropSpect.Web.Controllers
             return View("Create", user);
         }
 
-        [Route("user/add/owner")]
+        [Route("user/add/o")]
         public ActionResult AddOwner()
         {
             User user = new Models.FormModels.User();
@@ -50,8 +50,11 @@ namespace PropSpect.Web.Controllers
         {
             List<User> users = new List<User>();
             users = Models.FormModels.User.CreateList(ApiWrapper.Get<List<UserResponse>>("api/user/list/" + type));
-
-            return View("List", users);
+            AdminAddUser model = new AdminAddUser();
+            model.Users = users;
+            if (!string.IsNullOrEmpty(type))
+                model.Type = Associations.GetLoginRole(type);
+            return View("List", model);
         }
     }
 }

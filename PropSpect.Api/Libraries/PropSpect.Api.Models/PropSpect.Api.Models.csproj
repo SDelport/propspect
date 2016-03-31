@@ -57,10 +57,12 @@
     <Compile Include="Request\CreatePropertyTenantRequest.cs" />
     <Compile Include="Request\CreateTenantRequest.cs" />
     <Compile Include="Request\LoginRequest.cs" />
+    <Compile Include="Request\ResetPasswordRequest.cs" />
     <Compile Include="Response\AreaItemResponse.cs" />
     <Compile Include="Response\AreaResponse.cs" />
     <Compile Include="Response\EntityResponse.cs" />
     <Compile Include="Response\EnvironmentValueResponse.cs" />
+    <Compile Include="Response\ForgotPasswordResponse.cs" />
     <Compile Include="Response\InspectionAreaItemResponse.cs" />
     <Compile Include="Response\InspectionAreaResponse.cs" />
     <Compile Include="Response\InspectionResponse.cs" />

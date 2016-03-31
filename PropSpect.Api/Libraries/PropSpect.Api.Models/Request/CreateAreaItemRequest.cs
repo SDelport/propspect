@@ -11,5 +11,6 @@ namespace PropSpect.Api.Models.Request
         public int AreaItemID { get; set; }
         public string RoomItem { get; set; }
         public string RoomDescription { get; set; }
+        public int AreaID { get; set; }
     }
 }

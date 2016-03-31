@@ -11,6 +11,8 @@ namespace PropSpect.Api.Models
     {
         [Column("key_id")]
         public int AreaID { get; set; }
+        [Column("parent_id")]
+        public int PropertyID { get; set; }
         [Column("prop_area_name")]
         public string Name { get; set; }
 

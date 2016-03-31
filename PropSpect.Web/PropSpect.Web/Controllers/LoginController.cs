@@ -19,6 +19,29 @@ namespace PropSpect.Web.Controllers
             return View("Login");
         }
 
+        [Route("reset-password/{key}")]
+        public ActionResult ResetPassword(string key, string message = "")
+        {
+            SetPassword model = new SetPassword();
+            var response = ApiWrapper.Get<ForgotPasswordResponse>("api/user/reset");
+
+            model.Email = response.Email;
+            model.Key = key;
+            model.Message = message;
+
+            return View("SetPassword");
+        }
+
+        [Route("reset-password/post")]
+        public ActionResult ResetPasswordPassword(SetPassword model)
+        {
+            ResetPasswordRequest request = new ResetPasswordRequest();
+
+            var response = ApiWrapper.Post<ResetPasswordRequest>("api/user/reset", request);
+
+            return View("/login");
+        }
+
         [Route("login/post")]
         public ActionResult LoginPost(Login loginModel)
         {
@@ -102,7 +125,10 @@ namespace PropSpect.Web.Controllers
 
             var result = ApiWrapper.Post<bool>("api/user/add", request);
 
-            return Redirect("/");
+            if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
+                return Redirect("/");
+            else
+                return Redirect(Request.QueryString["returnurl"]);
         }
     }
 }

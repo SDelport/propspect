@@ -13,7 +13,7 @@ namespace PropSpect.Api.Controllers
     {
         DatabaseContext db = new DatabaseContext();
 
-        [Route("api/areaitem/{id}")]
+        [Route("api/areaitem/get/{id}")]
         public JsonResult Get(int id)
         {
             AreaItemResponse response = null;
@@ -41,6 +41,7 @@ namespace PropSpect.Api.Controllers
                 areaItem.AreaItemID = request.AreaItemID;
                 areaItem.RoomDescription = request.RoomDescription;
                 areaItem.RoomItem = request.RoomItem;
+                areaItem.AreaID = request.AreaID; 
 
                 db.AreaItems.Add(areaItem);
                 db.SaveChanges();
@@ -53,6 +54,7 @@ namespace PropSpect.Api.Controllers
                     areaItem.AreaItemID = request.AreaItemID;
                     areaItem.RoomDescription = request.RoomDescription;
                     areaItem.RoomItem = request.RoomItem;
+                    areaItem.AreaID = request.AreaID;
 
                     db.SaveChanges();
                 }
@@ -62,14 +64,15 @@ namespace PropSpect.Api.Controllers
             return Json("true");
         }
 
-        [Route("api/areaitem")]
+        [Route("api/areaitem/list")]
         public JsonResult List()
         {
             return Json(db.AreaItems.ToList().Select(x => new AreaItemResponse()
             {
                 AreaItemID = x.AreaItemID,
                 RoomDescription = x.RoomDescription,
-                RoomItem = x.RoomItem
+                RoomItem = x.RoomItem,
+                AreaID = x.AreaID
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 

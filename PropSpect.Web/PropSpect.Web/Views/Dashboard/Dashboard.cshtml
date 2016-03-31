@@ -30,10 +30,10 @@
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Admin)
     {
-        @UI.Tile("Add Admins", url: "/user/add/admin")
-        @UI.Tile("Add/Edit Agents", url: "/user/add/agent")
-        @UI.Tile("Add/Edit Tenant", url: "/user/add/tenant")
-        @UI.Tile("Add/Edit Owner", url: "/user/add/owner")
+        @UI.Tile("Add Admins", url: "/user/list/admin")
+        @UI.Tile("Add/Edit Agents", url: "/user/list/agent")
+        @UI.Tile("Add/Edit Tenant", url: "/user/list/tenant")
+        @UI.Tile("Add/Edit Owner", url: "/user/list/owner")
     }
 
     

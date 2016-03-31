@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EnvironmentCache.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Attributes.cs" />
@@ -138,7 +139,7 @@
     <Compile Include="Controllers\Helpers\TileControl.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
-    <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\AreaItemController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
@@ -147,10 +148,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Helpers\ListAsyncFormModel.cs" />
+    <Compile Include="Models\FormModels\AdminAddUser.cs" />
     <Compile Include="Models\FormModels\Area.cs" />
+    <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
     <Compile Include="Models\FormModels\LandLord.cs" />
     <Compile Include="Models\FormModels\Login.cs" />
+    <Compile Include="Models\FormModels\SetPassword.cs" />
     <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,6 +253,8 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\Area\List.cshtml" />
+    <Content Include="Views\AreaItem\List.cshtml" />
+    <Content Include="Views\User\SetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
