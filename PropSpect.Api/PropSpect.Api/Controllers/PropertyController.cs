@@ -82,8 +82,8 @@ namespace PropSpect.Api.Controllers
         }
 
 
-        [Route("api/property")]
-        public JsonResult List()
+        [Route("api/property/list/{search?}")]
+        public JsonResult List(string search = "")
         {
             return Json(db.Properties.ToList().Select(x => new PropertyResponse()
             {
@@ -96,7 +96,7 @@ namespace PropSpect.Api.Controllers
                 Suburb = x.Suburb,
                 City = x.City,
                 PostalCode = x.PostalCode
-            }).ToList(), JsonRequestBehavior.AllowGet);
+            }).Take(1).ToList(), JsonRequestBehavior.AllowGet);
         }
 
 

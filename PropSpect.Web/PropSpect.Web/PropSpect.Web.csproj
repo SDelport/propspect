@@ -152,8 +152,10 @@
     <Compile Include="Models\FormModels\Area.cs" />
     <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
+    <Compile Include="Models\FormModels\InspectionPart.cs" />
     <Compile Include="Models\FormModels\LandLord.cs" />
     <Compile Include="Models\FormModels\Login.cs" />
+    <Compile Include="Models\FormModels\PreInspection.cs" />
     <Compile Include="Models\FormModels\SetPassword.cs" />
     <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -89,18 +89,29 @@ namespace PropSpect.Web.Controllers
         {
             List<Landlord> landlords = new List<Landlord>();
 
-            landlords = Landlord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord"));
+            landlords = Landlord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord/list"));
 
             ListAsyncFormModel formModel = ListAsyncFormModel.Create(landlords);
 
 
-            formModel.ItemLists.Add("CityItems",EnvironmentCache.GetDisplayValues("CITY").Select(x => new SelectListItem()
+            formModel.ItemLists.Add("CityItems", EnvironmentCache.GetDisplayValues("CITY").Select(x => new SelectListItem()
             {
                 Text = x.Display,
                 Value = x.ID
             }).ToList());
 
             return View("List", formModel);
+        }
+
+        [Route("landlord/search/{search}")]
+        public JsonResult Search(string search)
+        {
+            List<Landlord> landlords = new List<Landlord>();
+
+            landlords = Landlord.CreateList(ApiWrapper.Get<List<LandlordResponse>>("api/landlord/list/" + search));
+
+            return Json(landlords, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

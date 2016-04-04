@@ -9,6 +9,7 @@ namespace PropSpect.Api.Models.Request
     public class CreateInspectionAreaItemRequest
     {
         public int InspectionAreaItemID { get; set; }
+        public int AreaID { get; set; }
         public int ItemID { get; set; }
         public string ItemDescription { get; set; }
         public string ItemCondition { get; set; }

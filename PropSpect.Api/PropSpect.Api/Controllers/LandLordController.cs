@@ -117,12 +117,16 @@ namespace PropSpect.Api.Controllers
         }
 
 
-        [Route("api/landlord")]
-        public JsonResult List()
+        [Route("api/landlord/list/{search?}")]
+        public JsonResult List(string search="")
         {
 
 
-            return Json(db.LandLords.ToList().Select(x => new LandlordResponse()
+            return Json(db.LandLords.Where(x=>
+            search ==""||
+            x.FirstName.ToLower() == search.ToLower()
+            
+            ).ToList().Select(x => new LandlordResponse()
             {
                 AddressUnitNr = x.AddressUnitNr,
                 CityName = x.CityName,

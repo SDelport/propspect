@@ -15,12 +15,14 @@ namespace PropSpect.Web.Models.FormModels
         public int UserID { get; set; }
         [EmailAddress]
         public string Username { get; set; }
-        [EditOptions(Type = ControlType.Dropdown, SourceName = "RoleItems")]
-        [ListOptions(SourceName = "RoleItems")]
-        public string Type { get; set; }
-        public string Password { get; set; }
-        public bool IsPasswordChanged { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Dropdown, SourceName = "RoleItems")]
+        public string Type { get; set; }
+        [ListOptions(Hide = true)]
+        public string Password { get; set; }
+        [ListOptions(Hide = true)]
+        public bool IsPasswordChanged { get; set; }
+
         public string Language { get; set; }
 
         public static User Create(UserResponse response)

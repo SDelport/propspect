@@ -5,86 +5,81 @@
 @section styles
 {
     <style>
-        #wrap .col {
-            margin: 0 !important;
-            padding: 0 !important;
-            height: 60px !important;
-            border-bottom: 1px solid black !important;
-            border-right: 1px solid black !important;
-        }
-
-            #wrap .col:first-child {
-                border-left: 1px solid black !important;
-            }
-
-        #wrap .row {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-            #wrap .row:first-child {
-                border-top: 1px solid black !important;
-            }
-
-        .signature-cell {
+        #wrapper * {
             user-select: none;
             -moz-user-select: none;
             -khtml-user-select: none;
             -webkit-user-select: none;
             -o-user-select: none;
         }
+
+        .signature-cell {
+        }
+
+        .signature {
+            width: 100%;
+            height: 200px;
+        }
     </style>
 }
+<div id="wrapper">
+    @foreach (var part in roomParts)
+    {
 
-@foreach (var part in roomParts)
-{
-    <div class="row z-depth-1 long-container white">
-        <div class="col s12 m2">
-            <div class="col s12 propspect-blue-text"><h4>@part</h4></div>
-        </div>
-        <div class="col s12 m5">
-            <div class="input-field col s12">
-                <select>
-                    <option>Great</option>
-                    <option>Good</option>
-                    <option>Bad</option>
-                    <option>Shit</option>
-                    <option>Stefan</option>
-                </select>
-            </div>
-            <div class="col s12">
-                <div class="file-field input-field">
-                    <div class="btn propspect-blue-background">
-                        <span>Image</span>
-                        <input type="file">
+        <div class="row z-depth-1 long-container white">
+            <form id="@part.ToLower().Replace(" ","")-form">
+                <div class="col s12 m2">
+                    <div class="col s12 propspect-blue-text"><h4>@part</h4></div>
+                </div>
+                <div class="col s12 m5">
+                    <div class="input-field col s12">
+                        <select name="condition">
+                            <option>Great</option>
+                            <option>Good</option>
+                            <option>Bad</option>
+                            <option>Shit</option>
+                            <option>Stefan</option>
+                        </select>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                    <div class="col s12">
+                        <input type="hidden" name="name" value="@part" />
+                        <div class="file-field input-field">
+                            <div class="btn propspect-blue-background">
+                                <span>Image</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" name="file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <span class="col s6">Repair needed?</span>
+                        <div class="switch">
+                            <label>
+                                No
+                                <input type="checkbox" name="repair-needed">
+                                <span class="lever"></span>
+                                Yes
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col s12">
-                <span class="col s6">Repair needed?</span>
-                <div class="switch">
-                    <label>
-                        No
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        Yes
-                    </label>
-                </div>
-            </div>
-        </div>
 
-        <div class="col s12 m5 verticalLine-left">
-            <div class="col s8 propspect-blue-text"><h4>Signature</h4></div>
-            <a class="btn-floating btn-large waves-effect waves-light right propspect-blue-background"><i class="material-icons">not_interested</i></a>
-            <div class="signature-cell">
-                <canvas class="signature"></canvas>
-            </div>
+                <div class="col s12 m5 verticalLine-left">
+                    <div class="col s8 propspect-blue-text "><h4>Signature</h4></div>
+                    <a id="@part.ToLower().Replace(" ","")-clear" class="btn-floating btn-large waves-effect waves-light right propspect-blue-background "><i class="material-icons">not_interested</i></a>
+                    <br />
+                    <a id="@part.ToLower().Replace(" ","")-submit" data-part="@part" class="btn-floating btn-large waves-effect waves-light right propspect-blue-background over-content">Done</a>
+                    <div class="signature-cell">
+                        <canvas id="@part.ToLower().Replace(" ","")" class="signature"></canvas>
+                    </div>
+
+                </div>
+            </form>
         </div>
-    </div>
-}
+    }
+</div>
 
 
 
@@ -147,19 +142,62 @@
     <script src="~/Content/Scripts/signature_pad.min.js"></script>
     <script>
         var canvas = $('.signature');
-
+        var k;
         $(canvas).each(function (i, e) {
             var signaturePad = new SignaturePad(e,
                 {
                     minWidth: 0.3,
                     maxWidth: 1.5
                 });
+            $('#' + $(e).attr("id") + '-clear').click(function () {
+                signaturePad.clear();
+            })
+
+            $('#' + $(e).attr("id") + '-submit').click(function (ev) {
+                submitItem($(ev.target).attr('data-part'), $(e).attr("id"), signaturePad);
+            })
+            k = signaturePad;
         })
 
         $(window).load(function () {
 
             select_refresh('select');
         });
+
+        function resizeCanvas() {
+            $(canvas).each(function (i, e) {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                e.width = e.offsetWidth * ratio;
+                e.height = e.offsetHeight * ratio;
+                e.getContext("2d").scale(ratio, ratio);
+            });
+        }
+
+        window.onresize = resizeCanvas;
+        resizeCanvas();
+
+        function submitItem(name, variablename, signature) {
+            $.ajax(
+            {
+                url: 'inspection/submitpart',
+                data: JSON.stringify({
+                    Data: $('#' + variablename + '-form').serializeArray(),
+                    Signature: signature.toDataURL("image/jpeg")
+                }),
+                type: "POST",
+                context: this,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    successmethod(result);
+                },
+                error: function (result) {
+                    alert("An error occured")
+                    console.log(result)
+                }
+            }
+            );
+        }
     </script>
 
 }

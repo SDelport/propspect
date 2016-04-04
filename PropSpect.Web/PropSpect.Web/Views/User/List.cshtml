@@ -16,10 +16,6 @@
                 <thead>
                     <tr>
                         <th>Username</th>
-                        <th>Type</th>
-                        <th>Language</th>
-                        <th>Password</th>
-                        <th>Password Changed</th>
                         <th><a href="/user/add/@Model.Type" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
                     </tr>
                 </thead>
@@ -28,10 +24,6 @@
                     {
                         <tr>
                             <td>@user.Username</td>
-                            <td>@user.Type</td>
-                            <td>@user.Language</td>
-                            <td>@user.Password</td>
-                            <td>@user.IsPasswordChanged</td>
                             <td><a href="/user/add/@user.Type.ToLower()/@user.UserID">Edit</a></td>
                         </tr>
                     }

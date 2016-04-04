@@ -65,6 +65,7 @@
     <Compile Include="Response\ForgotPasswordResponse.cs" />
     <Compile Include="Response\InspectionAreaItemResponse.cs" />
     <Compile Include="Response\InspectionAreaResponse.cs" />
+    <Compile Include="Response\InspectionDetailsResponse.cs" />
     <Compile Include="Response\InspectionResponse.cs" />
     <Compile Include="Response\LandlordResponse.cs" />
     <Compile Include="Response\LandlordTemplateAreaItemResponse.cs" />

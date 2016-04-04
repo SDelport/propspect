@@ -75,6 +75,19 @@ function SearchViewModel(modelName, items) {
 
     })
 
+    this.Search = function()
+    {
+        if(that.SearchString()!= '')
+        ServiceProxy.Get('/' + that.domName + '/search/' + that.SearchString(), this.SearchSuccess);
+    }
+
+    this.SearchSuccess = function(data)
+    {
+        this.Items(data);
+    }
+
+    this.SearchString = ko.observable('');
+
     this.EditTemplate = function (item) {
         if (window[that.modelName + 'EditModel'])
             if (item)
@@ -88,12 +101,16 @@ function SearchViewModel(modelName, items) {
             return '';
 
         for (var i = 0; i < that[source]().length; i++) {
+            if (!value)
+                continue;
             if (that[source]()[i].Value == value.toString())
                 return that[source]()[i].Text;
         }
     }
 
     this.Items(items)
+
+    
 
     return this;
 }
@@ -162,7 +179,23 @@ var ServiceProxy =
                         console.log(result)
                     }
                 });
+        },
 
-
+        Get: function (url, successmethod) {
+            return $.ajax(
+                {
+                    url: url,
+                    type: "GET",
+                    context: this,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        successmethod(result);
+                    },
+                    error: function (result) {
+                        alert("An error occured")
+                        console.log(result)
+                    }
+                });
         }
     }

@@ -115,6 +115,43 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/inspection/details/{inspectionTemplateID}/{inspectionAreaID}")]
+        public JsonResult List(int inspectionTemplateID, int inspectionAreaID)
+        {
+            InspectionDetailsResponse response = new InspectionDetailsResponse();
+            response.CurrentPage = inspectionAreaID;
+            response.TotalPages = 8;
+            response.Items = new List<InspectionAreaItemResponse>()
+            {
+                new InspectionAreaItemResponse()
+                {
+                    InspectionAreaItemID=1,
+                    ItemID = inspectionAreaID
+                }
+
+
+            };
+
+
+            return Json(db.Inspections.ToList().Select(x => new InspectionResponse()
+            {
+                InspectionID = x.InspectionID,
+                Type = x.Type,
+                Date = x.Date,
+                EntityType = x.EntityType,
+                EntityID = x.EntityID,
+                HouseClean = x.HouseClean,
+                HouseComments = x.HouseComments,
+                CarpetsClean = x.CarpetsClean,
+                CarpetsComments = x.CarpetsComments,
+                GardenClean = x.GardenClean,
+                GardenComments = x.GardenComments,
+                PoolClean = x.PoolClean,
+                PoolComments = x.PoolComments,
+                OverallComments = x.OverallComments
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
