@@ -84,7 +84,7 @@ namespace PropSpect.Web.Controllers
             return Json(result);
         }
 
-        [Route("landlord")]
+        [Route("landlord/list")]
         public ActionResult List()
         {
             List<Landlord> landlords = new List<Landlord>();

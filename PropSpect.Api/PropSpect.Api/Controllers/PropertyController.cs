@@ -42,9 +42,11 @@ namespace PropSpect.Api.Controllers
         [Route("api/property/add")]
         public JsonResult Add(CreatePropertyRequest request)
         {
+            Property property = null;
+
             if (request.PropertyID <= 0)
             {
-                Property property = new Property();
+                property = new Property();
                 property.PropertyID = request.PropertyID;
                 property.PropertyType = request.PropertyType;
                 property.UnitNumber = request.UnitNumber;
@@ -60,7 +62,7 @@ namespace PropSpect.Api.Controllers
             }
             else
             {
-                Property property = db.Properties.Where(x => x.PropertyID == request.PropertyID).FirstOrDefault();
+                property = db.Properties.Where(x => x.PropertyID == request.PropertyID).FirstOrDefault();
                 if (property != null)
                 {
                     property.PropertyID = request.PropertyID;
@@ -78,7 +80,7 @@ namespace PropSpect.Api.Controllers
 
             }
 
-            return Json("true");
+            return Json(property);
         }
 
 

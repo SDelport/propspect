@@ -112,8 +112,8 @@
                             <th>Street Name</th>
                             <th>Street Number</th>
                             <th>Unit Number</th>
-                            <th></th>
-                            <th></th>
+                            <th>Conplex Name</th>
+                            <th>Suburb</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -124,7 +124,7 @@
                             <td data-bind="text: UnitNumber"></td>
                             <td data-bind="text: ComplexName"></td>
                             <td data-bind="text: Suburb"></td>
-                            <td><button class="btn">Select</button></td>
+                            <td><button data-bind="click:function(){$root.select($data)}" class="btn">Select</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -390,10 +390,19 @@
                 timeout: 27000
             })
 
-            var viewModel =
+            var viewModel =function()
                 {
-                    properties: ko.observableArray(propertyItems)
+                this.that=this;
+                this.properties = ko.observableArray(propertyItems);
+                this.selected= ko.observable();
+                this.select =function(item)
+                {
 
+                    that.selected(item);
+                    console.log(  that.selected())
+                };
+
+                return this;
                 }
 
             ko.applyBindings(viewModel,$('#properties')[0])

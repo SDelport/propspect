@@ -140,8 +140,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\AreaItemController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -153,6 +153,7 @@
     <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
     <Compile Include="Models\FormModels\InspectionPart.cs" />
+    <Compile Include="Models\FormModels\Property.cs" />
     <Compile Include="Models\FormModels\LandLord.cs" />
     <Compile Include="Models\FormModels\Login.cs" />
     <Compile Include="Models\FormModels\PreInspection.cs" />
@@ -239,7 +240,6 @@
     <Content Include="Views\LandLord\List.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Hidden.cshtml" />
     <Content Include="Views\Property\Add.cshtml" />
-    <Content Include="Views\Property\List.cshtml" />
     <Content Include="Views\LandLord\Add.cshtml" />
     <Content Include="Views\Shared\Templates\Default\ListAsync.cshtml" />
     <Content Include="Views\Shared\Templates\Default\Dropdown.cshtml" />
@@ -257,6 +257,7 @@
     <Content Include="Views\Area\List.cshtml" />
     <Content Include="Views\AreaItem\List.cshtml" />
     <Content Include="Views\User\SetPassword.cshtml" />
+    <Content Include="Views\Property\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
