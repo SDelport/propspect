@@ -12,6 +12,9 @@ namespace PropSpect.Api.Models
         [Column("key_id")]
         public int UserID { get; set; }
 
+        [Column("user_key")]
+        public int UserKey { get; set; }
+
         [Column("user_name")]
         public string Username { get; set; }
 

@@ -109,6 +109,7 @@ namespace PropSpect.Api.Controllers
             {
                 User user = new User();
                 user.UserID = request.UserID;
+                user.UserKey = request.UserKey;
                 user.Type = request.Type;
                 user.Username = request.Username;
                 user.IsPasswordChanged = 'N';
@@ -140,12 +141,14 @@ namespace PropSpect.Api.Controllers
 
             return Json(db.Users.Where(x => x.Type == realType || type == "").ToList().Select(x => new UserResponse()
             {
+               
                 Username = x.Username,
                 Language = x.Language,
                 IsPasswordChanged = x.IsPasswordChanged == 'Y',
                 Password = x.Password,
                 Type = x.Type,
-                UserID = x.UserID
+                UserID = x.UserID,
+                UserKey = x.UserKey
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 

@@ -10,40 +10,73 @@ namespace PropSpect.Web.Models.FormModels
 {
     public class Landlord
     {
+        //Properties Used
+        [ListOptions(Display = "Company Name")]
+        [EditOptions(Display = "Company Name")]
+        public string Name { get; set; }
+        [ListOptions(Display = "Contact Name")]
+        [EditOptions(Display = "Contact Name")]
+        public string FirstName { get; set; }
+        [ListOptions(Display = "Contact Surname")]
+        [EditOptions(Display = "Contact Surname")]
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+        [ListOptions(Display = "Work Number")]
+        [EditOptions(Display = "Work Number")]
+        public string TelWork { get; set; }
+        [ListOptions(Display = "Cell Number")]
+        [EditOptions(Display = "Cell Number")]
+        public string TelMobile { get; set; }
+
+
+
+        //Properties Not Used
         [ListOptions(Hide = true)]
         [EditOptions(Type = ControlType.Hidden)]
-        public int LandlordID { get; set; }   
-        public string Type { get; set; }
-        public string Name { get; set; }
+        public int LandlordID { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
+        public string Type { get; set; }  
+        [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string AddressUnitNr { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string ComplexName { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string StreetNumber { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string StreetName { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string Suburb { get; set; }
-        [EditOptions(Type = ControlType.Dropdown, SourceName = "CityItems")]
-        [ListOptions(SourceName = "CityItems")]
+        //[EditOptions(Type = ControlType.Dropdown, SourceName = "CityItems")]
+        //[ListOptions(SourceName = "CityItems")]
+        [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string CityName { get; set; }
-        [EditOptions(Type = ControlType.Number)]
+        //[EditOptions(Type = ControlType.Number)]
+        //[ListOptions(Hide = true)]
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public int PostalCode { get; set; }
-        public string TelWork { get; set; }
-        public string TelMobile { get; set; }
-        public string Fax { get; set; }
-        public string Email { get; set; }
         [ListOptions(Hide = true)]
-        public string Website { get; set; }
+        [EditOptions(Type = ControlType.Hidden)]
+        public string Fax { get; set; }
+        [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string Title { get; set; }
-        public string FirstName { get; set; }
+        [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string SecondName { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string ThirdName { get; set; }
-        public string LastName { get; set; }
         [ListOptions(Hide = true)]
+        [EditOptions(Type = ControlType.Hidden)]
         public string IDNumber { get; set; }
 
        

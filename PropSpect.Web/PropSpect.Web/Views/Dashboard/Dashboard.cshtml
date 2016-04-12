@@ -39,7 +39,13 @@
         @UI.Tile("Do Inspection", url: "/inspection/start-inspection")
     }
 
-    
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.SuperAdmin)
+    {
+        @UI.Tile("Manage Landlords", url: "/landlord/list");
+        @UI.Tile("Manage Tennants", url: "/user/list/tenant");
+    }
+
+
 </div>
 
 

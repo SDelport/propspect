@@ -19,12 +19,13 @@ namespace PropSpect.Web.Controllers
         }
 
         [Route("user/add/t")]
+        [Route("user/add/tenant")]
         public ActionResult AddTenant()
         {
-            Models.FormModels.User user = new Models.FormModels.User();
-            user.Type = Associations.GetLoginRole(LoginRole.Tenant);
+            Models.FormModels.Tenant tenant = new Models.FormModels.Tenant();
+            tenant.Type = Associations.GetLoginRole(LoginRole.Tenant);
 
-            return View("Create", user);
+            return View("Tenant\\Create", tenant);
         }
 
         [Route("user/add/ag")]

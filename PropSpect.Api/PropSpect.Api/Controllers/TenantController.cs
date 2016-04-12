@@ -62,6 +62,9 @@ namespace PropSpect.Api.Controllers
 
                 db.Tenants.Add(tenant);
                 db.SaveChanges();
+
+                var item = db.Tenants.OrderByDescending(i => i.TenantID).FirstOrDefault();
+                return Json(string.Format("{0}",item.TenantID));
             }
             else
             {

@@ -158,6 +158,7 @@
     <Compile Include="Models\FormModels\Login.cs" />
     <Compile Include="Models\FormModels\PreInspection.cs" />
     <Compile Include="Models\FormModels\SetPassword.cs" />
+    <Compile Include="Models\FormModels\Tenant.cs" />
     <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -258,6 +259,8 @@
     <Content Include="Views\AreaItem\List.cshtml" />
     <Content Include="Views\User\SetPassword.cshtml" />
     <Content Include="Views\Property\List.cshtml" />
+    <Content Include="Views\User\Tenant\Create.cshtml" />
+    <Content Include="Views\User\Tenant\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

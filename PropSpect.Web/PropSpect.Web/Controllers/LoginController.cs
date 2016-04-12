@@ -130,5 +130,42 @@ namespace PropSpect.Web.Controllers
             else
                 return Redirect(Request.QueryString["returnurl"]);
         }
+
+        [LoggedIn]
+        [Route("user/add-user/t")]
+        public ActionResult AddUserTenant(Tenant model)
+        {
+
+            CreateUserRequest request = new CreateUserRequest();
+            request.UserID = model.UserID;
+            request.Username = model.Username;
+            request.Type = model.Type;
+
+            CreateTenantRequest tenantRequest = new CreateTenantRequest();
+            tenantRequest.TenantID = model.TenantID;
+            tenantRequest.Title = model.Title;
+            tenantRequest.FirstName = model.FirstName;
+            tenantRequest.SecondName = model.SecondName;
+            tenantRequest.ThirdName = model.ThirdName;
+            tenantRequest.PreferredName = model.PreferredName;
+            tenantRequest.LastName = model.LastName;
+            tenantRequest.IDNumber = model.IDNumber;
+            tenantRequest.TelWork = model.TelWork;
+            tenantRequest.TelMobile = model.TelMobile;
+            tenantRequest.Email = model.Email;
+            tenantRequest.Website = model.Website;
+
+
+            var result = ApiWrapper.Post<string>("api/tenant/add", tenantRequest);
+
+            request.UserKey = int.Parse(result);
+            var resultUser = ApiWrapper.Post<bool>("api/user/add", request);
+
+
+            if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
+                return Redirect("/user/list/t");
+            else
+                return Redirect(Request.QueryString["returnurl"]);
+        }
     }
 }

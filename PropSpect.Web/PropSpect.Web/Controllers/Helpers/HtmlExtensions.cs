@@ -115,7 +115,8 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
                 HeaderControl headerControl = new HeaderControl();
 
-                headerControl.Label = new MvcHtmlString(property.Name);
+                if (listOptions != null && listOptions.Display != null) headerControl.Label = new MvcHtmlString(listOptions.Display);
+                else headerControl.Label = new MvcHtmlString(property.Name);
                 headerControl.PropertyName = new MvcHtmlString(property.Name);
 
                 if (listOptions != null)
@@ -128,8 +129,8 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
                         headerControl.Source = new MvcHtmlString(listOptions.SourceName);
                         headerControl.UseSource = true;
                     }
-      
-                       
+
+
                 }
 
                 listControl.Headers.Add(headerControl);
@@ -143,7 +144,9 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
                 EditOptions editOptions = property.GetCustomAttribute(typeof(EditOptions), false) as EditOptions;
 
                 EditControl editControl = new EditControl();
-                editControl.Label = new MvcHtmlString(property.Name);
+
+                if (editOptions != null && editOptions.Display != null) editControl.Label = new MvcHtmlString(editOptions.Display);
+                else editControl.Label = new MvcHtmlString(property.Name);
                 editControl.PropertyName = new MvcHtmlString(property.Name);
 
                 if (editOptions != null)
@@ -153,7 +156,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
 
                     editControl.Type = editOptions.Type;
                     editControl.Source = new MvcHtmlString(editOptions.SourceName);
-          
+
                 }
 
 
