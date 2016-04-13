@@ -10,5 +10,6 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
     {
         public ControlType Type { get; set; }
         public MvcHtmlString Source { get; set; }
+        public ModelMetadata metaData { get; set; }
     }
 }

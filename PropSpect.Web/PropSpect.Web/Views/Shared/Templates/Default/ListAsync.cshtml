@@ -13,16 +13,16 @@
         </div>
     </div>
     <div class="row">
-            <div class="input-field col m8 hide-on-small-and-down">
-            </div>
-            <div class="input-field col m3 s8">
-                <i class="material-icons prefix">search</i>
-                <input data-bind="value: SearchString" id="icon_telephone" type="text" class="validate">
-                <label for="icon_telephone">Search</label>
-            </div>
-            <div class="input-field col m1 s4">
-                <button data-bind="click: Search" class="btn btn-block">Search</button>
-            </div>
+        <div class="input-field col m8 hide-on-small-and-down">
+        </div>
+        <div class="input-field col m3 s8">
+            <i class="material-icons prefix">search</i>
+            <input data-bind="value: SearchString" id="@Model.Control.VariableName-search" type="text" class="validate">
+            <label for="icon_telephone">Search</label>
+        </div>
+        <div class="input-field col m1 s4">
+            <button data-bind="click: Search" class="btn btn-block">Search</button>
+        </div>
         <div class="col s12">
             <table class="highlight bordered">
                 <thead>
@@ -44,7 +44,7 @@
                             }
                             else
                             {
-                        <td data-bind="text: @header.VariableName"></td>
+                                <td data-bind="text: @header.VariableName"></td>
                             }
 
                         }
@@ -71,20 +71,29 @@
     @*Need fixed header with content: Add/Edit @Model.Control.Label*@
     <div class="modal-content">
         <h4 class="modal-header">Add/Edit @Model.Control.Label</h4>
-        <form class="col s12">
+        <form class="col s12" id="@Model.Control.HtmlID">
             <div class="row">
                 @foreach (var field in Model.Control.EditControls)
                 {
-                    @Form.RenderTemplate(field, field.Type.ToString())
+                    if (field.Type != ControlType.Textbox)
+                    {
+                        @Form.RenderTemplate(field.metaData, field, field.Type.ToString())
+                    }
+                    else
+                    {
+                        @Form.RenderTemplate(field.metaData, field, field.Type.ToString()+"Async")
+                    }
+
                 }
             </div>
         </form>
     </div>
-    <div class="modal-footer modal-foot">         
+    <div class="modal-footer modal-foot">
         <a data-bind="click:Save" class=" modal-action waves-effect waves-green btn-flat">Save</a>
         <a class=" modal-action modal-close waves-effect waves-red btn-flat">Don't Save</a>
+        <a data-bind="click:Delete, css:{hide:!IsEdit()}" class=" modal-action modal-close waves-effect waves-red btn-flat red-text">Delete</a>
         <div class="progress no-margin-border" data-bind="css: {hide:!IsLoading()}">
             <div class="indeterminate"></div>
-        </div>      
+        </div>
     </div>
 </div>

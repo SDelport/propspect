@@ -10,17 +10,12 @@
     }
 }
 
-@*<div class="form-group row">
+<div class="form-group row">
         <label for="@Model.Label" class="col-sm-4 control-label">@Model.Label</label>
         <div class="col-sm-8">
-            <input  type="text" class="form-control" name="@Model.Label" id="@Model.HtmlID"placeholder="@Model.Label" value="@Model.Value">
+            <input  type="text" class="form-control" @Model.ValidationAttributes name="@Model.Label" id="@Model.HtmlID"placeholder="@Model.Label" value="@Model.Value">
             @Model.Validation
         </div>
-    </div>*@
+    </div>
 
 
-<div class="input-field col s12">
-    <input placeholder="@Model.Label" id="@Model.HtmlID" type="text" class="validate" @binding name="@Model.VariableName">
-    <label for="@Model.HtmlID">@Model.Label</label>
-    @Model.Validation    
-</div>

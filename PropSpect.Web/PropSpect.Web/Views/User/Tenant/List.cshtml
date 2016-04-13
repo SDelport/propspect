@@ -1,4 +1,4 @@
-﻿@model AdminAddUser
+﻿@model List<Tenant>
 @{
     ViewBag.Title = "Create";
 }
@@ -7,7 +7,7 @@
 <div class="long-container white z-depth-1  col s12">
     <div class="propspect-blue-background z-depth-1">
         <div class="">
-            <h3 class="center white-text padding-2">Add/Edit @Model.Type.ToString()</h3>
+            <h3 class="center white-text padding-2">Add/Edit Tenant</h3>
         </div>
     </div>
     <div class="row">
@@ -15,17 +15,32 @@
             <table class="highlight bordered">
                 <thead>
                     <tr>
+                        <th>Title</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>ID Number</th>
+                        <th>Tel Work</th>
+                        <th>Tel Mobile</th>
+                        <th>Email</th>
                         <th>Username</th>
-                        <th><a href="/user/add/@Model.Type" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+<th><a href="/user/add/owner" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
                     </tr>
                 </thead>
                 <tbody class="font-12">
-                    @foreach (var user in Model.Users)
+                    @foreach (var tenant in Model)
                     {
-                        <tr>
-                            <td>@user.Username</td>
-                            <td><a href="/user/add/@user.Type.ToLower()/@user.UserID">Edit</a></td>
-                        </tr>
+                    <tr>
+                        <td>@tenant.Title</td>
+                        <td>@tenant.FirstName</td>
+                        <td>@tenant.LastName</td>
+                        <td>@tenant.IDNumber</td>
+                        <td>@tenant.TelWork</td>
+                        <td>@tenant.TelMobile</td>
+                        <td>@tenant.Email</td>        
+                        <td>@tenant.Username</td>   
+                        <td><a href="/user/add/tenant/@tenant.TenantID">Edit </a></td>
+                
+                    </tr>
                     }
                 </tbody>
             </table>

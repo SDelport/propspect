@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace PropSpect.Web.Models.FormModels
 {
@@ -20,6 +21,7 @@ namespace PropSpect.Web.Models.FormModels
         [ListOptions(Display = "Contact Surname")]
         [EditOptions(Display = "Contact Surname")]
         public string LastName { get; set; }
+        [EmailAddress(ErrorMessage ="Please provide a valid email address")]
         public string Email { get; set; }
         public string Website { get; set; }
         [ListOptions(Display = "Work Number")]

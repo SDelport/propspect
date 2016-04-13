@@ -23,7 +23,13 @@
                     }
                 }
             }
+            $('#' + viewModelName + '-search').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    viewModel.SearchString($(e.target).val());
+                    viewModel.Search();
+                }
 
+            });
             window[viewModelName + 'SearchModel'] = viewModel;
             ko.applyBindings(viewModel, $(e)[0]);
         })
@@ -75,15 +81,13 @@ function SearchViewModel(modelName, items) {
 
     })
 
-    this.Search = function()
-    {
-        if(that.SearchString()!= '')
+    this.Search = function () {
+
         ServiceProxy.Get('/' + that.domName + '/search/' + that.SearchString(), this.SearchSuccess);
     }
 
-    this.SearchSuccess = function(data)
-    {
-        this.Items(data);
+    this.SearchSuccess = function (data) {
+        that.Items(data);
     }
 
     this.SearchString = ko.observable('');
@@ -110,7 +114,7 @@ function SearchViewModel(modelName, items) {
 
     this.Items(items)
 
-    
+
 
     return this;
 }
@@ -124,6 +128,16 @@ function EditViewModel(modelName, itemtemplate) {
     this.template = itemtemplate;
 
     this.OpenEdit = function (item) {
+        $('#' + that.domName).validate().resetForm();
+
+        $('.field-validation-error')
+    .removeClass('field-validation-error')
+    .addClass('field-validation-valid').text('');
+
+        $('.input-validation-error')
+            .removeClass('input-validation-error')
+            .addClass('valid').text('');
+
         if (item)
             this.EditItem(ko.mapping.fromJS(item));
         else
@@ -133,9 +147,37 @@ function EditViewModel(modelName, itemtemplate) {
     }
 
     this.Save = function (item) {
+
+        if (!$('#' + that.domName).valid())
+            return;
+
         that.IsLoading(true);
         ServiceProxy.Post('/' + that.domName + '/add', ko.mapping.toJSON(that.EditItem), item.EditItem()[that.modelName + "ID"]() == 0 || !item.EditItem()[that.modelName + "ID"] ? this.AddSuccess : this.SaveSuccess);
     }
+
+    this.Delete = function (item) {
+        if (confirm("Are you sure you want to delete this " + that.modelName) + "?") {
+            that.IsLoading(true);
+            ServiceProxy.Get('/' + that.domName + '/delete/' + item.EditItem()[that.modelName + "ID"](), that.DeleteSuccess);
+        }
+    }
+
+    this.DeleteSuccess = function () {
+        for (var i = 0; i < window[that.modelName + 'SearchModel'].Items().length; i++) {
+            if (window[that.modelName + 'SearchModel'].Items()[i][that.modelName + 'ID']() == that.EditItem()[that.modelName + 'ID']()) {
+                window[that.modelName + 'SearchModel'].Items.remove(window[that.modelName + 'SearchModel'].Items()[i]);
+            }
+        }
+        that.IsLoading(false);
+    }
+
+    this.IsEdit = ko.computed(function () {
+        if (that.EditItem())
+            if (that.EditItem()[that.modelName + "ID"])
+                return that.EditItem()[that.modelName + "ID"]() != 0;
+
+        return false;
+    })
 
     this.SaveSuccess = function (result) {
         $('#edit-modal-' + that.domName).closeModal();

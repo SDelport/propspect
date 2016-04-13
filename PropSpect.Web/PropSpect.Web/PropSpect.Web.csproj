@@ -158,6 +158,7 @@
     <Compile Include="Models\FormModels\Login.cs" />
     <Compile Include="Models\FormModels\PreInspection.cs" />
     <Compile Include="Models\FormModels\SetPassword.cs" />
+    <Compile Include="Models\FormModels\Owner.cs" />
     <Compile Include="Models\FormModels\Tenant.cs" />
     <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +262,10 @@
     <Content Include="Views\Property\List.cshtml" />
     <Content Include="Views\User\Tenant\Create.cshtml" />
     <Content Include="Views\User\Tenant\List.cshtml" />
+    <Content Include="Views\User\Owner\Create.cshtml" />
+    <Content Include="Views\User\Owner\List.cshtml" />
+    <Content Include="Views\Shared\Templates\Default\TextboxAsync.cshtml" />
+    <Content Include="Views\Property\AsyncSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

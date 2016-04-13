@@ -156,14 +156,60 @@ namespace PropSpect.Web.Controllers
             tenantRequest.Website = model.Website;
 
 
-            var result = ApiWrapper.Post<string>("api/tenant/add", tenantRequest);
+            var result = ApiWrapper.Post<TenantResponse>("api/tenant/add", tenantRequest);
 
-            request.UserKey = int.Parse(result);
+            request.UserKey = result.TenantID;
             var resultUser = ApiWrapper.Post<bool>("api/user/add", request);
 
 
             if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
                 return Redirect("/user/list/t");
+            else
+                return Redirect(Request.QueryString["returnurl"]);
+        }
+
+        [LoggedIn]
+        [Route("user/add-user/o")]
+        public ActionResult AddUserOwner(Owner model)
+        {
+
+            CreateUserRequest request = new CreateUserRequest();
+            request.UserID = model.UserID;
+            request.Username = model.Username;
+            request.Type = model.Type;
+
+            CreateOwnerRequest ownerRequest = new CreateOwnerRequest();
+            ownerRequest.OwnerID = model.OwnerID;
+            ownerRequest.Type = model.OwnerType;
+            ownerRequest.Name = model.Name;
+            ownerRequest.UnitNr = model.UnitNr;
+            ownerRequest.ComplexName = model.ComplexName;
+            ownerRequest.StreetNumber = model.StreetNumber;
+            ownerRequest.StreeName = model.StreetName;
+            ownerRequest.Suburb = model.Suburb;
+            ownerRequest.City = model.City;
+            ownerRequest.PostalCode = model.PostalCode;
+            ownerRequest.TelWork = model.TelWork;
+            ownerRequest.TelMobile = model.TelMobile;
+            ownerRequest.Fax = model.Fax;
+            ownerRequest.Email = model.Email;
+            ownerRequest.Website = model.Website;
+            ownerRequest.Title = model.Title;
+            ownerRequest.FirstName = model.FirstName;
+            ownerRequest.SecondName = model.SecondName;
+            ownerRequest.ThirdName = model.ThirdName;
+            ownerRequest.LastName = model.LastName;
+            ownerRequest.IDNumber = model.IDNumber;
+
+
+            var result = ApiWrapper.Post<OwnerResponse>("api/owner/add", ownerRequest);
+
+            request.UserKey = result.OwnerID;
+            var resultUser = ApiWrapper.Post<bool>("api/user/add", request);
+
+
+            if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
+                return Redirect("/user/list/o");
             else
                 return Redirect(Request.QueryString["returnurl"]);
         }

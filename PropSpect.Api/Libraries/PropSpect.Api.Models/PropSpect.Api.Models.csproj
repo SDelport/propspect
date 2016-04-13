@@ -44,6 +44,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CreateAreaItemRequest.cs" />
     <Compile Include="Request\CreateAreaRequest.cs" />
+    <Compile Include="Request\CreateTenantRequest.cs" />
     <Compile Include="Request\CreateUserRequest.cs" />
     <Compile Include="Request\CreateEntityRequest.cs" />
     <Compile Include="Request\CreateInspectionAreaItemRequest.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Request\CreatePropertyRequest.cs" />
     <Compile Include="Request\CreateLandLordRequest.cs" />
     <Compile Include="Request\CreatePropertyTenantRequest.cs" />
-    <Compile Include="Request\CreateTenantRequest.cs" />
+    <Compile Include="Request\CreateOwnerRequest.cs" />
     <Compile Include="Request\LoginRequest.cs" />
     <Compile Include="Request\ResetPasswordRequest.cs" />
     <Compile Include="Response\AreaItemResponse.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Response\LoginResponse.cs" />
     <Compile Include="Response\PropertyResponse.cs" />
     <Compile Include="Response\PropertyTenantResponse.cs" />
+    <Compile Include="Response\OwnerResponse.cs" />
     <Compile Include="Response\TenantResponse.cs" />
     <Compile Include="Response\UserResponse.cs" />
   </ItemGroup>

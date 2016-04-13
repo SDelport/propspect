@@ -12,6 +12,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         public MvcHtmlString Label { get; set; }
         public MvcHtmlString CssClass { get; set; }
         public MvcHtmlString Validation { get; set; }
+        public MvcHtmlString ValidationAttributes { get; set; }
         public MvcHtmlString Value { get; set; }
         public MvcHtmlString PropertyName { get; set; }
         public bool IsAsync { get; set; }

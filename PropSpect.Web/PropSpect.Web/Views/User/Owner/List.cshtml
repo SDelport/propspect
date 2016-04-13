@@ -1,0 +1,46 @@
+﻿@model List<Owner>
+@{
+    ViewBag.Title = "Create";
+}
+
+@* took class: knockout-search out *@
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Add/Edit Owner</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>ID Number</th>
+                        <th>Username</th>
+                        <th><a href="/user/add/owner" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var owner in Model)
+                    {
+                    <tr>
+                        <td>@owner.Title</td>
+                        <td>@owner.Name</td>
+                        <td>@owner.LastName</td>
+                        <td>@owner.Email</td>
+                        <td>@owner.IDNumber</td>
+                        <td>@owner.Username</td>
+                        <td><a href="/user/add/owner/@owner.OwnerID">Edit </a> / <a href=""> Manage Properties</a></td>
+                
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

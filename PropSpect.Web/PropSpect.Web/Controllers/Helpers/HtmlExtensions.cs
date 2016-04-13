@@ -29,6 +29,13 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             return form.Html.Partial("Templates/Default/Textbox", control);
         }
 
+        public static MvcHtmlString TextboxAsync<TModel, TValue>(this Form<TModel> form, Expression<Func<TModel, TValue>> expression) where TModel : class
+        {
+            FormControl control = GetControl(form, expression);
+
+            return form.Html.Partial("Templates/Default/TextboxAsync", control);
+        }
+
         public static MvcHtmlString Hidden<TModel, TValue>(this Form<TModel> form, Expression<Func<TModel, TValue>> expression) where TModel : class
         {
             FormControl control = GetControl(form, expression);
@@ -47,8 +54,10 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
         }
 
 
-        public static MvcHtmlString RenderTemplate<TModel>(this Form<TModel> form, FormControl control, string templateName)
+        public static MvcHtmlString RenderTemplate<TModel>(this Form<TModel> form, ModelMetadata metaData, FormControl control, string templateName)
         {
+            control.Validation = form.Html.ValidationMessage(control.PropertyName.ToString());
+            control.ValidationAttributes = new MvcHtmlString(string.Join(" ", form.Html.GetUnobtrusiveValidationAttributes(control.PropertyName.ToString(), metaData).Select(x => x.Key + "=\'" + x.Value + "\'").ToArray()));
             return form.Html.Partial("Templates/Default/" + templateName, control);
         }
 
@@ -62,7 +71,10 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
             control.Label = new MvcHtmlString(modelData.DisplayName ?? modelData.PropertyName);
             control.PropertyName = new MvcHtmlString(modelData.PropertyName);
             control.Value = new MvcHtmlString(value);
+            control.Validation = form.Html.ValidationMessageFor<TModel, TValue>(expression);
 
+
+            control.ValidationAttributes = new MvcHtmlString(string.Join(" ", form.Html.GetUnobtrusiveValidationAttributes(control.PropertyName.ToString(), modelData).Select(x => x.Key + "=\"" + x.Value + "\"").ToArray()));
             return control;
         }
 
@@ -144,7 +156,7 @@ namespace PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine
                 EditOptions editOptions = property.GetCustomAttribute(typeof(EditOptions), false) as EditOptions;
 
                 EditControl editControl = new EditControl();
-
+                editControl.metaData = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(T), property.Name);
                 if (editOptions != null && editOptions.Display != null) editControl.Label = new MvcHtmlString(editOptions.Display);
                 else editControl.Label = new MvcHtmlString(property.Name);
                 editControl.PropertyName = new MvcHtmlString(property.Name);

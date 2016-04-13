@@ -50,43 +50,58 @@ namespace PropSpect.Api.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/landlord/delete/{id}")]
+        public JsonResult Delete(int id)
+        {
+            Landlord landlord = db.LandLords.Where(x => x.LandlordID == id).FirstOrDefault();
+
+            if (landlord != null)
+            {
+                db.LandLords.Remove(landlord);
+                db.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [Route("api/landlord/add")]
         public JsonResult Add(CreateLandLordRequest request)
         {
             Landlord landlord = null;
-            if (request.LandlordID<=0)
-            { 
-            landlord = new Landlord();
-            landlord.Title = request.Title;
-            landlord.Name = request.Name;
-            landlord.FirstName = request.FirstName;
-            landlord.LastName = request.LastName;
-            landlord.SecondName = request.SecondName;
-            landlord.ThirdName = request.ThirdName;
-            landlord.Type = request.Type;
-            landlord.IDNumber = request.IDNumber;
-            landlord.AddressUnitNr = request.AddressUnitNr;
-            landlord.ComplexName = request.ComplexName;
-            landlord.StreetNumber = request.StreetNumber;
-            landlord.StreetName = request.StreetName;
-            landlord.CityName = request.CityName;
-            landlord.PostalCode = request.PostalCode;
-            landlord.TelWork = request.TelWork;
-            landlord.TelMobile = request.TelMobile;
-            landlord.Fax = request.Fax;
-            landlord.Email = request.Email;
-            landlord.Website = request.Website;
+            if (request.LandlordID <= 0)
+            {
+                landlord = new Landlord();
+                landlord.Title = request.Title;
+                landlord.Name = request.Name;
+                landlord.FirstName = request.FirstName;
+                landlord.LastName = request.LastName;
+                landlord.SecondName = request.SecondName;
+                landlord.ThirdName = request.ThirdName;
+                landlord.Type = request.Type;
+                landlord.IDNumber = request.IDNumber;
+                landlord.AddressUnitNr = request.AddressUnitNr;
+                landlord.ComplexName = request.ComplexName;
+                landlord.StreetNumber = request.StreetNumber;
+                landlord.StreetName = request.StreetName;
+                landlord.CityName = request.CityName;
+                landlord.PostalCode = request.PostalCode;
+                landlord.TelWork = request.TelWork;
+                landlord.TelMobile = request.TelMobile;
+                landlord.Fax = request.Fax;
+                landlord.Email = request.Email;
+                landlord.Website = request.Website;
 
 
 
-            db.LandLords.Add(landlord);
-            db.SaveChanges();
+                db.LandLords.Add(landlord);
+                db.SaveChanges();
             }
             else
             {
                 landlord = db.LandLords.Where(x => x.LandlordID == request.LandlordID).FirstOrDefault();
-                if(landlord!= null)
+                if (landlord != null)
                 {
                     landlord.Title = request.Title;
                     landlord.Name = request.Name;
@@ -118,14 +133,20 @@ namespace PropSpect.Api.Controllers
 
 
         [Route("api/landlord/list/{search?}")]
-        public JsonResult List(string search="")
+        public JsonResult List(string search = "")
         {
 
 
-            return Json(db.LandLords.Where(x=>
-            search ==""||
-            x.FirstName.ToLower() == search.ToLower()
-            
+            //Company Name    Contact Name    Contact Surname Email Website Work Number Cell Number
+            return Json(db.LandLords.Where(x =>
+            search == "" ||
+            x.Name.ToLower().Contains(search.ToLower()) ||
+            x.FirstName.ToLower().Contains(search.ToLower()) ||
+            x.LastName.ToLower().Contains(search.ToLower()) ||
+            x.Email.ToLower().Contains(search.ToLower()) ||
+            x.Website.ToLower().Contains(search.ToLower()) ||
+            x.TelWork.ToLower().Contains(search.ToLower()) ||
+            x.TelMobile.ToLower().Contains(search.ToLower())
             ).ToList().Select(x => new LandlordResponse()
             {
                 AddressUnitNr = x.AddressUnitNr,

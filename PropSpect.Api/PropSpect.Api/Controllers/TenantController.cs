@@ -40,13 +40,29 @@ namespace PropSpect.Api.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/tenant/delete/{id}")]
+        public JsonResult Delete(int id)
+        {
+            Tenant tenant = db.Tenants.Where(x => x.TenantID == id).FirstOrDefault();
+            bool result = false;
+            if (tenant != null)
+            {
+                db.Tenants.Remove(tenant);
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [Route("api/tenant/add")]
         public JsonResult Add(CreateTenantRequest request)
         {
+            Tenant tenant = null;
             if (request.TenantID <= 0)
             {
-                Tenant tenant = new Tenant();
+                tenant = new Tenant();
                 tenant.TenantID = request.TenantID;
                 tenant.Email = request.Email;
                 tenant.FirstName = request.FirstName;
@@ -63,12 +79,12 @@ namespace PropSpect.Api.Controllers
                 db.Tenants.Add(tenant);
                 db.SaveChanges();
 
-                var item = db.Tenants.OrderByDescending(i => i.TenantID).FirstOrDefault();
-                return Json(string.Format("{0}",item.TenantID));
+                
+
             }
             else
             {
-                Tenant tenant = db.Tenants.Where(x => x.TenantID == request.TenantID).FirstOrDefault();
+                tenant = db.Tenants.Where(x => x.TenantID == request.TenantID).FirstOrDefault();
                 if (tenant != null)
                 {
                     tenant.TenantID = request.TenantID;
@@ -89,7 +105,7 @@ namespace PropSpect.Api.Controllers
 
             }
 
-            return Json("true");
+            return Json(tenant);
         }
 
         [Route("api/tenant")]

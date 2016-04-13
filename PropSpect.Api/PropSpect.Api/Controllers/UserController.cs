@@ -101,6 +101,43 @@ namespace PropSpect.Api.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/user/getbykey/{id}")]
+        public JsonResult GetByKey(int id)
+        {
+            UserResponse response = null;
+
+            User user = db.Users.Where(x => x.UserKey == id).FirstOrDefault();
+
+            if (user != null)
+            {
+                response = new UserResponse();
+                response.UserID = user.UserID;
+                response.Username = user.Username;
+                response.Language = user.Language;
+                response.IsPasswordChanged = user.IsPasswordChanged == 'Y';
+                if (!response.IsPasswordChanged)
+                    response.Password = user.Password;
+                response.Type = user.Type;
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/user/deletebykey/{id}")]
+        public JsonResult DeleteByKey(int id)
+        {
+            User user = db.Users.Where(x => x.UserKey == id).FirstOrDefault();
+            bool response = false;
+            if (user != null)
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+                response = true;
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [Route("api/user/add")]
         public JsonResult Add(CreateUserRequest request)

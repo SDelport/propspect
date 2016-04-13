@@ -103,8 +103,8 @@ namespace PropSpect.Web.Controllers
             return View("List", formModel);
         }
 
-        [Route("landlord/search/{search}")]
-        public JsonResult Search(string search)
+        [Route("landlord/search/{search?}")]
+        public JsonResult Search(string search = "")
         {
             List<Landlord> landlords = new List<Landlord>();
 
@@ -112,6 +112,14 @@ namespace PropSpect.Web.Controllers
 
             return Json(landlords, JsonRequestBehavior.AllowGet);
 
+        }
+
+        [Route("landlord/delete/{landlordID}")]
+        public JsonResult Delete(int landlordID)
+        {
+            var response = ApiWrapper.Get<bool>("api/landlord/delete/" + landlordID);
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }
