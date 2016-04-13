@@ -166,8 +166,27 @@ main {
     border: 0 !important;
 }
 
+.input-margin{
+    margin-bottom: 5px !important;
+}
+
+
 
 /* ====== Dashboard ====== */
 .dashboard-logo{
     max-height: 130px;
+}
+
+
+
+/* ======= Validation ====== */
+.field-validation-error{
+    font-size: 10px !important;
+    color: red !important;
+    vertical-align: top;
+}
+
+.input-validation-error{
+    border-bottom: 1px solid #F44336 !important;
+    box-shadow: 0 1px 0 0 #F44336 !important;
 }

@@ -1,0 +1,48 @@
+﻿@model List<LandlordAgent>
+@{
+    ViewBag.Title = "Create";
+}
+
+@* took class: knockout-search out *@
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Add/Edit Agent</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>ID Number</th>
+                        <th>Cell Number</th>
+                        <th>Work Number</th>
+                        <th>Username</th>
+                        <th><a href="/user/add/agent" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var agent in Model)
+                    {
+                    <tr>
+                        <td>@agent.FirstName</td>
+                        <td>@agent.LastName</td>
+                        <td>@agent.Email</td>
+                        <td>@agent.IDNumber</td>
+                        <td>@agent.TelMobile</td>
+                        <td>@agent.TelWork</td>
+                        <td>@agent.Username</td>
+                        <td><a href="/user/add/agent/@agent.LandlordAgentID">Edit </a></td>
+                
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -153,6 +153,8 @@
     <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
     <Compile Include="Models\FormModels\InspectionPart.cs" />
+    <Compile Include="Models\FormModels\LandlordAdmin.cs" />
+    <Compile Include="Models\FormModels\LandlordAgent.cs" />
     <Compile Include="Models\FormModels\Property.cs" />
     <Compile Include="Models\FormModels\LandLord.cs" />
     <Compile Include="Models\FormModels\Login.cs" />
@@ -267,6 +269,10 @@
     <Content Include="Views\Shared\Templates\Default\TextboxAsync.cshtml" />
     <Content Include="Views\Property\AsyncSelect.cshtml" />
     <Content Include="Views\User\RequestPasswordChange.cshtml" />
+    <Content Include="Views\User\Agent\Create.cshtml" />
+    <Content Include="Views\User\Agent\List.cshtml" />
+    <Content Include="Views\User\Admin\Create.cshtml" />
+    <Content Include="Views\User\Admin\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

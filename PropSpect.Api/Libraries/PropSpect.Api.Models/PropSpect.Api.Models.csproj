@@ -44,6 +44,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CreateAreaItemRequest.cs" />
     <Compile Include="Request\CreateAreaRequest.cs" />
+    <Compile Include="Request\CreateLandlordAdminRequest.cs" />
+    <Compile Include="Request\CreateLandlordAgentRequest.cs" />
     <Compile Include="Request\CreateTenantRequest.cs" />
     <Compile Include="Request\CreateUserRequest.cs" />
     <Compile Include="Request\CreateEntityRequest.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Response\InspectionAreaResponse.cs" />
     <Compile Include="Response\InspectionDetailsResponse.cs" />
     <Compile Include="Response\InspectionResponse.cs" />
+    <Compile Include="Response\LandlordAdminResponse.cs" />
+    <Compile Include="Response\LandlordAgentResponse.cs" />
     <Compile Include="Response\LandlordResponse.cs" />
     <Compile Include="Response\LandlordTemplateAreaItemResponse.cs" />
     <Compile Include="Response\LandlordTemplateAreaResponse.cs" />

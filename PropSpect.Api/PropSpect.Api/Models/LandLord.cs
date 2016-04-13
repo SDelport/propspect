@@ -51,5 +51,9 @@ namespace PropSpect.Api.Models
         public string LastName { get; set; }
         [Column("land_landlord_id_number")]
         public string IDNumber { get; set; }
+        [Column("land_landlord_reg_number")]
+        public string RegNumber { get; set; }
+        [Column("land_landlord_vat_number")]
+        public string VatNumber { get; set; }
     }
 }

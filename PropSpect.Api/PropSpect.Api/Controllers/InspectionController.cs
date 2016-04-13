@@ -51,8 +51,9 @@ namespace PropSpect.Api.Controllers
                 landlord.Fax = request.Fax;
                 landlord.Email = request.Email;
                 landlord.Website = request.Website;
-
-
+                landlord.RegNumber = request.RegNumber;
+                landlord.VatNumber = request.VatNumber;
+                
 
                 db.LandLords.Add(landlord);
                 db.SaveChanges();
@@ -81,6 +82,8 @@ namespace PropSpect.Api.Controllers
                     landlord.Fax = request.Fax;
                     landlord.Email = request.Email;
                     landlord.Website = request.Website;
+                    landlord.RegNumber = request.RegNumber;
+                    landlord.VatNumber = request.VatNumber;
 
                     db.SaveChanges();
                 }

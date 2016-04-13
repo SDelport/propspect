@@ -28,6 +28,7 @@ namespace PropSpect.Api.Models.Request
         public string Fax { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
-        
+        public string RegNumber { get; set; }
+        public string VatNumber { get; set; }
     }
 }

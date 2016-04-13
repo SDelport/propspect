@@ -45,6 +45,8 @@ namespace PropSpect.Api.Controllers
                 response.Fax = landlord.Fax;
                 response.Email = landlord.Email;
                 response.Website = landlord.Website;
+                response.VatNumber = landlord.VatNumber;
+                response.RegNumber = landlord.RegNumber;
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
@@ -92,8 +94,8 @@ namespace PropSpect.Api.Controllers
                 landlord.Fax = request.Fax;
                 landlord.Email = request.Email;
                 landlord.Website = request.Website;
-
-
+                landlord.RegNumber = request.RegNumber;
+                landlord.VatNumber = request.VatNumber;
 
                 db.LandLords.Add(landlord);
                 db.SaveChanges();
@@ -122,6 +124,8 @@ namespace PropSpect.Api.Controllers
                     landlord.Fax = request.Fax;
                     landlord.Email = request.Email;
                     landlord.Website = request.Website;
+                    landlord.RegNumber = request.RegNumber;
+                    landlord.VatNumber = request.VatNumber;
 
                     db.SaveChanges();
                 }
@@ -169,7 +173,9 @@ namespace PropSpect.Api.Controllers
                 ThirdName = x.ThirdName,
                 Title = x.Title,
                 Type = x.Type,
-                Website = x.Website
+                Website = x.Website,
+                VatNumber = x.VatNumber,
+                RegNumber = x.RegNumber
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 

@@ -29,5 +29,7 @@ namespace PropSpect.Api.Models.Response
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public string IDNumber { get; set; }
+        public string RegNumber { get; set; }
+        public string VatNumber { get; set; }
     }
 }

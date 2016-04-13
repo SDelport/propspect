@@ -24,6 +24,12 @@ namespace PropSpect.Web.Models.FormModels
         [EmailAddress(ErrorMessage ="Please provide a valid email address")]
         public string Email { get; set; }
         public string Website { get; set; }
+        [ListOptions(Display = "VAT Number")]
+        [EditOptions(Display = "VAT Number")]
+        public string VatNumber { get; set; }
+        [ListOptions(Display = "Registration Number")]
+        [EditOptions(Display = "Registration Number")]
+        public string RegNumber { get; set; }
         [ListOptions(Display = "Work Number")]
         [EditOptions(Display = "Work Number")]
         public string TelWork { get; set; }

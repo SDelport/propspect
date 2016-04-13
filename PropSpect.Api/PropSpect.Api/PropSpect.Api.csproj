@@ -144,6 +144,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\LandlordAdmin\" />
+    <Folder Include="Views\LandlordAgent\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -189,6 +191,8 @@
     <Compile Include="Controllers\InspectionAreaController.cs" />
     <Compile Include="Controllers\InspectionAreaItemController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
+    <Compile Include="Controllers\LandlordAdminController.cs" />
+    <Compile Include="Controllers\LandlordAgentController.cs" />
     <Compile Include="Controllers\LandlordTemplateAreaController.cs" />
     <Compile Include="Controllers\LandlordTemplateAreaItemController.cs" />
     <Compile Include="Controllers\LandlordTemplateController.cs" />
@@ -206,6 +210,8 @@
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\AreaItem.cs" />
     <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\LandlordAdmin.cs" />
+    <Compile Include="Models\LandlordAgent.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\ResetPasswordKey.cs" />
     <Compile Include="Models\User.cs" />

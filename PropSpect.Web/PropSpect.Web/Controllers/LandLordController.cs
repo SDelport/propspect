@@ -43,6 +43,8 @@ namespace PropSpect.Web.Controllers
                 formModel.StreetName = landlord.StreetName;
                 formModel.CityName = landlord.CityName;
                 formModel.PostalCode = landlord.PostalCode;
+                formModel.VatNumber = landlord.VatNumber;
+                formModel.RegNumber = landlord.RegNumber;
                 formModel.TelWork = landlord.TelWork;
                 formModel.TelMobile = landlord.TelMobile;
                 formModel.Fax = landlord.Fax;
@@ -78,6 +80,8 @@ namespace PropSpect.Web.Controllers
             request.Fax = model.Fax;
             request.Email = model.Email;
             request.Website = model.Website;
+            request.VatNumber = model.VatNumber;
+            request.RegNumber = model.RegNumber;
 
             var result = ApiWrapper.Post<Landlord>("api/landlord/add", request);
 

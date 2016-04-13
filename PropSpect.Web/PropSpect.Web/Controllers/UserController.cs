@@ -58,13 +58,70 @@ namespace PropSpect.Web.Controllers
             return View("Tenant/Create", tenant);
         }
 
-        [Route("user/add/ag")]
-        public ActionResult AddAgent()
+        [Route("user/add/ag/{agentID?}")]
+        [Route("user/add/agent/{agentID?}")]
+        public ActionResult AddAgent(int agentID = 0)
         {
-            User user = new Models.FormModels.User();
-            user.Type = Associations.GetLoginRole(LoginRole.Agent);
+            LandlordAgent landlordAgent = new LandlordAgent();
+            landlordAgent.Type = Associations.GetLoginRole(LoginRole.Agent);
 
-            return View("Create", user);
+            if (agentID > 0)
+            {
+                LandlordAgentResponse landlordAgentResponse = ApiWrapper.Get<LandlordAgentResponse>("api/landlordagent/" + agentID);
+                UserResponse userResponse = userResponse = ApiWrapper.Get<UserResponse>("api/user/getbykey/" + agentID);
+                if (landlordAgentResponse != null && userResponse != null)
+                {
+                    landlordAgent.LandlordAgentID = landlordAgentResponse.LandlordAgentID;
+                    landlordAgent.FirstName = landlordAgentResponse.FirstName;
+                    landlordAgent.PreferredName = landlordAgentResponse.PreferredName;
+                    landlordAgent.LastName = landlordAgentResponse.LastName;
+                    landlordAgent.IDNumber = landlordAgentResponse.IDNumber;
+                    landlordAgent.TelWork = landlordAgentResponse.TelWork;
+                    landlordAgent.TelMobile = landlordAgentResponse.TelMobile;
+                    landlordAgent.Email = landlordAgentResponse.Email;
+                    landlordAgent.UserKey = landlordAgentResponse.LandlordAgentID;
+                    landlordAgent.UserID = userResponse.UserID;
+                    landlordAgent.Username = userResponse.Username;
+                    landlordAgent.Type = userResponse.Type;
+                }
+                else
+                    return HttpNotFound();
+            }
+
+            return View("Agent/Create", landlordAgent);
+        }
+
+        [Route("user/add/a/{adminID?}")]
+        [Route("user/add/admin/{adminID?}")]
+        public ActionResult AddAdmin(int adminID = 0)
+        {
+            LandlordAdmin landlordAdmin = new LandlordAdmin();
+            landlordAdmin.Type = Associations.GetLoginRole(LoginRole.Admin);
+
+            if (adminID > 0)
+            {
+                LandlordAdminResponse landlordAdminResponse = ApiWrapper.Get<LandlordAdminResponse>("api/landlordadmin/" + adminID);
+                UserResponse userResponse = userResponse = ApiWrapper.Get<UserResponse>("api/user/getbykey/" + adminID);
+                if (landlordAdminResponse != null && userResponse != null)
+                {
+                    landlordAdmin.LandlordAdminID = landlordAdminResponse.LandlordAdminID;
+                    landlordAdmin.FirstName = landlordAdminResponse.FirstName;
+                    landlordAdmin.PreferredName = landlordAdminResponse.PreferredName;
+                    landlordAdmin.LastName = landlordAdminResponse.LastName;
+                    landlordAdmin.IDNumber = landlordAdminResponse.IDNumber;
+                    landlordAdmin.TelWork = landlordAdminResponse.TelWork;
+                    landlordAdmin.TelMobile = landlordAdminResponse.TelMobile;
+                    landlordAdmin.Email = landlordAdminResponse.Email;
+                    landlordAdmin.UserKey = landlordAdminResponse.LandlordAdminID;
+                    landlordAdmin.UserID = userResponse.UserID;
+                    landlordAdmin.Username = userResponse.Username;
+                    landlordAdmin.Type = userResponse.Type;
+                }
+                else
+                    return HttpNotFound();
+            }
+
+            return View("Admin/Create", landlordAdmin);
         }
 
         [Route("user/delete/owner/{ownerID}")]
@@ -77,6 +134,16 @@ namespace PropSpect.Web.Controllers
             return Redirect("/user/list/owner");
         }
 
+        [Route("user/delete/agent/{agentID}")]
+        public ActionResult DeleteAgent(int agentID)
+        {
+            var response = ApiWrapper.Get<bool>("api/landlordagent/delete/" + agentID);
+            if (response)
+                ApiWrapper.Get<bool>("api/user/deletebykey/" + agentID);
+
+            return Redirect("/user/list/agent");
+        }
+
         [Route("user/delete/tenant/{tenantID}")]
         public ActionResult DeleteTenant(int tenantID)
         {
@@ -85,6 +152,16 @@ namespace PropSpect.Web.Controllers
                 ApiWrapper.Get<bool>("api/user/deletebykey/" + tenantID);
 
             return Redirect("/user/list/tenant");
+        }
+
+        [Route("user/delete/admin/{adminID}")]
+        public ActionResult DeleteAdmin(int adminID)
+        {
+            var response = ApiWrapper.Get<bool>("api/landlordadmin/delete/" + adminID);
+            if (response)
+                ApiWrapper.Get<bool>("api/user/deletebykey/" + adminID);
+
+            return Redirect("/user/list/admin");
         }
 
         [Route("user/add/o/{ownerID?}")]
@@ -221,6 +298,83 @@ namespace PropSpect.Web.Controllers
             }
 
             return View("Tenant/List", finalTenants);
+        }
+
+        [Route("user/list/ag")]
+        [Route("user/list/agent")]
+        public ActionResult ViewAgents()
+        {
+            List<UserResponse> users = new List<UserResponse>();
+            users = ApiWrapper.Get<List<UserResponse>>("api/user/list/agent");
+            List<LandlordAgentResponse> landlordAgents = new List<LandlordAgentResponse>();
+            landlordAgents = ApiWrapper.Get<List<LandlordAgentResponse>>("api/landlordagent/");
+
+            List<LandlordAgent> finalLandlordAgents = new List<LandlordAgent>();
+
+            foreach (LandlordAgentResponse agent in landlordAgents)
+            {
+                var user = users.Where(x => x.UserKey == agent.LandlordAgentID).FirstOrDefault();
+
+                if (user == null)
+                    continue;
+
+                LandlordAgent finalAgent = new LandlordAgent();
+                finalAgent.LandlordAgentID = agent.LandlordAgentID;
+                finalAgent.FirstName = agent.FirstName;
+                finalAgent.PreferredName = agent.FirstName;
+                finalAgent.LastName = agent.LastName;
+                finalAgent.IDNumber = agent.IDNumber;
+                finalAgent.TelWork = agent.TelWork;
+                finalAgent.TelMobile = agent.TelMobile;
+                finalAgent.Email = agent.Email;
+                finalAgent.UserKey = agent.LandlordAgentID;
+                finalAgent.UserID = user.UserID;
+                finalAgent.Username = user.Username;
+                finalAgent.Type = user.Type;
+
+                finalLandlordAgents.Add(finalAgent);
+            }
+
+            return View("Agent/List", finalLandlordAgents);
+        }
+
+
+        [Route("user/list/a")]
+        [Route("user/list/admin")]
+        public ActionResult ViewAdmin()
+        {
+            List<UserResponse> users = new List<UserResponse>();
+            users = ApiWrapper.Get<List<UserResponse>>("api/user/list/admin");
+            List<LandlordAdminResponse> landlordAdmins = new List<LandlordAdminResponse>();
+            landlordAdmins = ApiWrapper.Get<List<LandlordAdminResponse>>("api/landlordadmin/");
+
+            List<LandlordAdmin> finalLandlordAdmins = new List<LandlordAdmin>();
+
+            foreach (LandlordAdminResponse admin in landlordAdmins)
+            {
+                var user = users.Where(x => x.UserKey == admin.LandlordAdminID).FirstOrDefault();
+
+                if (user == null)
+                    continue;
+
+                LandlordAdmin finalAdmin = new LandlordAdmin();
+                finalAdmin.LandlordAdminID = admin.LandlordAdminID;
+                finalAdmin.FirstName = admin.FirstName;
+                finalAdmin.PreferredName = admin.FirstName;
+                finalAdmin.LastName = admin.LastName;
+                finalAdmin.IDNumber = admin.IDNumber;
+                finalAdmin.TelWork = admin.TelWork;
+                finalAdmin.TelMobile = admin.TelMobile;
+                finalAdmin.Email = admin.Email;
+                finalAdmin.UserKey = admin.LandlordAdminID;
+                finalAdmin.UserID = user.UserID;
+                finalAdmin.Username = user.Username;
+                finalAdmin.Type = user.Type;
+
+                finalLandlordAdmins.Add(finalAdmin);
+            }
+
+            return View("Admin/List", finalLandlordAdmins);
         }
 
         [Route("user/list/{type?}")]

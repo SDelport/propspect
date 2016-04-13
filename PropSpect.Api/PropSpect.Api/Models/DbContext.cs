@@ -30,6 +30,8 @@ namespace PropSpect.Api.Models
         public DbSet<EnvironmentValue> EnvironmentValues { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ResetPasswordKey> ResetPasswordKeys { get; set; }
+        public DbSet<LandlordAgent> LandlordAgents { get; set; }
+        public DbSet<LandlordAdmin> LandlordAdmins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

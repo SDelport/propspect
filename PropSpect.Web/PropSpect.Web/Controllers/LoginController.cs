@@ -213,5 +213,71 @@ namespace PropSpect.Web.Controllers
             else
                 return Redirect(Request.QueryString["returnurl"]);
         }
+
+        [LoggedIn]
+        [Route("user/add-user/ag")]
+        public ActionResult AddUserAgent(LandlordAgent model)
+        {
+
+            CreateUserRequest request = new CreateUserRequest();
+            request.UserID = model.UserID;
+            request.Username = model.Username;
+            request.Type = model.Type;
+
+            CreateLandlordAgentRequest agentRequest = new CreateLandlordAgentRequest();
+            agentRequest.LandlordAgentID = model.LandlordAgentID;
+            agentRequest.TelWork = model.TelWork;
+            agentRequest.TelMobile = model.TelMobile;
+            agentRequest.Email = model.Email;
+            agentRequest.FirstName = model.FirstName;
+            agentRequest.LastName = model.LastName;
+            agentRequest.IDNumber = model.IDNumber;
+            agentRequest.UserKey = model.LandlordAgentID;
+
+
+            var result = ApiWrapper.Post<LandlordAgentResponse>("api/landlordagent/add", agentRequest);
+
+            request.UserKey = result.LandlordAgentID;
+            var resultUser = ApiWrapper.Post<bool>("api/user/add", request);
+
+
+            if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
+                return Redirect("/user/list/ag");
+            else
+                return Redirect(Request.QueryString["returnurl"]);
+        }
+
+        [LoggedIn]
+        [Route("user/add-user/a")]
+        public ActionResult AddUserAdmin(LandlordAdmin model)
+        {
+
+            CreateUserRequest request = new CreateUserRequest();
+            request.UserID = model.UserID;
+            request.Username = model.Username;
+            request.Type = model.Type;
+
+            CreateLandlordAdminRequest adminRequest = new CreateLandlordAdminRequest();
+            adminRequest.LandlordAdminID = model.LandlordAdminID;
+            adminRequest.TelWork = model.TelWork;
+            adminRequest.TelMobile = model.TelMobile;
+            adminRequest.Email = model.Email;
+            adminRequest.FirstName = model.FirstName;
+            adminRequest.LastName = model.LastName;
+            adminRequest.IDNumber = model.IDNumber;
+            adminRequest.UserKey = model.LandlordAdminID;
+
+
+            var result = ApiWrapper.Post<LandlordAdminResponse>("api/landlordadmin/add", adminRequest);
+
+            request.UserKey = result.LandlordAdminID;
+            var resultUser = ApiWrapper.Post<bool>("api/user/add", request);
+
+
+            if (string.IsNullOrEmpty(Request.QueryString["returnurl"]))
+                return Redirect("/user/list/a");
+            else
+                return Redirect(Request.QueryString["returnurl"]);
+        }
     }
 }
