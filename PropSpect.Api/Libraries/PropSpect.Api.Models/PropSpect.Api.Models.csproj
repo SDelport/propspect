@@ -58,6 +58,7 @@
     <Compile Include="Request\CreatePropertyTenantRequest.cs" />
     <Compile Include="Request\CreateOwnerRequest.cs" />
     <Compile Include="Request\LoginRequest.cs" />
+    <Compile Include="Request\ChangePasswordRequestRequest.cs" />
     <Compile Include="Request\ResetPasswordRequest.cs" />
     <Compile Include="Response\AreaItemResponse.cs" />
     <Compile Include="Response\AreaResponse.cs" />

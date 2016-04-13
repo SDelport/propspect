@@ -189,5 +189,79 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/user/changepassword")]
+        public JsonResult ChangePassword(ResetPasswordRequest request)
+        {
+            var key = db.ResetPasswordKeys.Where(x => x.Key == request.Key).FirstOrDefault();
+            bool changed = false;
+            if(key!= null)
+            {
+                var user = db.Users.Where(x => x.UserID == key.UserID).FirstOrDefault();
+
+                if(user!= null)
+                {
+                    user.Salt = RandomString(5);
+                    user.Password = Encode(request.Password + user.Salt);
+                    db.SaveChanges();
+                    changed = true;
+                }
+            }
+
+            return Json(changed);
+        }
+
+        [Route("api/user/changepassword")]
+        public JsonResult ResetPassword(ResetPasswordRequest request)
+        {
+            var key = db.ResetPasswordKeys.Where(x => x.Key == request.Key).FirstOrDefault();
+            bool changed = false;
+            if (key != null)
+            {
+                var user = db.Users.Where(x => x.UserID == key.UserID).FirstOrDefault();
+
+                if (user != null)
+                {
+                    user.Salt = RandomString(5);
+                    user.Password = Encode(request.Password + user.Salt);
+                    db.SaveChanges();
+                    changed = true;
+                }
+            }
+
+            return Json(changed);
+        }
+
+        [HttpPost]
+        [Route("api/user/requestchange")]
+        public JsonResult ResetPasswordRequest(ChangePasswordRequestRequest request)
+        {
+            string keyID = "";
+
+            var user = db.Users.Where(x => x.UserID == request.UserID).FirstOrDefault();
+
+            if (user == null && !string.IsNullOrEmpty(request.Email))
+                user = db.Users.Where(x => x.Username.ToLower() == request.Email.ToLower()).FirstOrDefault();
+
+            if(user!= null)
+            {
+                ResetPasswordKey key = new ResetPasswordKey();
+                key.Key = Guid.NewGuid().ToString();
+                key.UserID = user.UserID;
+                db.ResetPasswordKeys.Add(key);
+                db.SaveChanges();
+                keyID = key.Key;
+            }
+
+            return Json(keyID);
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPijklmnopqrstuvwxyzQRSTUVWXYZ0123456789abcdefgh";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
     }
 }

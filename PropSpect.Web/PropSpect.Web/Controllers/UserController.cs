@@ -1,9 +1,12 @@
 ﻿using PropSpect.Api.Models.Helpers;
+using PropSpect.Api.Models.Request;
 using PropSpect.Api.Models.Response;
 using PropSpect.Web.Controllers.Helpers;
 using PropSpect.Web.Models.FormModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace PropSpect.Web.Controllers
@@ -231,6 +234,54 @@ namespace PropSpect.Web.Controllers
                 model.Type = Associations.GetLoginRole(type);
 
             return View("List", model);
+        }
+
+        [Route("user/setpassword/{guid}")]
+        public ActionResult SetPass(string guid)
+        {
+            Guid g;
+
+            if (!Guid.TryParse(guid, out g))
+                return HttpNotFound();
+
+            SetPassword model = new SetPassword();
+            model.Key = guid;
+
+            return View("SetPassword", model);
+        }
+
+        [Route("user/requestpassword")]
+        public ActionResult RequestPass()
+        {
+            return View("RequestPasswordChange");
+        }
+
+        [Route("user/requestpassword/post")]
+        public ActionResult RequestPass(string email)
+        {
+            ChangePasswordRequestRequest request = new ChangePasswordRequestRequest();
+            request.Email = email;
+
+            var key = ApiWrapper.Post<string>("api/user/requestchange", request);
+
+            return Redirect("/");
+        }
+
+
+        [Route("user/test")]
+        public JsonResult ResetPass()
+        {
+            MailMessage mail = new MailMessage("noreply@propspect.co.za", "delport.stefan@gmail.com");
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "smtp.webafrica.co.za";
+            mail.Subject = "this is a test email.";
+            mail.Body = "this is my test email body";
+            client.Send(mail);
+
+            return Json(true);
         }
     }
 }
