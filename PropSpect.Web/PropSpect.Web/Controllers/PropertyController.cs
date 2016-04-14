@@ -37,6 +37,7 @@ namespace PropSpect.Web.Controllers
                 formModel.PropertyID = property.PropertyID;
                 formModel.PropertyType = property.PropertyType;
                 formModel.UnitNumber = property.UnitNumber;
+                formModel.Suburb = property.Suburb;
             }
 
 
@@ -56,6 +57,7 @@ namespace PropSpect.Web.Controllers
             request.PropertyID = model.PropertyID;
             request.PropertyType = model.PropertyType;
             request.UnitNumber = model.UnitNumber;
+            request.Suburb = model.Suburb;
 
             var result = ApiWrapper.Post<PropertyResponse>("api/property/add", request);
 
@@ -98,6 +100,32 @@ namespace PropSpect.Web.Controllers
             return View("Select", model);
         }
 
+        [Route("property/selectowner/{searchMethod?}/{searchString?}")]
+        public ActionResult SelectOwner(string searchMethod = "", string searchString = "")
+        {
+            var response = Owner.CreateList(ApiWrapper.Get<List<OwnerResponse>>(("api/property/searchowner/" + searchMethod + "/" + searchString).Trim('/')));
+
+            OwnerSelect model = new OwnerSelect();
+            model.Owners = response;
+            model.ReturnUrl = Request.QueryString["returnurl"];
+
+            return View("OwnerSelect", model);
+        }
+
+        [Route("property/selecttenant/{searchMethod?}/{searchString?}")]
+        public ActionResult SelectTenant(string searchMethod = "", string searchString = "")
+        {
+            var response = Tenant.CreateList(ApiWrapper.Get<List<TenantResponse>>(("api/property/searchtenant/" + searchMethod + "/" + searchString).Trim('/')));
+
+            TenantSelect model = new TenantSelect();
+            model.Tenants = response;
+            model.ReturnUrl = Request.QueryString["returnurl"];
+
+            return View("TenantSelect", model);
+        }
+
+
+
         [Route("property/manage/owner/{ownerID}")]
         public ActionResult OwnerProperty(int ownerID)
         {
@@ -126,6 +154,40 @@ namespace PropSpect.Web.Controllers
             return View("TenantPropertyManage", model);
         }
 
+        [Route("property/manage/propertyowner/{propertyID}")]
+        public ActionResult PropertyOwner(int propertyID)
+        {
+            var propertyResponse = ApiWrapper.Get<PropertyResponse>("api/property/" + propertyID);
+            var ownerResponse = Owner.CreateList(ApiWrapper.Get<List<OwnerResponse>>("api/property/propertyowner/" + propertyID));
+
+            PropertyOwnerTenantManage model = new PropertyOwnerTenantManage();
+            model.Owners = ownerResponse;
+            model.PropertyID = propertyResponse.PropertyID;
+            model.StreetName = propertyResponse.StreetName;
+            model.StreetNumber = propertyResponse.StreetNumber;
+            model.UnitNumber = propertyResponse.UnitNumber;
+            model.ComplexName = propertyResponse.ComplexName;
+
+            return View("PropertyOwnerManage", model);
+        }
+
+        [Route("property/manage/propertytenant/{propertyID}")]
+        public ActionResult PropertyTenant(int propertyID)
+        {
+            var propertyResponse = ApiWrapper.Get<PropertyResponse>("api/property/" + propertyID);
+            var tenantResponse = Tenant.CreateList(ApiWrapper.Get<List<TenantResponse>>("api/property/propertytenant/" + propertyID));
+
+            PropertyOwnerTenantManage model = new PropertyOwnerTenantManage();
+            model.Tenants = tenantResponse;
+            model.PropertyID = propertyResponse.PropertyID;
+            model.StreetName = propertyResponse.StreetName;
+            model.StreetNumber = propertyResponse.StreetNumber;
+            model.UnitNumber = propertyResponse.UnitNumber;
+            model.ComplexName = propertyResponse.ComplexName;
+
+            return View("PropertyTenantManage", model);
+        }
+
         [HttpPost]
         [Route("property/manage/owner/add/{ownerID}")]
         public ActionResult AssignPropertyOwner(int ownerID, int propertyID)
@@ -143,6 +205,7 @@ namespace PropSpect.Web.Controllers
 
             return Redirect("/property/manage/owner/" + ownerID);
         }
+        
 
         [HttpPost]
         [Route("property/manage/tenant/add/{tenantID}")]
@@ -160,6 +223,40 @@ namespace PropSpect.Web.Controllers
             var response = ApiWrapper.Get<bool>("api/property/unassign-tenant/" + propertyID + "/" + tenantID);
 
             return Redirect("/property/manage/tenant/" + tenantID);
+        }
+
+        [HttpPost]
+        [Route("property/manage/propertyowner/add/{propertyID}")]
+        public ActionResult AssignOwnerProperty(int ownerID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/assign-owner/" + propertyID + "/" + ownerID);
+
+            return Redirect("/property/manage/propertyowner/" + propertyID);
+        }
+
+        [Route("property/unassign-propertyowner/{propertyID}/{ownerID}")]
+        public ActionResult UnassignOwnerProperty(int ownerID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/unassign-owner/" + propertyID + "/" + ownerID);
+
+            return Redirect("/property/manage/propertyowner/" + propertyID);
+        }
+
+        [HttpPost]
+        [Route("property/manage/propertytenant/add/{propertyID}")]
+        public ActionResult AssignTenantProperty(int tenantID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/assign-tenant/" + propertyID + "/" + tenantID);
+
+            return Redirect("/property/manage/propertytenant/" + propertyID);
+        }
+
+        [Route("property/unassign-propertytenant/{propertyID}/{tenantID}")]
+        public ActionResult UnassignTenantProperty(int tenantID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/unassign-tenant/" + propertyID + "/" + tenantID);
+
+            return Redirect("/property/manage/propertytenant/" + propertyID);
         }
 
         [Route("property/search/{search}")]

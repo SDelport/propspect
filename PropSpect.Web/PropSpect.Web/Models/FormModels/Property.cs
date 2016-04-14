@@ -10,6 +10,7 @@ namespace PropSpect.Web.Models.FormModels
 {
     public class Property
     {
+        [EditOptions(Type = ControlType.Hidden)]
         public int PropertyID { get; set; }
         public string PropertyType { get; set; }
         public string UnitNumber { get; set; }

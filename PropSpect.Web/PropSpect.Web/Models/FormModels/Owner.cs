@@ -5,6 +5,7 @@ using System.Web;
 using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using PropSpect.Api.Models.Response;
 
 namespace PropSpect.Web.Models.FormModels
 {
@@ -45,5 +46,52 @@ namespace PropSpect.Web.Models.FormModels
         public string Type { get; set; }
         [ListOptions(Hide = true)]
         public string Password { get; set; }
+
+
+        public static Owner Create(OwnerResponse response)
+        {
+            if (response == null)
+                return null;
+
+            Owner owner = new Owner();
+            owner.OwnerID = response.OwnerID;
+            owner.Type = response.Type;
+            owner.Name = response.Name;
+            owner.UnitNr = response.UnitNr;
+            owner.ComplexName = response.ComplexName;
+            owner.StreetNumber = response.StreetNumber;
+            owner.StreetName = response.StreeName;
+            owner.Suburb = response.Suburb;
+            owner.City = response.City;
+            owner.PostalCode = response.PostalCode;
+            owner.TelWork = response.TelWork;
+            owner.TelMobile = response.TelMobile;
+            owner.Fax = response.Fax;
+            owner.Email = response.Email;
+            owner.Website = response.Website;
+            owner.Title = response.Title;
+            owner.FirstName = response.FirstName;
+            owner.SecondName = response.SecondName;
+            owner.ThirdName = response.ThirdName;
+            owner.LastName = response.LastName;
+            owner.IDNumber = response.IDNumber;
+
+            return owner;
+
+        }
+
+
+        public static List<Owner> CreateList(List<OwnerResponse> response)
+        {
+            if (response == null)
+                return null;
+
+            List<Owner> owners = new List<Owner>();
+            foreach (var owner in response)
+            {
+                owners.Add(Create(owner));
+            }
+            return owners;
+        }
     }
 }

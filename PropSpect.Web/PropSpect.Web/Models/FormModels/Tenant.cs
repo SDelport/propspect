@@ -5,6 +5,7 @@ using System.Web;
 using PropSpect.Web.Controllers.Helpers.CustomWebViewPageEngine;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using PropSpect.Api.Models.Response;
 
 namespace PropSpect.Web.Models.FormModels
 {
@@ -37,5 +38,45 @@ namespace PropSpect.Web.Models.FormModels
         public string Type { get; set; }
         [ListOptions(Hide = true)]
         public string Password { get; set; }
+
+
+
+        public static Tenant Create(TenantResponse response)
+        {
+            if (response == null)
+                return null;
+
+            Tenant tenant = new Tenant();
+            tenant.TenantID = response.TenantID;
+            tenant.Email = response.Email;
+            tenant.FirstName = response.FirstName;
+            tenant.IDNumber = response.IDNumber;
+            tenant.LastName = response.LastName;
+            tenant.PreferredName = response.PreferredName;
+            tenant.SecondName = response.SecondName;
+            tenant.TelMobile = response.TelMobile;
+            tenant.TelWork = response.TelWork;
+            tenant.ThirdName = response.ThirdName;
+            tenant.Title = response.Title;
+            tenant.Website = response.Website;
+
+            return tenant;
+
+        }
+
+
+        public static List<Tenant> CreateList(List<TenantResponse> response)
+        {
+            if (response == null)
+                return null;
+
+            List<Tenant> tenants = new List<Tenant>();
+            foreach (var tenant in response)
+            {
+                tenants.Add(Create(tenant));
+            }
+            return tenants;
+        }
+
     }
 }

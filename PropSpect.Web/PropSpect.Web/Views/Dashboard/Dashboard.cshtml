@@ -33,6 +33,7 @@
         @UI.Tile("Manage Tenants", url: "/user/list/tenant");
         @UI.Tile("Manage Owners", url: "/user/list/owner");
         @UI.Tile("Manage Agents", url: "/user/list/agent");
+        @UI.Tile("Manage Properties", url: "/property/list");
     }
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.SuperAdmin)
@@ -43,6 +44,7 @@
         @UI.Tile("Manage Agents", url: "/user/list/agent");
         @UI.Tile("Manage Admins", url: "/user/list/admin");
         @UI.Tile("Manage Area Templates", url: "/areatemplate/manage");
+        @UI.Tile("Manage Properties", url: "/property/list");
     }
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Agent)

@@ -158,6 +158,8 @@
     <Compile Include="Models\FormModels\LandlordAgent.cs" />
     <Compile Include="Models\FormModels\AreaTemplate.cs" />
     <Compile Include="Models\FormModels\ManageAreaTemplates.cs" />
+    <Compile Include="Models\FormModels\OwnerSelect.cs" />
+    <Compile Include="Models\FormModels\PropertyOwnerTenantManage.cs" />
     <Compile Include="Models\FormModels\TenantPropertyManage.cs" />
     <Compile Include="Models\FormModels\OwnerPropertyManage.cs" />
     <Compile Include="Models\FormModels\PropertySelect.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Models\FormModels\SetPassword.cs" />
     <Compile Include="Models\FormModels\Owner.cs" />
     <Compile Include="Models\FormModels\Tenant.cs" />
+    <Compile Include="Models\FormModels\TenantSelect.cs" />
     <Compile Include="Models\FormModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -283,6 +286,10 @@
     <Content Include="Views\Property\Select.cshtml" />
     <Content Include="Views\Property\TenantPropertyManage.cshtml" />
     <Content Include="Views\LandlordTemplateAreaItem\Manage.cshtml" />
+    <Content Include="Views\Property\PropertyOwnerManage.cshtml" />
+    <Content Include="Views\Property\OwnerSelect.cshtml" />
+    <Content Include="Views\Property\PropertyTenantManage.cshtml" />
+    <Content Include="Views\Property\TenantSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

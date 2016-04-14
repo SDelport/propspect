@@ -1,0 +1,42 @@
+﻿@model PropertyOwnerTenantManage
+@{
+    ViewBag.Title = "PropertyOwnerTenatManage";
+}
+
+
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Manage Owners of @string.Format("{0} {1}", Model.StreetNumber, Model.StreetName) </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <a class="btn white-text waves-effect waves-light" href="/user/list/owner">Back to Property List</a>
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Surname</th>
+                        <th>ID Number</th>
+                        <th>Email</th>
+                        <th><a href="/property/selectowner/exclude-property/@Model.PropertyID?returnurl=/property/manage/propertyowner/add/@Model.PropertyID" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var owner in Model.Owners)
+                    {
+                        <tr>
+                            <td>@owner.Name</td>
+                            <td>@owner.LastName</td>
+                            <td>@owner.IDNumber</td>
+                            <td>@owner.Email</td>
+                            <td><a href="/property/unassign-propertyowner/@Model.PropertyID/@owner.OwnerID">Remove</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

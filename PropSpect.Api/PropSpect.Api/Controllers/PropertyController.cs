@@ -123,7 +123,7 @@ namespace PropSpect.Api.Controllers
         public JsonResult ListOwnerExlude(int ownerID)
         {
             var q = from tbl in db.Properties
-                    let po = db.PropertyOwners.Where(x=>x.OwnerID == ownerID).Select(x=>x.PropertyID).ToList()
+                    let po = db.PropertyOwners.Where(x => x.OwnerID == ownerID).Select(x => x.PropertyID).ToList()
                     where !po.Contains(tbl.PropertyID)
                     select tbl;
 
@@ -160,6 +160,65 @@ namespace PropSpect.Api.Controllers
                 Suburb = x.Suburb,
                 City = x.City,
                 PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/searchowner/exclude-property/{propertyID}")]
+        public JsonResult ListPropertyOwnerExlude(int propertyID)
+        {
+            var q = from tbl in db.Owners
+                    let pt = db.PropertyOwners.Where(x => x.PropertyID == propertyID).Select(x => x.OwnerID).ToList()
+                    where !pt.Contains(tbl.OwnerID)
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new OwnerResponse()
+            {
+                OwnerID = x.OwnerID,
+                Type = x.Type,
+                Name = x.Name,
+                UnitNr = x.UnitNr,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreeName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode,
+                TelWork = x.TelWork,
+                TelMobile = x.TelMobile,
+                Fax = x.Fax,
+                Email = x.Email,
+                Website = x.Website,
+                Title = x.Title,
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                ThirdName = x.ThirdName,
+                LastName = x.LastName,
+                IDNumber = x.IDNumber
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/searchtenant/exclude-property/{propertyID}")]
+        public JsonResult ListPropertyTenantExlude(int propertyID)
+        {
+            var q = from tbl in db.Tenants
+                    let pt = db.PropertyTenants.Where(x => x.PropertyID == propertyID).Select(x => x.TenantID).ToList()
+                    where !pt.Contains(tbl.TenantID)
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new TenantResponse()
+            {
+                TenantID = x.TenantID,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                IDNumber = x.IDNumber,
+                LastName = x.LastName,
+                PreferredName = x.PreferredName,
+                SecondName = x.SecondName,
+                TelMobile = x.TelMobile,
+                TelWork = x.TelWork,
+                ThirdName = x.ThirdName,
+                Title = x.Title,
+                Website = x.Website
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -207,6 +266,66 @@ namespace PropSpect.Api.Controllers
                 PostalCode = x.PostalCode
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
+
+        [Route("api/property/propertyowner/{propertyID}")]
+        public JsonResult OwnersByProperties(int propertyID)
+        {
+            var q = from tbl in db.Owners
+                    join po in db.PropertyOwners on tbl.OwnerID equals po.OwnerID
+                    where po.PropertyID == propertyID
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new OwnerResponse()
+            {
+                OwnerID = x.OwnerID,
+                Type = x.Type,
+                Name = x.Name,
+                UnitNr = x.UnitNr,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreeName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode,
+                TelWork = x.TelWork,
+                TelMobile = x.TelMobile,
+                Fax = x.Fax,
+                Email = x.Email,
+                Website = x.Website,
+                Title = x.Title,
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                ThirdName = x.ThirdName,
+                LastName = x.LastName,
+                IDNumber = x.IDNumber
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/propertytenant/{propertyID}")]
+        public JsonResult TenantsByProperties(int propertyID)
+        {
+            var q = from tbl in db.Tenants
+                    join po in db.PropertyTenants on tbl.TenantID equals po.TenantID
+                    where po.PropertyID == propertyID
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new TenantResponse()
+            {
+                TenantID = x.TenantID,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                IDNumber = x.IDNumber,
+                LastName = x.LastName,
+                PreferredName = x.PreferredName,
+                SecondName = x.SecondName,
+                TelMobile = x.TelMobile,
+                TelWork = x.TelWork,
+                ThirdName = x.ThirdName,
+                Title = x.Title,
+                Website = x.Website
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
 
         [Route("api/property/assign-owner/{propertyID}/{ownerID}")]
         public JsonResult AssignPropertyOwner(int propertyID, int ownerID)

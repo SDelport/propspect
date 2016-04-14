@@ -1,0 +1,49 @@
+﻿@model TenantSelect
+@{
+    ViewBag.Title = "TenantSelect";
+}
+
+
+
+
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Select Tenant</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>ID Number</th>
+                        <th>Email</th>
+                        <th><a href="/property/edit?returnurl='/property/select/'" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var tenant in Model.Tenants)
+                    {
+                        <tr>
+                            <td>@tenant.FirstName</td>
+                            <td>@tenant.LastName</td>
+                            <td>@tenant.IDNumber</td>
+                            <td>@tenant.Email</td>
+                            <td>
+                                <form action="@Model.ReturnUrl" method="post">
+                                    <input name="TenantID" type="hidden" value="@tenant.TenantID" />
+                                    <button class="btn" role="submit">Select</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
