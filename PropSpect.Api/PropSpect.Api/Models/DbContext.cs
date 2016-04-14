@@ -32,6 +32,7 @@ namespace PropSpect.Api.Models
         public DbSet<ResetPasswordKey> ResetPasswordKeys { get; set; }
         public DbSet<LandlordAgent> LandlordAgents { get; set; }
         public DbSet<LandlordAdmin> LandlordAdmins { get; set; }
+        public DbSet<PropertyOwner> PropertyOwners { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

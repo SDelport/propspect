@@ -62,6 +62,8 @@ namespace PropSpect.Web.Controllers
             return Json(result);
         }
 
+
+
         [Route("property/list")]
         public ActionResult List()
         {
@@ -81,6 +83,53 @@ namespace PropSpect.Web.Controllers
             return View("List", formModel);
         }
 
+      
+
+
+        [Route("property/select/{searchMethod?}/{searchString?}")]
+        public ActionResult SelectProperty(string searchMethod = "", string searchString = "")
+        {
+            var response = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>(("api/property/search/" + searchMethod + "/" + searchString).Trim('/')));
+
+            PropertySelect model = new PropertySelect();
+            model.Properties = response;
+            model.ReturnUrl = Request.QueryString["returnurl"];
+
+            return View("Select", model);
+        }
+
+        [Route("property/manage/owner/{ownerID}")]
+        public ActionResult OwnerProperty(int ownerID)
+        {
+            var propertyResponse = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/owner/" + ownerID));
+            var ownerResponse = ApiWrapper.Get<OwnerResponse>("api/owner/get/" + ownerID);
+
+            OwnerPropertyManage model = new OwnerPropertyManage();
+            model.OwnerName = ownerResponse.Name + " " + ownerResponse.LastName;
+            model.OwnerID = ownerID;
+            model.Properties = propertyResponse;
+
+            return View("OwnerPropertyManage", model);
+        }
+
+        [HttpPost]
+        [Route("property/manage/owner/add/{ownerID}")]
+        public ActionResult AssignProperty(int ownerID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/assign/" + propertyID + "/" + ownerID);
+
+            return Redirect("/property/manage/owner/" + ownerID);
+        }
+
+
+        [Route("property/unassign/{propertyID}/{ownerID}")]
+        public ActionResult UnassignProperty(int ownerID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/unassign/" + propertyID + "/" + ownerID);
+
+            return Redirect("/property/manage/owner/" + ownerID);
+        }
+
         [Route("property/search/{search}")]
         public JsonResult Search(string search)
         {
@@ -91,5 +140,6 @@ namespace PropSpect.Web.Controllers
             return Json(propertys, JsonRequestBehavior.AllowGet);
 
         }
+
     }
 }

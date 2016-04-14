@@ -173,7 +173,7 @@ namespace PropSpect.Web.Controllers
 
             if (ownerID > 0)
             {
-                OwnerResponse ownerResponse = ApiWrapper.Get<OwnerResponse>("api/owner/" + ownerID);
+                OwnerResponse ownerResponse = ApiWrapper.Get<OwnerResponse>("api/owner/get/" + ownerID);
                 UserResponse userResponse = userResponse = ApiWrapper.Get<UserResponse>("api/user/getbykey/" + ownerID);
                 if (ownerResponse != null && userResponse != null)
                 {

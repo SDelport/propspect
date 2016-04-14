@@ -84,8 +84,8 @@ namespace PropSpect.Api.Controllers
         }
 
 
-        [Route("api/property/list/{search?}")]
-        public JsonResult List(string search = "")
+        [Route("api/property/list")]
+        public JsonResult List()
         {
             return Json(db.Properties.ToList().Select(x => new PropertyResponse()
             {
@@ -98,7 +98,105 @@ namespace PropSpect.Api.Controllers
                 Suburb = x.Suburb,
                 City = x.City,
                 PostalCode = x.PostalCode
-            }).Take(1).ToList(), JsonRequestBehavior.AllowGet);
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/search/{search?}")]
+        public JsonResult Search(string search = "")
+        {
+            return Json(db.Properties.ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Route("api/property/search/exclude-owner/{ownerID}")]
+        public JsonResult ListOwnerExlude(int ownerID)
+        {
+            var q = from tbl in db.Properties
+                    let po = db.PropertyOwners.Where(x=>x.OwnerID == ownerID).Select(x=>x.PropertyID).ToList()
+                    where !po.Contains(tbl.PropertyID)
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/owner/{ownerID}")]
+        public JsonResult PropertiesByOwner(int ownerID)
+        {
+            var q = from tbl in db.Properties
+                    join po in db.PropertyOwners on tbl.PropertyID equals po.PropertyID
+                    where po.OwnerID == ownerID
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/assign/{propertyID}/{ownerID}")]
+        public JsonResult AssignProperty(int propertyID, int ownerID)
+        {
+            var property = db.Properties.Where(x => x.PropertyID == propertyID).FirstOrDefault();
+            var owner = db.Owners.Where(x => x.OwnerID == ownerID).FirstOrDefault();
+            bool assigned = false;
+            if (owner != null && property != null)
+            {
+                PropertyOwner propertyOwner = new PropertyOwner();
+
+                propertyOwner.PropertyID = propertyID;
+                propertyOwner.OwnerID = ownerID;
+
+                db.PropertyOwners.Add(propertyOwner);
+                db.SaveChanges();
+                assigned = true;
+            }
+
+            return Json(assigned, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/unassign/{propertyID}/{ownerID}")]
+        public JsonResult UnassignProperty(int propertyID, int ownerID)
+        {
+            var propertyOwner = db.PropertyOwners.Where(x => x.PropertyID == propertyID && x.OwnerID == ownerID).FirstOrDefault();
+            bool unassigned = false;
+            if (propertyOwner != null)
+            {
+                db.PropertyOwners.Remove(propertyOwner);
+                db.SaveChanges();
+                unassigned = true;
+            }
+
+            return Json(unassigned, JsonRequestBehavior.AllowGet);
         }
 
 

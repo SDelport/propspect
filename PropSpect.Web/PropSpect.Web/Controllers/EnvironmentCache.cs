@@ -35,6 +35,11 @@ namespace PropSpect.Web.Controllers
             return EnvironmentValues.Where(x => x.Type == category).Where(x => x.Display == displayValue).Select(x => x.ID).FirstOrDefault();
         }
 
+        public static string GetDisplayValue(string ID, string category)
+        {
+            return EnvironmentValues.Where(x => x.Type == category).Where(x => x.ID == ID).Select(x => x.Display).FirstOrDefault();
+        }
+
         private static void Load()
         {
             vals = new List<EnvironmentValueResponse>();

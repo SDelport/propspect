@@ -1,0 +1,41 @@
+﻿@model OwnerPropertyManage
+@{
+    ViewBag.Title = "OwnerPropertyManage";
+}
+
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Manage Properties of @Model.OwnerName</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <a class="btn white-text waves-effect waves-light" href="/user/list/owner">Back to owner List</a>
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Street Number</th>
+                        <th>Street Name</th>
+                        <th>Suburb</th>
+                        <th>City</th>
+                        <th><a href="/property/select/exclude-owner/@Model.OwnerID?returnurl=/property/manage/owner/add/@Model.OwnerID" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var property in Model.Properties)
+                    {
+                        <tr>
+                            <td>@property.StreetNumber</td>
+                            <td>@property.StreetName</td>
+                            <td>@property.Suburb</td>
+                            <td>@PropSpect.Web.Controllers.EnvironmentCache.GetDisplayValue(property.City, "CITY")</td>
+                            <td><a href="/property/unassign/@property.PropertyID/@Model.OwnerID">Remove</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

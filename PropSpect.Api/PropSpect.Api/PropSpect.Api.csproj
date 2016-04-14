@@ -213,6 +213,7 @@
     <Compile Include="Models\LandlordAdmin.cs" />
     <Compile Include="Models\LandlordAgent.cs" />
     <Compile Include="Models\Owner.cs" />
+    <Compile Include="Models\PropertyOwner.cs" />
     <Compile Include="Models\ResetPasswordKey.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Entity.cs" />
