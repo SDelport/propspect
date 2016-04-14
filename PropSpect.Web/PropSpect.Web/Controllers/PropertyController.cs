@@ -112,22 +112,54 @@ namespace PropSpect.Web.Controllers
             return View("OwnerPropertyManage", model);
         }
 
+        [Route("property/manage/tenant/{tenantID}")]
+        public ActionResult TenantProperty(int tenantID)
+        {
+            var propertyResponse = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/tenant/" + tenantID));
+            var tenantResponse = ApiWrapper.Get<TenantResponse>("api/tenant/get/" + tenantID);
+
+            TenantPropertyManage model = new TenantPropertyManage();
+            model.TenantName = tenantResponse.FirstName + " " + tenantResponse.LastName;
+            model.TenantID = tenantID;
+            model.Properties = propertyResponse;
+
+            return View("TenantPropertyManage", model);
+        }
+
         [HttpPost]
         [Route("property/manage/owner/add/{ownerID}")]
-        public ActionResult AssignProperty(int ownerID, int propertyID)
+        public ActionResult AssignPropertyOwner(int ownerID, int propertyID)
         {
-            var response = ApiWrapper.Get<bool>("api/property/assign/" + propertyID + "/" + ownerID);
+            var response = ApiWrapper.Get<bool>("api/property/assign-owner/" + propertyID + "/" + ownerID);
 
             return Redirect("/property/manage/owner/" + ownerID);
         }
 
 
-        [Route("property/unassign/{propertyID}/{ownerID}")]
-        public ActionResult UnassignProperty(int ownerID, int propertyID)
+        [Route("property/unassign-owner/{propertyID}/{ownerID}")]
+        public ActionResult UnassignPropertyOwner(int ownerID, int propertyID)
         {
-            var response = ApiWrapper.Get<bool>("api/property/unassign/" + propertyID + "/" + ownerID);
+            var response = ApiWrapper.Get<bool>("api/property/unassign-owner/" + propertyID + "/" + ownerID);
 
             return Redirect("/property/manage/owner/" + ownerID);
+        }
+
+        [HttpPost]
+        [Route("property/manage/tenant/add/{tenantID}")]
+        public ActionResult AssignPropertyTenant(int tenantID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/assign-tenant/" + propertyID + "/" + tenantID);
+
+            return Redirect("/property/manage/tenant/" + tenantID);
+        }
+
+
+        [Route("property/unassign-tenant/{propertyID}/{tenantID}")]
+        public ActionResult UnassignPropertyTenant(int tenantID, int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/unassign-tenant/" + propertyID + "/" + tenantID);
+
+            return Redirect("/property/manage/tenant/" + tenantID);
         }
 
         [Route("property/search/{search}")]

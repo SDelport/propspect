@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\LandlordTemplateAreaItemController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EnvironmentCache.cs" />
     <Compile Include="Controllers\Helpers\CustomWebViewPageEngine\Attributes.cs" />
@@ -155,6 +156,9 @@
     <Compile Include="Models\FormModels\InspectionPart.cs" />
     <Compile Include="Models\FormModels\LandlordAdmin.cs" />
     <Compile Include="Models\FormModels\LandlordAgent.cs" />
+    <Compile Include="Models\FormModels\AreaTemplate.cs" />
+    <Compile Include="Models\FormModels\ManageAreaTemplates.cs" />
+    <Compile Include="Models\FormModels\TenantPropertyManage.cs" />
     <Compile Include="Models\FormModels\OwnerPropertyManage.cs" />
     <Compile Include="Models\FormModels\PropertySelect.cs" />
     <Compile Include="Models\FormModels\Property.cs" />
@@ -277,6 +281,8 @@
     <Content Include="Views\User\Admin\List.cshtml" />
     <Content Include="Views\Property\OwnerPropertyManage.cshtml" />
     <Content Include="Views\Property\Select.cshtml" />
+    <Content Include="Views\Property\TenantPropertyManage.cshtml" />
+    <Content Include="Views\LandlordTemplateAreaItem\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

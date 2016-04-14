@@ -31,7 +31,7 @@ namespace PropSpect.Web.Controllers
 
             if (tenantID > 0)
             {
-                TenantResponse tenantResponse = ApiWrapper.Get<TenantResponse>("api/tenant/" + tenantID);
+                TenantResponse tenantResponse = ApiWrapper.Get<TenantResponse>("api/tenant/get/" + tenantID);
                 UserResponse userResponse = userResponse = ApiWrapper.Get<UserResponse>("api/user/getbykey/" + tenantID);
                 if (tenantResponse != null && userResponse != null)
                 {

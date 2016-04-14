@@ -198,7 +198,6 @@
     <Compile Include="Controllers\LandlordTemplateController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LandlordController.cs" />
-    <Compile Include="Controllers\PropertyTenantController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Controllers\UserController.cs" />

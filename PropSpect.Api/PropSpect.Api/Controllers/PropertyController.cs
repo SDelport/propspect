@@ -141,6 +141,28 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/property/search/exclude-tenant/{tenantID}")]
+        public JsonResult ListTenantExlude(int tenantID)
+        {
+            var q = from tbl in db.Properties
+                    let pt = db.PropertyTenants.Where(x => x.TenantID == tenantID).Select(x => x.PropertyID).ToList()
+                    where !pt.Contains(tbl.PropertyID)
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         [Route("api/property/owner/{ownerID}")]
         public JsonResult PropertiesByOwner(int ownerID)
         {
@@ -163,8 +185,31 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [Route("api/property/assign/{propertyID}/{ownerID}")]
-        public JsonResult AssignProperty(int propertyID, int ownerID)
+
+        [Route("api/property/tenant/{tenantID}")]
+        public JsonResult PropertiesByTenant(int tenantID)
+        {
+            var q = from tbl in db.Properties
+                    join po in db.PropertyTenants on tbl.PropertyID equals po.PropertyID
+                    where po.TenantID == tenantID
+                    select tbl;
+
+            return Json(q.ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/assign-owner/{propertyID}/{ownerID}")]
+        public JsonResult AssignPropertyOwner(int propertyID, int ownerID)
         {
             var property = db.Properties.Where(x => x.PropertyID == propertyID).FirstOrDefault();
             var owner = db.Owners.Where(x => x.OwnerID == ownerID).FirstOrDefault();
@@ -184,8 +229,8 @@ namespace PropSpect.Api.Controllers
             return Json(assigned, JsonRequestBehavior.AllowGet);
         }
 
-        [Route("api/property/unassign/{propertyID}/{ownerID}")]
-        public JsonResult UnassignProperty(int propertyID, int ownerID)
+        [Route("api/property/unassign-owner/{propertyID}/{ownerID}")]
+        public JsonResult UnassignPropertyOwner(int propertyID, int ownerID)
         {
             var propertyOwner = db.PropertyOwners.Where(x => x.PropertyID == propertyID && x.OwnerID == ownerID).FirstOrDefault();
             bool unassigned = false;
@@ -199,6 +244,41 @@ namespace PropSpect.Api.Controllers
             return Json(unassigned, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/property/assign-tenant/{propertyID}/{tenantID}")]
+        public JsonResult AssignPropertyTenant(int propertyID, int tenantID)
+        {
+            var property = db.Properties.Where(x => x.PropertyID == propertyID).FirstOrDefault();
+            var tenant = db.Tenants.Where(x => x.TenantID == tenantID).FirstOrDefault();
+            bool assigned = false;
+            if (tenant != null && property != null)
+            {
+                PropertyTenant propertyTenant = new PropertyTenant();
+
+                propertyTenant.PropertyID = propertyID;
+                propertyTenant.TenantID = tenantID;
+
+                db.PropertyTenants.Add(propertyTenant);
+                db.SaveChanges();
+                assigned = true;
+            }
+
+            return Json(assigned, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/property/unassign-tenant/{propertyID}/{tenantID}")]
+        public JsonResult UnassignPropertyTenant(int propertyID, int tenantID)
+        {
+            var propertyTenant = db.PropertyTenants.Where(x => x.PropertyID == propertyID && x.TenantID == tenantID).FirstOrDefault();
+            bool unassigned = false;
+            if (propertyTenant != null)
+            {
+                db.PropertyTenants.Remove(propertyTenant);
+                db.SaveChanges();
+                unassigned = true;
+            }
+
+            return Json(unassigned, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

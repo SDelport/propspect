@@ -11,7 +11,10 @@ namespace PropSpect.Api.Models
     {
         [Column("key_id")]
         public int PropertyTenantID { get; set; }
+        [Column("parent_id")]
+        public int PropertyID { get; set; }
         [Column("prop_tenant_id")]
         public int TenantID { get; set; }
+
     }
 }

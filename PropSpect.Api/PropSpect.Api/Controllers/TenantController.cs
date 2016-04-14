@@ -13,7 +13,7 @@ namespace PropSpect.Api.Controllers
     {
         DatabaseContext db = new DatabaseContext();
 
-        [Route("api/tenant/{id}")]
+        [Route("api/tenant/get/{id}")]
         public JsonResult Get(int id)
         {
             TenantResponse response = null;
