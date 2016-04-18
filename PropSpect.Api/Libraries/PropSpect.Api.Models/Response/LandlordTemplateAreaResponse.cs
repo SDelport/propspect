@@ -11,5 +11,7 @@ namespace PropSpect.Api.Models.Response
         public int LandlordTemplateAreaID { get; set; }
         public string AreaName { get; set; }
         public int AreaOrder { get; set; }
+
+        public List<LandlordTemplateAreaItemResponse> Items { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace PropSpect.Api.Models.Request
         public int LandlordTemplateAreaID { get; set; }
         public string AreaName { get; set; }
         public int AreaOrder { get; set; }
+        public List<CreateLandlordTemplateAreaItemRequest> Items { get; set; }
     }
 }

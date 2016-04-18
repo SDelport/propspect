@@ -46,6 +46,7 @@
     <Compile Include="Request\CreateAreaRequest.cs" />
     <Compile Include="Request\CreateLandlordAdminRequest.cs" />
     <Compile Include="Request\CreateLandlordAgentRequest.cs" />
+    <Compile Include="Request\SaveLandlordTemplatesRequest.cs" />
     <Compile Include="Request\CreateTenantRequest.cs" />
     <Compile Include="Request\CreateUserRequest.cs" />
     <Compile Include="Request\CreateEntityRequest.cs" />

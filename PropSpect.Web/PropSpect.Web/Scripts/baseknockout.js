@@ -9,8 +9,6 @@
 
             var items = window[viewModelName + 'Items'];
 
-
-
             if (!items)
                 items = [];
 
@@ -241,3 +239,4 @@ var ServiceProxy =
                 });
         }
     }
+

@@ -3,5 +3,266 @@
     ViewBag.Title = "Manage";
 }
 
-<h2>Manage</h2>
 
+<div id="areas">
+    <div class="row">
+        <div class="col m6 l3 s12">
+            <button data-bind="click:Save, css:{disabled: IsSaving()}" class="btn waves-effect waves-light btn-large btn-block">
+                <h5> Save </h5>
+
+            </button>
+            <div data-bind="css:{hide: !IsSaving()}" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="sortable" data-bind="foreach: Areas">
+
+            <div class="col s12 m6 l3  edit-card" data-bind="attr:{id:ID}">
+                <div class="card-panel">
+
+                    <i data-bind="click: function(){$parent.Remove($index)}" style="font-size: 40px;" class="material-icons red-text right">not_interested</i>
+                    <h4 class="handle" ><span data-bind="text: Name"></span></h4>
+                    <ul class="sortable-inner" data-bind="foreach:$data.Items, attr:{id:'item-'+ID}">
+                        <li class="propspect-blue-background white-text" data-bind="attr:{id:ID}"><span class="" data-bind="text: $data.Name"></span><i data-bind="click: function(){$parent.Remove($index)}" class="material-icons red-text right">not_interested</i></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col m8 s12">
+                            <input data-bind="value: ItemName" placeholder="Item Name" id="first_name" type="text" class="validate">
+                        </div>
+                        <div class="col m4 s12">
+                            <button data-bind="click: Add" class="btn waves-effect waves-light btn-block">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 m6 l3  edit-card">
+
+            <div class="card-panel ">
+                <h4>Add new Area</h4>
+                <div class="row">
+
+                    <div class="col m8 s12">
+                        <input data-bind="value: AreaName" placeholder="Area Name" id="" type="text" class="validate">
+                    </div>
+                    <div class="col m4 s12">
+                        <button data-bind="click: Add" class="btn waves-effect waves-light btn-block">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("/Content/jquery-ui.css")
+
+    <style>
+        .sortable li {
+            margin: 5px;
+            padding: 8px;
+        }
+    </style>
+}
+
+@section scripts
+{
+    <script>
+        var areas = @Html.Raw(Json.Encode(Model.Areas))
+    </script>
+
+    @Scripts.Render("/Scripts/jquery-ui.js")
+
+    <script>
+
+        var sortableViewModel;
+
+        function Area(name, items) {
+            this.ID = makeid();
+            this.Name = ko.observable(name);
+            this.Items = ko.observableArray(items);
+            this.Order = ko.observable(0);
+            this.ItemName = ko.observable('');
+            this.Add = function () {
+                if (this.ItemName().trim() != '') {
+                    this.Items.push(new Item(this.ItemName()));
+                    this.ItemName('');
+
+                    setTimeout(function () {
+                        $(".sortable").sortable({ handle: ".handle" });
+                        SizeCards();
+                    }, 1)
+                }
+            }
+            this.Remove = function (index) {
+                this.Items.remove(this.Items()[index()])
+
+                setTimeout(function () {
+                    $(".sortable").sortable({ handle: ".handle", update: function () { $(this).children('.order').val(5); } });
+                    SizeCards();
+                }, 1)
+            }
+            return this;
+        }
+
+        function Item(name) {
+            this.ID = makeid();
+            this.Name = name;
+            this.Order = 0;
+            return this;
+        }
+
+        function S() {
+
+            this.Areas = ko.observableArray([]);
+            this.AreaName = ko.observable('');
+            this.Add = function () {
+                var that = this;
+                if (this.AreaName().trim() != '') {
+                    this.Areas.push(new Area(this.AreaName(), []));
+                    this.AreaName('');
+
+                    setTimeout(function () {
+                        $(".sortable-inner").sortable({});
+                        SizeCards();
+                    }, 1)
+                }
+            }
+            this.IsSaving = ko.observable(false);
+            this.Remove = function (index) {
+                this.Areas.remove(this.Areas()[index()])
+
+                setTimeout(function () {
+                    $(".sortable-inner").sortable();
+                    SizeCards();
+                }, 1)
+            }
+
+            this.Save = function () {
+                this.IsSaving(true);
+                var k = $(".sortable").sortable('toArray');
+                for (var i = 0; i < k.length; i++) {
+                    for (var q = 0; q < this.Areas().length; q++) {
+                        if (k[i] == this.Areas()[q].ID) {
+                            var p = $("#item-" + k[i]).sortable('toArray');
+                            this.Areas()[q].Order = i;
+                            for (var s = 0; s < p.length; s++) {
+                                for (var a = 0; a < this.Areas()[q].Items().length; a++) {
+                                    if (p[s] == this.Areas()[q].Items()[a].ID) {
+
+                                        this.Areas()[q].Items()[a].Order = s;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+                $.ajax(
+                {
+                    url: '/template-area/save',
+                    data: ko.toJSON(this.Areas()),
+                    type: "POST",
+                    context: this,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        this.IsSaving(false);
+                    },
+                    error: function (result) {
+                        this.IsSaving(false);
+                        alert('An error has occured')
+                    }
+                });
+            }
+
+            return this;
+        }
+
+        $(function () {
+
+            sortableViewModel = new S();
+            ko.applyBindings(sortableViewModel, $('#areas')[0]);
+
+            if(areas)
+            {
+                for (var i = 0; i < areas.length; i++) {
+                    var a =new Area(areas[i].Name,[]);
+                    a.Order(areas[i].Order)
+                    for (var q = 0; q < areas[i].Items.length; q++) {
+                        var it =new Item(areas[i].Items[q].Name);
+                        it.Order= areas[i].Items[q].Order;
+                        a.Items.push(it);
+                    }
+                    sortableViewModel.Areas.push(a);
+
+                }
+            }
+            $(".sortable").sortable({ handle: ".handle" });
+            $(".sortable-inner").sortable();
+            SizeCards();
+        });
+
+        var eqHeightSelectors = ['.edit-card'];
+
+        function SizeCards() {
+            for (var p = 0; p < eqHeightSelectors.length; p++) {
+                $(eqHeightSelectors[p]).css('height', 'auto');
+
+                $(eqHeightSelectors[p]).each(function (i, e) {
+                    var biggestNeeded = $(e).css('height');
+                    $(eqHeightSelectors[p]).each(function (k, q) {
+                        if (i == k)
+                            return;
+
+                        if ($(q).css('height') > biggestNeeded && $(q).offset().top == $(e).offset().top) {
+                            biggestNeeded = $(q).css('height');
+                        }
+                    });
+                    $(e).css('height', biggestNeeded);
+                })
+            }
+
+
+        }
+        var stillSizing = false;
+        $(window).resize(function () {
+            SizeCards();
+
+            stillSizing =true;
+
+            setTimeout(function()
+            {
+                if(!stillSizing)
+                {
+                    $(".sortable").sortable({ handle: ".handle" });
+                    $(".sortable-inner").sortable();
+                }
+                stillSizing= false;
+            },300)
+        })
+
+        function makeid() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 9; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+    </script>
+
+}

@@ -62,15 +62,78 @@ namespace PropSpect.Api.Controllers
             return Json("true");
         }
 
-        [Route("api/landlordtemplatearea")]
+        [Route("api/get-templates")]
         public JsonResult List()
         {
             return Json(db.LandlordTemplateAreas.ToList().Select(x => new LandlordTemplateAreaResponse()
             {
                 LandlordTemplateAreaID = x.LandlordTemplateAreaID,
                 AreaName = x.AreaName,
-                AreaOrder = x.AreaOrder
-            }).ToList(), JsonRequestBehavior.AllowGet);
+                AreaOrder = x.AreaOrder,
+                Items = db.LandlordTemplateAreaItems.Where(y => y.LandlordTemplateAreaID == x.LandlordTemplateAreaID).Select(y => new LandlordTemplateAreaItemResponse()
+                {
+                    ItemName = y.ItemName,
+                    ItemOrder = y.ItemOrder,
+                    LandlordTemplateAreaID = x.LandlordTemplateAreaID,
+                    LandlordTemplateAreaItemID = y.LandlordTemplateAreaItemID
+                }).OrderBy(y => y.ItemOrder).ToList()
+            }).OrderBy(y => y.AreaOrder).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/save-templates")]
+        public JsonResult Save(SaveLandlordTemplatesRequest request)
+        {
+            List<int> UsedAreas = new List<int>();
+            List<int> UsedItems = new List<int>();
+            if (request.Areas != null)
+            {
+                foreach (var requestArea in request.Areas)
+                {
+                    LandlordTemplateArea area = db.LandlordTemplateAreas.Where(x => x.AreaName.ToLower() == requestArea.AreaName.ToLower()).FirstOrDefault(); ;
+                    bool newArea = false;
+                    if (area == null)
+                    {
+                        area = new LandlordTemplateArea();
+                        newArea = true;
+                    }
+
+                    area.AreaName = requestArea.AreaName;
+                    area.AreaOrder = requestArea.AreaOrder;
+
+                    if (newArea)
+                        db.LandlordTemplateAreas.Add(area);
+
+                    db.SaveChanges();
+
+                    UsedAreas.Add(area.LandlordTemplateAreaID);
+                    if (requestArea.Items != null)
+                    {
+                        foreach (var itemRequest in requestArea.Items)
+                        {
+                            LandlordTemplateAreaItem item = db.LandlordTemplateAreaItems.Where(x => x.LandlordTemplateAreaID == area.LandlordTemplateAreaID && x.ItemName == itemRequest.ItemName).FirstOrDefault();
+                            bool newItem = false;
+                            if (item == null)
+                            {
+                                item = new LandlordTemplateAreaItem();
+                                newItem = true;
+                            }
+                            item.ItemName = itemRequest.ItemName;
+                            item.ItemOrder = itemRequest.ItemOrder;
+                            item.LandlordTemplateAreaID = area.LandlordTemplateAreaID;
+                            if (newItem)
+                                db.LandlordTemplateAreaItems.Add(item);
+
+
+                            db.SaveChanges();
+                            UsedItems.Add(item.LandlordTemplateAreaItemID);
+                        }
+                    }
+                }
+            }
+            db.LandlordTemplateAreas.RemoveRange(db.LandlordTemplateAreas.Where(x => !UsedAreas.Contains(x.LandlordTemplateAreaID)).ToList());
+            db.LandlordTemplateAreaItems.RemoveRange(db.LandlordTemplateAreaItems.Where(x => !UsedItems.Contains(x.LandlordTemplateAreaItemID)).ToList());
+            db.SaveChanges();
+            return Json(true);
         }
     }
 }

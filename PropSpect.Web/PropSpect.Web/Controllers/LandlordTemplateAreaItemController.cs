@@ -55,7 +55,63 @@ namespace PropSpect.Web.Controllers
         {
             ManageAreaTemplates model = new ManageAreaTemplates();
 
+            var response = ApiWrapper.Get<List<LandlordTemplateAreaResponse>>("api/get-templates");
+
+            model.Areas = new List<LandlordTemplateArea>();
+            foreach (var areaResponse in response)
+            {
+                LandlordTemplateArea area = new LandlordTemplateArea();
+
+                area.Name = areaResponse.AreaName;
+                area.Order = areaResponse.AreaOrder;
+
+                area.Items = new List<LandlordTemplateAreaItem>();
+
+                foreach (var responseItem in areaResponse.Items)
+                {
+                    LandlordTemplateAreaItem item = new LandlordTemplateAreaItem();
+                    item.Name = responseItem.ItemName;
+                    item.Order = responseItem.ItemOrder;
+
+                    area.Items.Add(item);
+                }
+
+                model.Areas.Add(area);
+            }
+
             return View("Manage", model);
+        }
+
+        [Route("template-area/save")]
+        public JsonResult Save(List<LandlordTemplateArea> areas)
+        {
+            SaveLandlordTemplatesRequest request = new SaveLandlordTemplatesRequest();
+            request.Areas = new List<CreateLandlordTemplateAreaRequest>();
+            if (areas != null)
+            {
+                foreach (var area in areas)
+                {
+                    CreateLandlordTemplateAreaRequest areaRequest = new CreateLandlordTemplateAreaRequest();
+                    areaRequest.AreaName = area.Name;
+                    areaRequest.AreaOrder = area.Order;
+                    areaRequest.Items = new List<CreateLandlordTemplateAreaItemRequest>();
+                    if (area.Items != null)
+                    {
+                        foreach (var item in area.Items)
+                        {
+                            CreateLandlordTemplateAreaItemRequest itemRequest = new CreateLandlordTemplateAreaItemRequest();
+                            itemRequest.ItemName = item.Name;
+                            itemRequest.ItemOrder = item.Order;
+
+                            areaRequest.Items.Add(itemRequest);
+                        }
+                    }
+                    request.Areas.Add(areaRequest);
+                }
+            }
+            var response = ApiWrapper.Post<bool>("api/save-templates", request);
+
+            return Json(true);
         }
     }
 }

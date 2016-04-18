@@ -9,6 +9,7 @@ namespace PropSpect.Api.Models.Response
     public class LandlordTemplateAreaItemResponse
     {
         public int LandlordTemplateAreaItemID { get; set; }
+        public int LandlordTemplateAreaID { get; set; }
         public string ItemName { get; set; }
         public int ItemOrder { get; set; }
     }

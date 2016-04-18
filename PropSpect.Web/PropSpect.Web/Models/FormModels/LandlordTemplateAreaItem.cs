@@ -5,8 +5,9 @@ using System.Web;
 
 namespace PropSpect.Web.Models.FormModels
 {
-    public class ManageAreaTemplates
+    public class LandlordTemplateAreaItem
     {
-        public List<LandlordTemplateArea> Areas { get; set; }
+        public string Name { get; set; }
+        public int Order { get; set; }
     }
 }

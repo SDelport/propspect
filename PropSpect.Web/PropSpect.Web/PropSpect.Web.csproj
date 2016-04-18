@@ -157,6 +157,8 @@
     <Compile Include="Models\FormModels\LandlordAdmin.cs" />
     <Compile Include="Models\FormModels\LandlordAgent.cs" />
     <Compile Include="Models\FormModels\AreaTemplate.cs" />
+    <Compile Include="Models\FormModels\LandlordTemplateArea.cs" />
+    <Compile Include="Models\FormModels\LandlordTemplateAreaItem.cs" />
     <Compile Include="Models\FormModels\ManageAreaTemplates.cs" />
     <Compile Include="Models\FormModels\OwnerSelect.cs" />
     <Compile Include="Models\FormModels\PropertyOwnerTenantManage.cs" />
