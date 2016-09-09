@@ -116,7 +116,8 @@ namespace PropSpect.Web.Models.FormModels
             landlord.ThirdName = response.ThirdName;
             landlord.LastName = response.LastName;
             landlord.IDNumber = response.IDNumber;
-
+            landlord.RegNumber = response.RegNumber;
+            landlord.VatNumber = response.VatNumber;
             return landlord;
 
         }
