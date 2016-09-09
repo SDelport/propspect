@@ -168,7 +168,7 @@ namespace PropSpect.Api.Controllers
                 StreetName = x.StreetName,
                 StreetNumber = x.StreetNumber,
                 Suburb = x.Suburb,
-                TelMobile = x.Suburb,
+                TelMobile = x.TelMobile,
                 TelWork = x.TelWork,
                 ThirdName = x.ThirdName,
                 Title = x.Title,
