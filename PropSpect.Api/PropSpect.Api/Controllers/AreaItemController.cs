@@ -75,6 +75,16 @@ namespace PropSpect.Api.Controllers
                 AreaID = x.AreaID
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
-
+        [Route("api/area/selectForPropertyArea/{areaID}")]
+        public JsonResult GetItemsForProperty(int areaID)
+        {
+            return Json(db.AreaItems.Where(y => y.AreaID == areaID).ToList().Select(x => new AreaItemResponse()
+            {
+                AreaID = x.AreaID,
+                AreaItemID = x.AreaItemID,
+                RoomItem = x.RoomItem,
+                RoomDescription = x.RoomDescription,
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

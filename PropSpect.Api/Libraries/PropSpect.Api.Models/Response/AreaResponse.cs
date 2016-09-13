@@ -10,5 +10,6 @@ namespace PropSpect.Api.Models.Response
     {
         public int AreaID { get; set; }
         public string Name { get; set; }
+        public int PropertyID { get; set; }
     }
 }

@@ -1,0 +1,37 @@
+﻿@model ManagePropertyAreas
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Manage Areas of @String.Format(Model.Property.Suburb==""?"{0} {1}, {2} ({3})": "{0} {1} {2} ({3})", Model.Property.StreetNumber,Model.Property.StreetName,Model.Property.Suburb,Model.Property.ComplexName) </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <a class="btn white-text waves-effect waves-light" href="..\list">Back to Property List</a>
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var area in Model.Areas)
+                    {
+                        <tr>
+                            <td>@area.AreaID</td>
+                            <td>@area.Name</td>
+                            <td><a href="#">Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+

@@ -39,7 +39,24 @@ namespace PropSpect.Web.Models.FormModels
             return user;
 
         }
+        public AreaItem()
+        {
 
+        }
+        public AreaItem(AreaItemResponse response)
+        {
+            this.AreaID = response.AreaID;
+            this.AreaItemID = response.AreaItemID;
+            this.RoomDescription = response.RoomDescription;
+            this.RoomItem = response.RoomItem;
+        }
+        public AreaItem(int AreaID,int AreaItemID,string RoomDescription,string RoomItem)
+        {
+            this.AreaID = AreaID;
+            this.AreaItemID = AreaItemID;
+            this.RoomDescription = RoomDescription;
+            this.RoomItem = RoomItem;
+        }
         public static List<AreaItem> CreateList(List<AreaItemResponse> response)
         {
             if (response == null)

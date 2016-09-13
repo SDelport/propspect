@@ -25,7 +25,20 @@ namespace PropSpect.Web.Models.FormModels
             return user;
 
         }
+        public Area()
+        {
 
+        }
+        public Area(AreaResponse response)
+        {
+            this.AreaID = response.AreaID;
+            this.Name = response.Name;
+        }
+        public Area(int AreaID,string Name)
+        {
+            this.AreaID = AreaID;
+            this.Name = Name;
+        }
         public static List<Area> CreateList(List<AreaResponse> response)
         {
             if (response == null)

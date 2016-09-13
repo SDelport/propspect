@@ -84,9 +84,18 @@ namespace PropSpect.Web.Controllers
 
             return View("List", formModel);
         }
+        [Route("property/manageAreas/{propertyID}")]
+        public ActionResult ManageAreas(int propertyID)
+        {
+            var propertyAreaResponse = ApiWrapper.Get<List<AreaResponse>>("api/area/selectForProperty/" + propertyID);
+            List<Area> areas = Area.CreateList(propertyAreaResponse);
+            return View("ManageAreas", new ManagePropertyAreas(areas,SelectPropertyFromID(propertyID)));
+        }
 
-      
-
+        public Property SelectPropertyFromID(int id)
+        {
+            return Property.Create(ApiWrapper.Get<PropertyResponse>(("api/property/getID/" + id)));
+        }
 
         [Route("property/select/{searchMethod?}/{searchString?}")]
         public ActionResult SelectProperty(string searchMethod = "", string searchString = "")

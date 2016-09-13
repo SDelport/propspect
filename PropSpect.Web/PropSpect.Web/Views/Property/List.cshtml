@@ -4,7 +4,108 @@
 }
 
 <div class="body-content">
-    @Form.ListAsync(Model)
+    @{
+        MvcHtmlString ItemsPropertyName = new MvcHtmlString(Model.Control.VariableName + "Items");
+        MvcHtmlString TemplatePropertyName = new MvcHtmlString(Model.Control.VariableName + "Template");
+    }
+    <div class="col s12 white z-depth-1 knockout-search" data-bindname="Property">
+        <div class="propspect-blue-background z-depth-1">
+            <div class="">
+                <h3 class="center white-text padding-2">Property</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m8 hide-on-small-and-down">
+            </div>
+            <div class="input-field col m3 s8">
+                <i class="material-icons prefix">search</i>
+                <input data-bind="value: SearchString" id="Property-search" type="text" class="validate">
+                <label for="icon_telephone">Search</label>
+            </div>
+            <div class="input-field col m1 s4">
+                <button data-bind="click: Search" class="btn btn-block">Search</button>
+            </div>
+            <div class="col s12">
+                <table class="highlight bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Unit Number</th>
+                            <th>Name</th>
+                            <th>Street Number</th>
+                            <th>Street Name</th>
+                            <th>Suburb</th>
+                            <th>City</th>
+                            <th>Postal Code</th>
+                            <th><a data-bind="click:Add" class="btn-floating waves-effect waves-light propspect-blue-background tooltipped" data-position="right" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-12" data-bind="foreach: Items">
+                        <tr>
+                            @foreach (var header in Model.Control.Headers)
+                            {
+                                if (header.UseSource)
+                                {
+                                    <td data-bind="text:  $root.GetSource('@header.Source',$data.@(header.VariableName)())  "></td>
+                                }
+                                else
+                                {
+                                    <td data-bind="text: @header.VariableName"></td>
+                                }
+                                if (header == Model.Control.Headers.Last())
+                                {
+                                    <td><a data-bind="click: Edit">Edit</a> /  <a data-bind="attr: { href: 'manageAreas/' + PropertyID() }">Manage Areas</a></td>
+                                }
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <script>
+    var @ItemsPropertyName= @Model.EncodedItems;
+    var @TemplatePropertyName= @Model.EncodedTemplate;
+    var DropdownItems = {};
+    @foreach (var list in Model.ItemLists)
+    {
+        @Html.Raw("DropdownItems."+ list.Key + " = " + Json.Encode( list.Value));
+    }
+    </script>
+
+
+    <div id="edit-modal-property" class="modal modal-fixed-footer knockout-edit modal-tall-wide" data-bindname="Property">
+        @*Need fixed header with content: Add/Edit @Model.Control.Label*@
+        <div class="modal-content">
+            <h4 class="modal-header">Add/Edit Property</h4>
+            <form class="col s12" id="property">
+                <div class="row">
+                    @foreach (var field in Model.Control.EditControls)
+                    {
+                        if (field.Type != ControlType.Textbox)
+                        {
+                            @Form.RenderTemplate(field.metaData, field, field.Type.ToString())
+                        }
+                        else
+                        {
+                            @Form.RenderTemplate(field.metaData, field, field.Type.ToString() + "Async")
+                        }
+
+                    }
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer modal-foot">
+            <a data-bind="click:Save" class=" modal-action waves-effect waves-green btn-flat">Save</a>
+            <a class=" modal-action modal-close waves-effect waves-red btn-flat">Don't Save</a>
+            <a data-bind="click:Delete, css:{hide:!IsEdit()}" class=" modal-action modal-close waves-effect waves-red btn-flat red-text">Delete</a>
+            <div class="progress no-margin-border" data-bind="css: {hide:!IsLoading()}">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

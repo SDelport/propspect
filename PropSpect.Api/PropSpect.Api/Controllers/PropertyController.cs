@@ -118,6 +118,22 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/property/getID/{id}")]
+        public JsonResult GetPropertyFromID(int id)
+        {
+            return Json(db.Properties.Where(y=> y.PropertyID==id).ToList().Select(x => new PropertyResponse()
+            {
+                PropertyID = x.PropertyID,
+                PropertyType = x.PropertyType,
+                UnitNumber = x.UnitNumber,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreetName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode
+            }).FirstOrDefault(), JsonRequestBehavior.AllowGet);
+        }
 
         [Route("api/property/search/exclude-owner/{ownerID}")]
         public JsonResult ListOwnerExlude(int ownerID)
