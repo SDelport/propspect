@@ -1,0 +1,40 @@
+﻿@model AddAreaItems
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Select Area Template</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var area in Model.TemplateAreas)
+                    {
+                        <tr>
+                            <td>@area.Name</td>
+                            <td>
+                                <form action="@Model.PropertyID/Add" method="post">
+                                    <input name="AreaTemplateID" type="hidden" value="@area.LandlordTemplateAreaID" />
+                                    <button class="btn" role="submit">Select</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+

@@ -149,6 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Helpers\ListAsyncFormModel.cs" />
+    <Compile Include="Models\FormModels\AddAreaItems.cs" />
     <Compile Include="Models\FormModels\AdminAddUser.cs" />
     <Compile Include="Models\FormModels\Area.cs" />
     <Compile Include="Models\FormModels\AreaItem.cs" />
@@ -296,6 +297,7 @@
     <Content Include="Views\Property\TenantSelect.cshtml" />
     <Content Include="Views\Property\ManageAreas.cshtml" />
     <Content Include="Views\Property\ManageAreaItems.cshtml" />
+    <Content Include="Views\Property\selectAreaToAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

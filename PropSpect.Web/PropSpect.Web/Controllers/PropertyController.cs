@@ -99,6 +99,12 @@ namespace PropSpect.Web.Controllers
             List<AreaItem> areaItems = AreaItem.CreateList(propertyAreaResponse);
             return View("ManageAreaItems", new ManageAreaItems(areaItems, SelectAreaItemFromID(areaID)));
         }
+        [Route("property/selectAreaToAdd/{propertyID}")]
+        public ActionResult SelectAreaToAdd(int propertyID)
+        {
+            var response = LandlordTemplateArea.CreateList(ApiWrapper.Get<List<LandlordTemplateAreaResponse>>(("api/get-templates")));
+            return View("selectAreaToAdd", new AddAreaItems(propertyID, response));
+        }
 
         public Property SelectPropertyFromID(int id)
         {
@@ -209,6 +215,13 @@ namespace PropSpect.Web.Controllers
             return View("PropertyTenantManage", model);
         }
 
+        [HttpPost]//asdasdasd
+        [Route("property/selectAreaToAdd/{propertyID}/Add")]
+        public ActionResult SelectAreaToAdd(int propertyID, int AreaTemplateID)
+        {
+            //var response = ApiWrapper.Get<LandlordTemplateAreaResponse>(("api/landlordtemplatearea/" + AreaTemplateID));
+            return Redirect("/property/manageAreas/" + propertyID);
+        }
         [HttpPost]
         [Route("property/manage/owner/add/{ownerID}")]
         public ActionResult AssignPropertyOwner(int ownerID, int propertyID)
