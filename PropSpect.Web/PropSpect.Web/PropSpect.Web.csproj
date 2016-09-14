@@ -159,6 +159,7 @@
     <Compile Include="Models\FormModels\AreaTemplate.cs" />
     <Compile Include="Models\FormModels\LandlordTemplateArea.cs" />
     <Compile Include="Models\FormModels\LandlordTemplateAreaItem.cs" />
+    <Compile Include="Models\FormModels\ManageAreaItems.cs" />
     <Compile Include="Models\FormModels\ManageAreaTemplates.cs" />
     <Compile Include="Models\FormModels\ManagePropertyAreas.cs" />
     <Compile Include="Models\FormModels\OwnerSelect.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Views\Property\PropertyTenantManage.cshtml" />
     <Content Include="Views\Property\TenantSelect.cshtml" />
     <Content Include="Views\Property\ManageAreas.cshtml" />
+    <Content Include="Views\Property\ManageAreaItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

@@ -12,6 +12,7 @@ namespace PropSpect.Web.Models.FormModels
         [EditOptions(Type = ControlType.Hidden)]
         public int AreaID { get; set; }
         public string Name { get; set; }
+        public int PropertyID { get; set; }
 
         public static Area Create(AreaResponse response)
         {
@@ -21,7 +22,7 @@ namespace PropSpect.Web.Models.FormModels
             Area user = new Area();
             user.AreaID = response.AreaID;
             user.Name = response.Name;
-
+            user.PropertyID = response.PropertyID;
             return user;
 
         }
@@ -33,11 +34,13 @@ namespace PropSpect.Web.Models.FormModels
         {
             this.AreaID = response.AreaID;
             this.Name = response.Name;
+            this.PropertyID = response.PropertyID;
         }
-        public Area(int AreaID,string Name)
+        public Area(int AreaID,string Name,int propertyID)
         {
             this.AreaID = AreaID;
             this.Name = Name;
+            this.PropertyID = propertyID;
         }
         public static List<Area> CreateList(List<AreaResponse> response)
         {

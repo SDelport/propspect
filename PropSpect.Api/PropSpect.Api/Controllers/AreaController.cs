@@ -26,7 +26,8 @@ namespace PropSpect.Api.Controllers
             {
                 response = new AreaResponse();
                 response.AreaID = area.AreaID;
-                response.Name = area.Name;            
+                response.Name = area.Name;
+                response.PropertyID = area.PropertyID;         
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
