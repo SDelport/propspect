@@ -23,6 +23,7 @@ namespace PropSpect.Api.Controllers
             if (areaItem != null)
             {
                 response = new AreaItemResponse();
+                response.AreaID = areaItem.AreaID;
                 response.AreaItemID = areaItem.AreaItemID;
                 response.RoomDescription = areaItem.RoomDescription;
                 response.RoomItem = areaItem.RoomItem;
@@ -74,6 +75,20 @@ namespace PropSpect.Api.Controllers
                 RoomItem = x.RoomItem,
                 AreaID = x.AreaID
             }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+        [Route("api/areaitem/remove")]
+        public JsonResult Remove(CreateAreaItemRequest request)
+        {
+            AreaItem areaItem = null;
+            bool removed = false;
+            if (request.AreaID > 0)
+            {
+                areaItem = db.AreaItems.Where(x => x.AreaItemID == request.AreaItemID).FirstOrDefault();
+                db.AreaItems.Remove(areaItem);
+                db.SaveChanges();
+                removed = true;
+            }
+            return Json(removed, JsonRequestBehavior.AllowGet);
         }
         [Route("api/area/selectForPropertyArea/{areaID}")]
         public JsonResult GetItemsForProperty(int areaID)

@@ -1,0 +1,59 @@
+﻿@model ManageAreaItems
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ManualEditWindow.js"></script>
+<div class="long-container white z-depth-1  col s12">
+    <div class="propspect-blue-background z-depth-1">
+        <div class="">
+            <h3 class="center white-text padding-2">Manage Items of @String.Format(Model.area.Name) </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <a class="btn white-text waves-effect waves-light" href="..\manageAreas\@Model.area.PropertyID">Back to Area List</a>
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="font-12">
+                    @foreach (var areaItem in Model.items)
+                    {
+                        <tr>
+                            <td>@areaItem.AreaItemID</td>
+                            <td>@areaItem.RoomItem</td>
+                            <td>@areaItem.RoomDescription</td>
+                            <td><a onclick="ShowWindow(@areaItem.AreaItemID,'@areaItem.RoomItem','@areaItem.RoomDescription');">Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <form action="/property/editAreaItemData" method="post">
+        <div id="edit-window" class="modal modal-fixed-footer modal-tall-wide" style="z-index:1000">
+            <div class="modal-content">
+                <h4 class="modal-header" style="top:40px;">Edit Area</h4>
+                <div class="row">
+                    @Html.Hidden("AreaItemID", null, new { @id = "ID-control" })
+                    @Html.Label("Name:")
+                    @Html.TextBox("Name", null, new { @id = "Name-control", @class = "form-control" })
+                    @Html.Label("Description:")
+                    @Html.TextBox("Description", null, new { @id = "Description-control", @class = "form-control" })
+                </div>
+            </div>
+            <div class="modal-footer modal-foot">
+                <input name="submit" type="submit" value="Save" class="modal-action waves-effect waves-green btn-flat" />
+                <a class="modal-action modal-close waves-effect waves-red btn-flat" onclick="DismissWindow();">Don't Save</a>
+                <input name="submit" type="submit" value="Delete" class="modal-action modal-close waves-effect waves-red btn-flat red-text" />
+            </div>
+        </div>
+    </form>
+</div>
+
+

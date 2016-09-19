@@ -63,6 +63,54 @@ namespace PropSpect.Api.Controllers
             return Json(area);
         }
 
+        [Route("api/area/remove")]
+        public JsonResult Remove(CreateAreaRequest request)
+        {
+            Area area = null;
+            bool removed = false;
+            if (request.AreaID > 0)
+            {
+                List<AreaItem> areaItems = db.AreaItems.Where(x => x.AreaID == request.AreaID).ToList();
+                foreach (var areaitem in areaItems)
+                {
+                    db.AreaItems.Remove(areaitem);
+                }
+                area = db.Areas.Where(x => x.AreaID == request.AreaID).FirstOrDefault();
+                db.Areas.Remove(area);
+                db.SaveChanges();
+                removed = true;
+            }
+            return Json(removed, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/area/addFromTemplate/{AreaTemplateID}/{PropertyID}")]
+        public JsonResult AddFromTemplate(int AreaTemplateID,int PropertyID)
+        {
+            Area area = null;
+            bool added = false;
+            if (AreaTemplateID>0&&PropertyID>0)
+            {
+                area = new Area();
+                LandlordTemplateArea templateArea = db.LandlordTemplateAreas.Where(x => x.LandlordTemplateAreaID == AreaTemplateID).FirstOrDefault();
+                area.Name = templateArea.AreaName;
+                area.PropertyID = PropertyID;
+                db.Areas.Add(area);
+                db.SaveChanges();
+                List<LandlordTemplateAreaItem> templateAreaItems = db.LandlordTemplateAreaItems.Where(y => y.LandlordTemplateAreaID == AreaTemplateID).ToList();
+                foreach (var templateAreaItem in templateAreaItems)
+                {
+                    AreaItem item = new AreaItem();
+                    item.AreaID = area.AreaID;
+                    item.RoomDescription = "";
+                    item.RoomItem = templateAreaItem.ItemName;
+                    db.AreaItems.Add(item);
+                }
+                db.SaveChanges();
+                added = true;
+            }
+            return Json(added, JsonRequestBehavior.AllowGet);
+        }
+
         [Route("api/area/list")]
         public JsonResult List()
         {

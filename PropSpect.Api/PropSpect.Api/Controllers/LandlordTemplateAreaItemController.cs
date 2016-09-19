@@ -73,5 +73,15 @@ namespace PropSpect.Api.Controllers
                 ItemOrder = x.ItemOrder
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
+        [Route("api/landlordtemplateareaitemforarea/{id}")]
+        public JsonResult ListForArea(int id)
+        {
+            return Json(db.LandlordTemplateAreaItems.Where(x=> id==x.LandlordTemplateAreaID).ToList().Select(x => new LandlordTemplateAreaItemResponse()
+            {
+                LandlordTemplateAreaItemID = x.LandlordTemplateAreaItemID,
+                ItemName = x.ItemName,
+                ItemOrder = x.ItemOrder
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -84,36 +84,6 @@ namespace PropSpect.Web.Controllers
 
             return View("List", formModel);
         }
-        [Route("property/manageAreas/{propertyID}")]
-        public ActionResult ManageAreas(int propertyID)
-        {
-            var propertyAreaResponse = ApiWrapper.Get<List<AreaResponse>>("api/area/selectForProperty/" + propertyID);
-            List<Area> areas = Area.CreateList(propertyAreaResponse);
-            return View("ManageAreas", new ManagePropertyAreas(areas,SelectPropertyFromID(propertyID)));
-        }
-
-        [Route("property/manageAreaItems/{areaID}")]
-        public ActionResult ManageAreaItems(int areaID)
-        {
-            var propertyAreaResponse = ApiWrapper.Get<List<AreaItemResponse>>("api/area/selectForPropertyArea/" + areaID);
-            List<AreaItem> areaItems = AreaItem.CreateList(propertyAreaResponse);
-            return View("ManageAreaItems", new ManageAreaItems(areaItems, SelectAreaItemFromID(areaID)));
-        }
-        [Route("property/selectAreaToAdd/{propertyID}")]
-        public ActionResult SelectAreaToAdd(int propertyID)
-        {
-            var response = LandlordTemplateArea.CreateList(ApiWrapper.Get<List<LandlordTemplateAreaResponse>>(("api/get-templates")));
-            return View("selectAreaToAdd", new AddAreaItems(propertyID, response));
-        }
-
-        public Property SelectPropertyFromID(int id)
-        {
-            return Property.Create(ApiWrapper.Get<PropertyResponse>(("api/property/getID/" + id)));
-        }
-        public Area SelectAreaItemFromID(int id)
-        {
-            return Area.Create(ApiWrapper.Get<AreaResponse>(("api/area/get/" + id)));
-        }
 
         [Route("property/select/{searchMethod?}/{searchString?}")]
         public ActionResult SelectProperty(string searchMethod = "", string searchString = "")
@@ -215,13 +185,7 @@ namespace PropSpect.Web.Controllers
             return View("PropertyTenantManage", model);
         }
 
-        [HttpPost]//asdasdasd
-        [Route("property/selectAreaToAdd/{propertyID}/Add")]
-        public ActionResult SelectAreaToAdd(int propertyID, int AreaTemplateID)
-        {
-            //var response = ApiWrapper.Get<LandlordTemplateAreaResponse>(("api/landlordtemplatearea/" + AreaTemplateID));
-            return Redirect("/property/manageAreas/" + propertyID);
-        }
+
         [HttpPost]
         [Route("property/manage/owner/add/{ownerID}")]
         public ActionResult AssignPropertyOwner(int ownerID, int propertyID)

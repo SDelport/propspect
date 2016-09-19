@@ -37,6 +37,14 @@ namespace PropSpect.Web.Controllers
             return View("Add", formModel);
         }
 
+        [Route("property/manageAreaItems/{areaID}")]
+        public ActionResult ManageAreaItems(int areaID)
+        {
+            var propertyAreaResponse = ApiWrapper.Get<List<AreaItemResponse>>("api/area/selectForPropertyArea/" + areaID);
+            List<AreaItem> areaItems = AreaItem.CreateList(propertyAreaResponse);
+            return View("ManageAreaItems", new ManageAreaItems(areaItems, SelectAreaItemFromID(areaID)));
+        }
+
         [Route("areaitem/add")]
         public JsonResult AddedAreaItem(AreaItemResponse model)
         {
@@ -51,6 +59,34 @@ namespace PropSpect.Web.Controllers
             return Json(result);
         }
 
+        [HttpPost]
+        [Route("property/editAreaItemData/")]
+        public ActionResult editAreaItemData(string submit, string Name,string Description, int AreaItemID = 0)
+        {
+            AreaItemResponse areaItem = ApiWrapper.Get<AreaItemResponse>("api/areaitem/get/" + AreaItemID);
+            if (AreaItemID != 0 && submit != null)
+            {
+                submit = submit.ToLower();
+                CreateAreaItemRequest request = new CreateAreaItemRequest();
+                request.AreaID = areaItem.AreaID;
+                request.AreaItemID = areaItem.AreaItemID;
+                request.RoomItem = Name;
+                request.RoomDescription = Description;
+                if (submit == "save")
+                {
+                    var result = ApiWrapper.Post<String>("api/areaitem/add", request);
+                }
+                else if (submit == "delete")
+                {
+                    var result = ApiWrapper.Post<bool>("api/areaitem/remove", request);
+                }
+            }
+            else
+            {
+                return Redirect("/property/list");
+            }
+            return Redirect("/property/manageAreaItems/" + areaItem.AreaID);
+        }
         [Route("areaitem")]
         public ActionResult List()
         {
@@ -67,6 +103,10 @@ namespace PropSpect.Web.Controllers
             }).ToList());
 
             return View("List", formModel);
+        }
+        public Area SelectAreaItemFromID(int id)
+        {
+            return Area.Create(ApiWrapper.Get<AreaResponse>(("api/area/get/" + id)));
         }
     }
 }
