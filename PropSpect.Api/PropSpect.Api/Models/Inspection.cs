@@ -11,6 +11,8 @@ namespace PropSpect.Api.Models
     {
         [Column("key_id")]
         public int InspectionID { get; set; }
+        [Column("parent_id")]
+        public int PropertyID { get; set; }
         [Column("prop_inspection_type")]
         public string Type { get; set; }
         [Column("prop_inspection_date")]

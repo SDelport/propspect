@@ -9,6 +9,7 @@ namespace PropSpect.Api.Models.Response
     public class InspectionResponse
     {
         public int    InspectionID { get; set; }
+        public int PropertyID { get; set; }
         public string Type { get; set; }
         public string Date { get; set; }
         public string EntityType { get; set; }

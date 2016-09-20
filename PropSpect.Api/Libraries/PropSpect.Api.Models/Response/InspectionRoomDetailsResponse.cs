@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace PropSpect.Api.Models.Response
 {
-    public class InspectionAreaResponse
+    class InspectionRoomDetailsResponse
     {
-        public int InspectionAreaID { get; set; }
-        public int AreaID { get; set; }
-        public int InspectionID { get; set; }
     }
 }

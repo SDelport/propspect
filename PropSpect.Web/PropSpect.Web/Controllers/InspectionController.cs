@@ -13,14 +13,44 @@ namespace PropSpect.Web.Controllers
     [LoggedIn]
     public class InspectionController : Controller
     {
-        [Route("inspection/{inspectionTemplateID}/{inspectionAreaID}/{page}")]
-        public ActionResult CreateInspection(int inspectionTemplateID, int inspectionAreaID, int page)
+        [Route("inspection/{inspectionID}/{page}")]
+        public ActionResult CreateInspection(int inspectionID, int page)
         {
-            List<InspectionDetailsResponse> response = new List<InspectionDetailsResponse>();
-
-            response = ApiWrapper.Get<List<InspectionDetailsResponse>>("/api/inspection/details/" + inspectionTemplateID + "/" + inspectionAreaID);
-
-            return View("InspectionRoom");
+            List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
+            response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
+            response.Clear();
+            response.Add(new InspectionAreaItemResponse()
+            {
+                InspectionAreaID = 0,
+                InspectionAreaItemID = 0,
+                ItemCondition = "Good",
+                ItemDescription = "Kettle",
+                ItemID = 0,
+                ItemRepair = "Yes"
+            });
+            response.Add(new InspectionAreaItemResponse()
+            {
+                InspectionAreaID = 0,
+                InspectionAreaItemID = 0,
+                ItemCondition = "Bad",
+                ItemDescription = "Door",
+                ItemID = 0,
+                ItemRepair = "No"
+            });
+            List<InspectionAreaItem> areaItem = new List<InspectionAreaItem>();
+            foreach (var item in response)
+            {
+                areaItem.Add(new InspectionAreaItem()
+                {
+                    InspectionAreaID = item.InspectionAreaID,
+                    InspectionAreaItemID = item.InspectionAreaItemID,
+                    ItemCondition = item.ItemCondition,
+                    ItemDescription = item.ItemDescription,
+                    ItemRepair = item.ItemRepair,
+                    ItemID = item.ItemID
+                });
+            }
+            return View("InspectionRoom",areaItem);
         }
 
         [Route("inspection/start-inspection")]
