@@ -99,6 +99,10 @@ main {
     font-size: 12px !important;
 }
 
+.font-42{
+    font-size: 42px !important;
+}
+
 .modal-tall-wide {
     max-height: 90%;
     width: 70%;
@@ -170,6 +174,18 @@ main {
     margin-bottom: 5px !important;
 }
 
+.hover-mouse-pointer:hover{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.scrollable {
+    overflow-x: scroll;
+}
+
+.no-marg-bot{
+    margin-bottom: 0px !important;
+}
 
 
 /* ====== Dashboard ====== */
@@ -190,3 +206,11 @@ main {
     border-bottom: 1px solid #F44336 !important;
     box-shadow: 0 1px 0 0 #F44336 !important;
 }
+
+/* ====== Template area item ======= */
+.item-list{
+    max-height: 250px;
+    min-height: 250px;
+}
+
+
