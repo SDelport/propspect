@@ -104,24 +104,28 @@ namespace PropSpect.Api.Controllers
         [Route("api/property/search/{search?}")]
         public JsonResult Search(string search = "")
         {
-            return Json(db.Properties.ToList().Select(x => new PropertyResponse()
+            var data = db.Properties.AsQueryable();
+
+            foreach (var word in search.Trim().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
             {
-                PropertyID = x.PropertyID,
-                PropertyType = x.PropertyType,
-                UnitNumber = x.UnitNumber,
-                ComplexName = x.ComplexName,
-                StreetNumber = x.StreetNumber,
-                StreetName = x.StreetName,
-                Suburb = x.Suburb,
-                City = x.City,
-                PostalCode = x.PostalCode
-            }).ToList(), JsonRequestBehavior.AllowGet);
+                data = data.Where(x =>
+                x.City.Contains(word) ||
+                x.ComplexName.Contains(word) ||
+                x.PostalCode.ToString().Contains(word) ||
+                x.StreetName.Contains(word) ||
+                x.StreetNumber.Contains(word) ||
+                x.Suburb.Contains(word) ||
+                x.UnitNumber.Contains(word)
+                );
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [Route("api/property/getID/{id}")]
         public JsonResult GetPropertyFromID(int id)
         {
-            return Json(db.Properties.Where(y=> y.PropertyID==id).ToList().Select(x => new PropertyResponse()
+            return Json(db.Properties.Where(y => y.PropertyID == id).ToList().Select(x => new PropertyResponse()
             {
                 PropertyID = x.PropertyID,
                 PropertyType = x.PropertyType,

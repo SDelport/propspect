@@ -235,13 +235,13 @@
                 $(eqHeightSelectors[p]).css('height', 'auto');
 
                 $(eqHeightSelectors[p]).each(function (i, e) {
-                    var biggestNeeded = $(e).css('height');
+                    var biggestNeeded =$(e).height();
                     $(eqHeightSelectors[p]).each(function (k, q) {
                         if (i == k)
                             return;
 
-                        if ($(q).css('height') > biggestNeeded && $(q).offset().top == $(e).offset().top) {
-                            biggestNeeded = $(q).css('height');
+                        if ($(q).height() > biggestNeeded && $(q).offset().top == $(e).offset().top) {
+                            biggestNeeded = $(q).height();
                         }
                     });
                     $(e).css('height', biggestNeeded);

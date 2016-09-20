@@ -104,34 +104,43 @@
 
             @*  ==============   STEP 3 ================ *@
             <div id="step3" class="hide">
-                <h5 class="center">Property Selection</h5>
+                <div id="properties">
+                    <h5 class="center">Property Selection</h5>
+                    <div class="input-field col m3 s8">
+                        <i class="material-icons prefix">search</i>
+                        <input id="property-search" data-bind="value: propertysearch" type="text" class="validate">
+                        <label for="icon_telephone">Search</label>
+                        <div class="input-field col m1 s4">
+                            <button data-bind="click: Search" class="btn btn-block">Search</button>
+                        </div>
+                    </div>
+                    <table class="highlight bordered">
+                        <thead>
+                            <tr>
+                                <th>Street Name</th>
+                                <th>Street Number</th>
+                                <th>Unit Number</th>
+                                <th>Conplex Name</th>
+                                <th>Suburb</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: properties">
+                            <tr>
+                                <td data-bind="text: StreetName"></td>
+                                <td data-bind="text: StreetNumber"></td>
+                                <td data-bind="text: UnitNumber"></td>
+                                <td data-bind="text: ComplexName"></td>
+                                <td data-bind="text: Suburb"></td>
+                                <td><button data-bind="click:function(){$root.select($data)}" class="btn">Select</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <table id="properties" class="highlight bordered">
-                    <thead>
-                        <tr>
-                            <th>Street Name</th>
-                            <th>Street Number</th>
-                            <th>Unit Number</th>
-                            <th>Conplex Name</th>
-                            <th>Suburb</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: properties">
-                        <tr>
-                            <td data-bind="text: StreetName"></td>
-                            <td data-bind="text: StreetNumber"></td>
-                            <td data-bind="text: UnitNumber"></td>
-                            <td data-bind="text: ComplexName"></td>
-                            <td data-bind="text: Suburb"></td>
-                            <td><button data-bind="click:function(){$root.select($data)}" class="btn">Select</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step3', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    <div class="col s12 m10 offset-m1">
+                        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                        <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step3', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    </div>
                 </div>
             </div>
 
@@ -390,20 +399,40 @@
                 timeout: 27000
             })
 
-            var viewModel =function()
+            var viewModel =
                 {
-                this.that=this;
-                this.properties = ko.observableArray(propertyItems);
-                this.selected= ko.observable();
-                this.select =function(item)
-                {
+                    that:this,
+                    properties : ko.observableArray(propertyItems),
+                    propertysearch : ko.observable(''),
 
-                    that.selected(item);
-                    console.log(  that.selected())
+
+
+                    selected: ko.observable(),
+                    select :function(item)
+                    {
+
+                        that.selected(item);
+                        console.log(  that.selected())
+                    },
+
+                    Search: function()
+                    {
+                        if(this.propertysearch() != '')
+                        ServiceProxy.Get('/property/search/' + this.propertysearch(), this.SearchSuccess);
+                    }
+
+               
+
                 };
 
-                return this;
-                }
+            viewModel.SearchSuccess= function(items)
+            {
+                viewModel.properties(items)
+            }
+
+
+
+
 
             ko.applyBindings(viewModel,$('#properties')[0])
 
