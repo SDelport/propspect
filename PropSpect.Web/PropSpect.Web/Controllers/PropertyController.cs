@@ -262,7 +262,7 @@ namespace PropSpect.Web.Controllers
         {
             List<Property> propertys = new List<Property>();
 
-            propertys = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/list/" + search));
+            propertys = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/search/" + search));
 
             return Json(propertys, JsonRequestBehavior.AllowGet);
 
