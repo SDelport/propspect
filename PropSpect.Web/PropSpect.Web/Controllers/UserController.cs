@@ -443,7 +443,7 @@ namespace PropSpect.Web.Controllers
         {
             List<Tenant> tenants = new List<Tenant>();
 
-            if (string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search))
                 tenants = Tenant.CreateList(ApiWrapper.Get<List<TenantResponse>>("api/tenant/search/" + search));
 
             return Json(tenants, JsonRequestBehavior.AllowGet);
@@ -454,7 +454,7 @@ namespace PropSpect.Web.Controllers
         {
             List<Owner> propertys = new List<Owner>();
 
-            if (string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search))
                 propertys = Owner.CreateList(ApiWrapper.Get<List<OwnerResponse>>("api/owner/search/" + search));
 
             return Json(propertys, JsonRequestBehavior.AllowGet);

@@ -128,7 +128,7 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [Route("api/tenant/{search}")]
+        [Route("api/tenant/search/{search}")]
         public JsonResult Search(string search = "")
         {
             var data = db.Tenants.AsQueryable();
