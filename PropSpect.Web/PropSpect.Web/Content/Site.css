@@ -51,6 +51,10 @@ main {
   background-color: rgba(81, 168, 177, 0.6);
 }
 
+.grey_background{
+    background: #A9A9A9;
+}
+
 /* ====== Navbar CSS ====== */
 .button-collapse {
     color: #51A8B1;
@@ -188,6 +192,7 @@ main {
 }
 
 
+
 /* ====== Dashboard ====== */
 .dashboard-logo{
     max-height: 130px;
@@ -212,5 +217,13 @@ main {
     max-height: 250px;
     min-height: 250px;
 }
+
+.selectable-icon{
+    color: #D3D3D3;
+    margin-right: 3px !important ;
+}
+
+
+
 
 

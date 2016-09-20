@@ -17,11 +17,6 @@ namespace PropSpect.Api.Controllers
         public JsonResult Get(int id)
         {
             LandlordResponse response = null;
-
-
-
-
-
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
@@ -116,6 +111,35 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/inspection/inspectionRoomDetails/{InspectionID}/{page}")]
+        public JsonResult GetInspectionRoomPersistent(int InspectionID, int page)
+        {
+            InspectionArea area = null;
+            List<InspectionAreaItem> areaItems = new List<InspectionAreaItem>();
+            try
+            {
+                area = db.InspectionAreas.Where(x => x.InspectionID == InspectionID).ToList()[page];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return Json(new List<InspectionAreaItem>(), JsonRequestBehavior.AllowGet);
+            }
+            areaItems = db.InspectionAreaItems.Where(x => x.InspectionAreaID == area.AreaID).ToList();
+            List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
+            foreach (var item in areaItems)
+            {
+                response.Add(new InspectionAreaItemResponse()
+                {
+                    InspectionAreaID = item.InspectionAreaID,
+                    InspectionAreaItemID = item.InspectionAreaItemID,
+                    ItemCondition = item.ItemCondition,
+                    ItemDescription = item.ItemDescription,
+                    ItemID = item.ItemID,
+                    ItemRepair = item.ItemRepair
+                });
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
         [Route("api/inspection/details/{inspectionTemplateID}/{inspectionAreaID}")]
         public JsonResult List(int inspectionTemplateID, int inspectionAreaID)
         {

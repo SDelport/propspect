@@ -268,5 +268,14 @@ namespace PropSpect.Web.Controllers
             return Json(propertys, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("property/delete/{propertyID}")]
+        public JsonResult Delete(int propertyID)
+        {
+            var response = ApiWrapper.Get<bool>("api/property/delete/" + propertyID);
+            
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
