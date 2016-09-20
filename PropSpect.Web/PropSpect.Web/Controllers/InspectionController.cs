@@ -16,9 +16,9 @@ namespace PropSpect.Web.Controllers
         [Route("inspection/{inspectionTemplateID}/{inspectionAreaID}/{page}")]
         public ActionResult CreateInspection(int inspectionTemplateID, int inspectionAreaID, int page)
         {
-            InspectionDetailsResponse response = new InspectionDetailsResponse();
+            List<InspectionDetailsResponse> response = new List<InspectionDetailsResponse>();
 
-            response = ApiWrapper.Get<InspectionDetailsResponse>("/api/inspection/getdetails/" + inspectionTemplateID + "/" + inspectionAreaID);
+            response = ApiWrapper.Get<List<InspectionDetailsResponse>>("/api/inspection/details/" + inspectionTemplateID + "/" + inspectionAreaID);
 
             return View("InspectionRoom");
         }
