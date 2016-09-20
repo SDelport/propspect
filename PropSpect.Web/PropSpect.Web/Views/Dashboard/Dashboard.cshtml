@@ -28,14 +28,6 @@
 <div class="row">   
     @*@UI.Tile("Lable Field", "Icon Field", "Url Field without the /")*@
 
-    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Admin)
-    {
-        @UI.Tile("Manage Tenants", url: "/user/list/tenant");
-        @UI.Tile("Manage Owners", url: "/user/list/owner");
-        @UI.Tile("Manage Agents", url: "/user/list/agent");
-        @UI.Tile("Manage Properties", url: "/property/list");
-    }
-
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.SuperAdmin)
     {
         @UI.Tile("Manage Landlords", url: "/landlord/list");
@@ -45,14 +37,42 @@
         @UI.Tile("Manage Admins", url: "/user/list/admin");
         @UI.Tile("Manage Area Templates", url: "/template-area/manage");
         @UI.Tile("Manage Properties", url: "/property/list");
+        @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
+    }
+
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Admin)
+    {
+        @UI.Tile("Manage Tenants", url: "/user/list/tenant");
+        @UI.Tile("Manage Owners", url: "/user/list/owner");
+        @UI.Tile("Manage Agents", url: "/user/list/agent");
+        @UI.Tile("Manage Properties", url: "/property/list");
+        @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
+    }
+
+
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Landlord)
+    {
+        @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
+    }
+
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Owner)
+    {
+        @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
     }
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Agent)
     {
         @UI.Tile("Manage Tenants", url: "/user/list/tenant");
         @UI.Tile("Manage Owners", url: "/user/list/owner");
+        @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
     }
 
+    @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Tenant)
+    {
+
+    }
+
+   
 </div>
 
 
