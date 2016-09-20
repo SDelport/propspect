@@ -18,7 +18,7 @@ namespace PropSpect.Web.Controllers
         {
             List<InspectionDetailsResponse> response = new List<InspectionDetailsResponse>();
 
-            response = ApiWrapper.Get<InspectionDetailsResponse>("/api/inspection/getdetails/" + inspectionTemplateID + "/" + inspectionAreaID);
+            response = ApiWrapper.Get<List<InspectionDetailsResponse>>("/api/inspection/details/" + inspectionTemplateID + "/" + inspectionAreaID);
 
             return View("InspectionRoom");
         }
