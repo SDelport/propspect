@@ -9,5 +9,7 @@ namespace PropSpect.Web.Models.FormModels
     public class PreInspection
     {
         public List<PropertyResponse> Properties { get; set; }
+        public List<TenantResponse> Tenants { get; set; }
+        public List<OwnerResponse> Owners { get; set; }
     }
 }

@@ -27,7 +27,10 @@ namespace PropSpect.Web.Controllers
         public ActionResult SelectProperty()
         {
             PreInspection model = new PreInspection();
-            model.Properties = ApiWrapper.Get<List<PropertyResponse>>("api/property/list");
+            model.Properties = new List<PropertyResponse>();
+            model.Tenants = new List<TenantResponse>();
+            model.Owners = new List<OwnerResponse>();
+
 
             return View("PreInspectionChecks",model);
         }

@@ -437,5 +437,27 @@ namespace PropSpect.Web.Controllers
 
             return Json(true);
         }
+
+        [Route("tenant/search/{search}")]
+        public JsonResult SearchTenant(string search = "")
+        {
+            List<Tenant> tenants = new List<Tenant>();
+
+            if (string.IsNullOrEmpty(search))
+                tenants = Tenant.CreateList(ApiWrapper.Get<List<TenantResponse>>("api/tenant/search/" + search));
+
+            return Json(tenants, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("owner/search/{search}")]
+        public JsonResult SearchOwner(string search = "")
+        {
+            List<Owner> propertys = new List<Owner>();
+
+            if (string.IsNullOrEmpty(search))
+                propertys = Owner.CreateList(ApiWrapper.Get<List<OwnerResponse>>("api/owner/search/" + search));
+
+            return Json(propertys, JsonRequestBehavior.AllowGet);
+        }
     }
 }

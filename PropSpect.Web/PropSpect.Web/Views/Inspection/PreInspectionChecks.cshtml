@@ -148,12 +148,14 @@
 
             @*  ==============   STEP 4 ================ *@
             <div id="step4" class="hide">
-                <h5 class="center">Tennat Selection</h5>
-                <h5> to do</h5>
+                <div id="properties">
+                    <h5 class="center">Tenant Selection</h5>
+                    <h5> to do</h5>
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step4', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    <div class="col s12 m10 offset-m1">
+                        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                        <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step4', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    </div>
                 </div>
             </div>
 
@@ -161,11 +163,13 @@
             @*  ==============   STEP 5 ================ *@
             <div id="step5" class="hide">
                 <h5 class="center">Owner Selection</h5>
-                <h5> to do</h5>
+                <div id="properties">
+                    <h5> to do</h5>
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step5', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    <div class="col s12 m10 offset-m1">
+                        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                        <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step5', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    </div>
                 </div>
             </div>
 
@@ -274,6 +278,8 @@
 
     <script>
         var propertyItems = @Html.Raw(Json.Encode(Model.Properties));
+        var tenantItems = @Html.Raw(Json.Encode(Model.Owners));
+        var ownerItems = @Html.Raw(Json.Encode(Model.Tenants));
 
         var itemCount;
         var checkItemCount = 0;
@@ -391,6 +397,10 @@
             mark_item_check(step - 1, false);
         }
 
+        var propertyModel ={};
+        var ownerModel ={};
+        var tenantModel ={};
+
         $(function () {
 
             navigator.geolocation.getCurrentPosition(setMap, function (err) { console.log(err) }, {
@@ -399,18 +409,15 @@
                 timeout: 27000
             })
 
-            var viewModel =
+            var propertyModel =
                 {
                     that:this,
                     properties : ko.observableArray(propertyItems),
                     propertysearch : ko.observable(''),
 
-
-
                     selected: ko.observable(),
                     select :function(item)
                     {
-
                         that.selected(item);
                         console.log(  that.selected())
                     },
@@ -418,23 +425,69 @@
                     Search: function()
                     {
                         if(this.propertysearch() != '')
-                        ServiceProxy.Get('/property/search/' + this.propertysearch(), this.SearchSuccess);
+                            ServiceProxy.Get('/property/search/' + this.propertysearch(), this.SearchSuccess);
                     }
-
-               
-
                 };
 
-            viewModel.SearchSuccess= function(items)
+
+            propertyModel.SearchSuccess= function(items)
             {
                 viewModel.properties(items)
             }
 
+            var tenantModel =
+               {
+                   that:this,
+                   tenants : ko.observableArray(tenantItems),
+                   tenantsearch : ko.observable(''),
 
+                   selected: ko.observable(),
+                   select :function(item)
+                   {
+                       that.selected(item);
+                       console.log(  that.selected())
+                   },
 
+                   Search: function()
+                   {
+                       if(this.tenantsearch() != '')
+                           ServiceProxy.Get('/tenant/search/' + this.tenantsearch(), this.SearchSuccess);
+                   }
+               };
 
+            tenantModel.SearchSuccess= function(items)
+            {
+                viewModel.properties(items)
+            }
 
-            ko.applyBindings(viewModel,$('#properties')[0])
+            var ownerModel =
+               {
+                   that:this,
+                   owners : ko.observableArray(ownerItems),
+                   ownersearch : ko.observable(''),
+
+                   selected: ko.observable(),
+                   select :function(item)
+                   {
+                       that.selected(item);
+                       console.log(  that.selected())
+                   },
+
+                   Search: function()
+                   {
+                       if(this.ownersearch() != '')
+                           ServiceProxy.Get('/owner/search/' + this.ownersearch(), this.SearchSuccess);
+                   }
+               };
+
+            ownerModel.SearchSuccess= function(items)
+            {
+                viewModel.properties(items)
+            }
+
+            ko.applyBindings(propertyModel,$('#properties')[0])
+            ko.applyBindings(tenantModel,$('#tenants')[0])
+            ko.applyBindings(ownerModel,$('#owners')[0])
 
         })
 
