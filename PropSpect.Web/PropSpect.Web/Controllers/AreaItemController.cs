@@ -61,22 +61,30 @@ namespace PropSpect.Web.Controllers
 
         [HttpPost]
         [Route("property/editAreaItemData/")]
-        public ActionResult editAreaItemData(string submit, string Name,string Description, int AreaItemID = 0)
+        public ActionResult editAreaItemData(string submit, string Name,string Description, string isAreaID, int AreaItemID = 0)
         {
             AreaItemResponse areaItem = ApiWrapper.Get<AreaItemResponse>("api/areaitem/get/" + AreaItemID);
-            if (AreaItemID != 0 && submit != null)
+            CreateAreaItemRequest request = new CreateAreaItemRequest();
+            if (submit != null)
             {
                 submit = submit.ToLower();
-                CreateAreaItemRequest request = new CreateAreaItemRequest();
-                request.AreaID = areaItem.AreaID;
-                request.AreaItemID = areaItem.AreaItemID;
+                if (isAreaID.ToLower()!="false")
+                {
+                    request.AreaID = AreaItemID;
+                    request.AreaItemID = 0;
+                }
+                else
+                {
+                    request.AreaID = areaItem.AreaID;
+                    request.AreaItemID = areaItem.AreaItemID;
+                }
                 request.RoomItem = Name;
                 request.RoomDescription = Description;
                 if (submit == "save")
                 {
                     var result = ApiWrapper.Post<String>("api/areaitem/add", request);
                 }
-                else if (submit == "delete")
+                else if (submit == "delete" && AreaItemID != 0)
                 {
                     var result = ApiWrapper.Post<bool>("api/areaitem/remove", request);
                 }
@@ -85,7 +93,7 @@ namespace PropSpect.Web.Controllers
             {
                 return Redirect("/property/list");
             }
-            return Redirect("/property/manageAreaItems/" + areaItem.AreaID);
+            return Redirect("/property/manageAreaItems/" + request.AreaID);
         }
         [Route("areaitem")]
         public ActionResult List()
