@@ -97,8 +97,6 @@ namespace PropSpect.Api.Controllers
         [Route("api/inspection")]
         public JsonResult List()
         {
-
-
             return Json(db.Inspections.ToList().Select(x => new InspectionResponse()
             {
                 InspectionID = x.InspectionID,
@@ -131,11 +129,7 @@ namespace PropSpect.Api.Controllers
                     InspectionAreaItemID=1,
                     ItemID = inspectionAreaID
                 }
-
-
             };
-
-
             return Json(db.Inspections.ToList().Select(x => new InspectionResponse()
             {
                 InspectionID = x.InspectionID,
@@ -154,7 +148,5 @@ namespace PropSpect.Api.Controllers
                 OverallComments = x.OverallComments
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }
