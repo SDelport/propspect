@@ -223,6 +223,10 @@ main {
     margin-right: 3px !important ;
 }
 
+/* ====== Pre inspection check ===== */
+.final-item{
+    min-height: 64px !important;
+}
 
 
 

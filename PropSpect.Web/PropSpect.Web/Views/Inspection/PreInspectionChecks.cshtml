@@ -85,8 +85,19 @@
 
             @*  ==============   STEP 2 ================ *@
             <div id="step2" class="hide">
-                <h5 class="center">Location</h5>
 
+                <div class="row">
+                    <div class="col s3">
+                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>                            
+                    </div>
+                    <div class="col s6">
+                        <h5 class="center">Location</h5>
+                    </div>
+                    <div class="col s3">
+                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'next')"><i class="material-icons right">keyboard_arrow_right</i>Confirm</a>                  
+                    </div>
+                </div>
+                
 
                 <h5 class="center">Is this where you are?</h5>
                 <p>If this is not your current location, make sure geolocation is enabled on your device.</p>
@@ -94,18 +105,25 @@
 
                 <div id="error"></div>
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step2', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step2', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
-                </div>
+                    @*<div class="col s12 m10 offset-m1">
+                        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step2', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                        <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step2', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                    </div>*@
             </div>
 
 
 
             @*  ==============   STEP 3 ================ *@
             <div id="step3" class="hide">
-                <div id="propertysection">
-                    <h5 class="center">Property Selection</h5>
+                <div id="propertysection">      
+                    <div class="row">
+                        <div class="col s3">
+                            <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step3', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
+                        </div>
+                        <div class="col s6">
+                            <h5 class="center">Property Selection</h5>
+                        </div>
+                    </div>
 
 
                     <div class="row no-marg-bot">
@@ -130,7 +148,7 @@
                                 <i class="material-icons center propspect-blue-text font-42">info</i>
                             </div>
                             <br />
-                            <h6 class="center">Please search for the property you would like to select for the inspection</h6>
+                            <h6 class="center">Please search for the <strong>property</strong> you would like to select for the inspection</h6>
                             <br /><br />
                         </div>
                     </div>
@@ -161,9 +179,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                </div>
+                @*<div class="col s12 m10 offset-m1">
+        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+    </div>*@
             </div>
 
 
@@ -171,7 +189,15 @@
             @*  ==============   STEP 4 ================ *@
             <div id="step4" class="hide">
                 <div id="tenantsection">
-                    <h5 class="center">Tenant Selection</h5>
+
+                    <div class="row">
+                        <div class="col s3">
+                            <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step4', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
+                        </div>
+                        <div class="col s6">
+                            <h5 class="center">Tenant Selection</h5>
+                        </div>
+                    </div>
 
                     <div class="row no-marg-bot">
                         <form class="col s12 pull-right">
@@ -195,7 +221,7 @@
                                 <i class="material-icons center propspect-blue-text font-42">info</i>
                             </div>
                             <br />
-                            <h6 class="center">Please search for the property you would like to select for the inspection</h6>
+                            <h6 class="center">Please search for the <strong>tenant</strong> you would like to select for the inspection</h6>
                             <br /><br />
                         </div>
                     </div>
@@ -227,17 +253,25 @@
                     </div>
                 </div>
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                </div>
+                @*<div class="col s12 m10 offset-m1">
+        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+    </div>*@
             </div>
 
 
             @*  ==============   STEP 5 ================ *@
-            <div id="step5" class="hide">
-                <h5 class="center">Owner Selection</h5>
+            <div id="step5" class="hide">                
                 <div id="ownersection">
-       
+
+                    <div class="row">
+                        <div class="col s3">
+                            <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step5', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
+                        </div>
+                        <div class="col s6">
+                            <h5 class="center">Owner Selection</h5>
+                        </div>
+                    </div>
+
                     <div class="row no-marg-bot">
                         <form class="col s12 pull-right">
                             <div class="row no-marg-bot">
@@ -260,7 +294,7 @@
                                 <i class="material-icons center propspect-blue-text font-42">info</i>
                             </div>
                             <br />
-                            <h6 class="center">Please search for the property you would like to select for the inspection</h6>
+                            <h6 class="center">Please search for the <strong>owner</strong> you would like to select for the inspection</h6>
                             <br /><br />
                         </div>
                     </div>
@@ -295,25 +329,68 @@
                     </div>
                 </div>
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                @*<div class="col s12 m10 offset-m1">
+        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
 
-                </div>
+    </div>*@
             </div>
 
 
-            @*  ==============   STEP 7: Details ================ *@
-            <div id="step6" class="hide">
-                <h5 class="center">Final Details</h5>
-                <span>Type:</span> <span id="inspectype"></span><br />
-                <span>Location:</span> <span id="long"></span> <span id="lat"></span><br />
-                <span>Property:</span> <span id="prop"></span> <br />
-                <span>Tenant:</span> <span id="tenant"></span> <br />
-                <span>Owner:</span> <span id="owner"></span><br />
+            @*  ==============   STEP 6: Details ================ *@
+            <div id="step6" class="hide">                
 
-                <div class="col s12 m10 offset-m1">
-                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step7', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step7', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                <div class="row">
+                    <div class="col s3">
+                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step6', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
+                    </div>
+                    <div class="col s6">
+                        <h5 class="center">Final Details</h5>
+                    </div>
+                </div>
+              
+
+                <div class="col s12">
+                    <ul class="collection">
+                        <li class="collection-item avatar final-item">
+                            <i class="material-icons circle propspect-blue-background">input</i>
+                            <strong><span class="title">Inspection Type</span></strong>
+                            <p>
+                                <span id="inspectype"></span>
+                            </p>                           
+                        </li>
+                        <li class="collection-item avatar final-item">
+                            <i class="material-icons circle propspect-blue-background">room</i>
+                            <strong><span class="title">Location</span></strong>
+                            <p>
+                                <span id="long"></span> <span id="lat"></span>
+                            </p>                           
+                        </li>
+                        <li class="collection-item avatar final-item">
+                            <i class="material-icons circle propspect-blue-background">home</i>
+                            <strong><span class="title">Property</span></strong>
+                            <p>
+                                <span id="prop"></span>
+                            </p>                           
+                        </li>
+                        <li class="collection-item avatar final-item">
+                            <i class="material-icons circle propspect-blue-background">account_circle</i>
+                            <strong><span class="title">Tenant</span></strong>
+                            <p>
+                                <span id="tenant"></span>
+                            </p>                           
+                        </li>
+                        <li class="collection-item avatar final-item">
+                            <i class="material-icons circle propspect-blue-background">account_box</i>
+                            <strong><span class="title">Owner</span></strong>
+                            <p>
+                                <span id="owner"></span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col s10 offset-s1 m8 offset-m2">                   
+                    <a class="waves-effect waves-light btn btn-block center propspect-blue-background" onclick="step_change('step6', 'next')">Confirm</a>
                 </div>
             </div>
 
@@ -404,7 +481,7 @@
                     $('#long').text(lastlongitude);
                     $('#tenant').text(tenantModel.selected().FirstName + ' '+tenantModel.selected().LastName);
                     $('#prop').text(propertyModel.selected().StreetName + ' '+propertyModel.selected().StreetNumber);
-                    if(ownerModel.selected().Name= '')
+                    if(ownerModel.selected().Name== '')
                         $('#owner').text(ownerModel.selected().FirstName + ' '+ownerModel.selected().LastName);
                     else
                         $('#owner').text(ownerModel.selected().Name);
