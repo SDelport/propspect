@@ -430,5 +430,20 @@ namespace PropSpect.Api.Controllers
             return Json(unassigned, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/property/delete/{id}")]
+        public JsonResult Delete(int id)
+        {
+            Property property = db.Properties.Where(x => x.PropertyID == id).FirstOrDefault();
+
+            if (property != null)
+            {
+                db.Properties.Remove(property);
+                db.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

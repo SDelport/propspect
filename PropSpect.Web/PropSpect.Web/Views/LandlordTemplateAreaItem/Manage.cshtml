@@ -23,10 +23,10 @@
             <div class="col s12 m6 l3  edit-card" data-bind="attr:{id:ID}">
                 <div class="card-panel">
 
-                    <i data-bind="click: function(){$parent.Remove(ID)}" style="font-size: 40px;" class="material-icons red-text right">not_interested</i>
+                    <i data-bind="click: function(){$parent.Remove(ID)}" style="font-size: 40px;" class="material-icons right">delete_forever</i>
                     <h4 class="handle"><span data-bind="text: Name"></span></h4>
                     <ul class="sortable-inner scrollable item-list" data-bind="foreach:$data.Items, attr:{id:'item-'+ID}">
-                        <li class="propspect-blue-background white-text hover-mouse-pointer" data-bind="attr:{id:ID}"><span class="" data-bind="text: $data.Name"></span><i data-bind="click: function(){$parent.Remove(ID)}" class="material-icons red-text right">not_interested</i></li>
+                        <li class="propspect-blue-background white-text hover-mouse-pointer" data-bind="attr:{id:ID}"><i class="material-icons selectable-icon left">menu</i><span class="" data-bind="text: $data.Name"></span><i data-bind="click: function(){$parent.Remove(ID)}" class="material-icons white-text right">clear</i></li>
                     </ul>
                     <div class="row">
                         <div class="col m8 s12">
@@ -116,7 +116,7 @@
                 setTimeout(function () {
                     $(".sortable").sortable();
                     SizeCards();
-                }, 1)
+                }, 1)                            
             }
             return this;
         }
@@ -226,6 +226,8 @@
             $(".sortable").sortable({ handle: ".handle" });
             $(".sortable-inner").sortable();
             setTimeout(function(){ SizeCards()},1);
+
+            $('.tooltipped').tooltip({delay: 50});
         });
 
         var eqHeightSelectors = ['.edit-card'];
