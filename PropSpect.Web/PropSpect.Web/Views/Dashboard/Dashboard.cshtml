@@ -5,18 +5,18 @@
 
 @*<h2>Dashboard</h2>
 
-<a href="/">Add/Edit User</a><br />
-<br />
-<a href="/">Add/Edit Agent</a><br />
-<a href="/">Add/Edit Tenant</a><br />
-<a href="/">Add/Edit Owner</a><br />
-<a href="/">Add/Edit Landlord</a><br />
-<br />
-<a href="/">Add/Edit Properties</a><br />
-<a href="/">Add/Edit Companies</a><br />
-<a href="/">Add/Edit Inspections</a><br />
-<a href="/">View/Export Reports</a><br />
-<a href="/">Do Inspections</a>*@
+    <a href="/">Add/Edit User</a><br />
+    <br />
+    <a href="/">Add/Edit Agent</a><br />
+    <a href="/">Add/Edit Tenant</a><br />
+    <a href="/">Add/Edit Owner</a><br />
+    <a href="/">Add/Edit Landlord</a><br />
+    <br />
+    <a href="/">Add/Edit Properties</a><br />
+    <a href="/">Add/Edit Companies</a><br />
+    <a href="/">Add/Edit Inspections</a><br />
+    <a href="/">View/Export Reports</a><br />
+    <a href="/">Do Inspections</a>*@
 
 @* Company Logo *@
 <div class="row">
@@ -25,27 +25,27 @@
     </div>
 </div>
 
-<div class="row">   
+<div class="row">
     @*@UI.Tile("Lable Field", "Icon Field", "Url Field without the /")*@
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.SuperAdmin)
     {
-        @UI.Tile("Manage Landlords", url: "/landlord/list");
-        @UI.Tile("Manage Tenants", url: "/user/list/tenant");
-        @UI.Tile("Manage Owners", url: "/user/list/owner");
-        @UI.Tile("Manage Agents", url: "/user/list/agent");
-        @UI.Tile("Manage Admins", url: "/user/list/admin");
-        @UI.Tile("Manage Area Templates", url: "/template-area/manage");
-        @UI.Tile("Manage Properties", url: "/property/list");
+        @UI.Tile("Manage Admins", url: "/user/list/admin", icon: "supervisor_account");
+        @UI.Tile("Manage Landlords", url: "/landlord/list", icon: "contacts");
+        @UI.Tile("Manage Agents", url: "/user/list/agent", icon: "assignment_ind");
+        @UI.Tile("Manage Owners", url: "/user/list/owner", icon: "account_box");
+        @UI.Tile("Manage Tenants", url: "/user/list/tenant", icon: "account_circle");
+        @UI.Tile("Manage Area Templates", url: "/template-area/manage", icon: "dns");
+        @UI.Tile("Manage Properties", url: "/property/list", icon: "home");
         @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
     }
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Admin)
     {
-        @UI.Tile("Manage Tenants", url: "/user/list/tenant");
-        @UI.Tile("Manage Owners", url: "/user/list/owner");
-        @UI.Tile("Manage Agents", url: "/user/list/agent");
-        @UI.Tile("Manage Properties", url: "/property/list");
+        @UI.Tile("Manage Agents", url: "/user/list/agent", icon: "assignment_ind");
+        @UI.Tile("Manage Owners", url: "/user/list/owner", icon: "account_box");
+        @UI.Tile("Manage Tenants", url: "/user/list/tenant", icon: "account_circle");
+        @UI.Tile("Manage Properties", url: "/property/list", icon: "home");
         @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
     }
 
@@ -62,8 +62,8 @@
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.Agent)
     {
-        @UI.Tile("Manage Tenants", url: "/user/list/tenant");
-        @UI.Tile("Manage Owners", url: "/user/list/owner");
+        @UI.Tile("Manage Owners", url: "/user/list/owner", icon: "account_box");
+        @UI.Tile("Manage Tenants", url: "/user/list/tenant", icon: "account_circle");
         @UI.Tile("Start Inspection", url: "/inspection/start-inspection", icon: "input");
     }
 
@@ -72,7 +72,7 @@
 
     }
 
-   
+
 </div>
 
 
@@ -82,23 +82,22 @@
 <script>
 
     //redirect function
-    function change_url(href)
-    {
+    function change_url(href) {
         window.location.href = "/" + href;
     }
 
 
     //make tiles equal height
-    var maxHeight = 0 
+    var maxHeight = 0
     $().ready()
     {
         $('.menu-item').each(function () {
             if (maxHeight < $(this)[0].clientHeight) {
                 maxHeight = $(this)[0].clientHeight;
-            }            
+            }
             console.log(maxHeight);
         })
 
-        $('.menu-item').height(maxHeight- 40);
+        $('.menu-item').height(maxHeight - 40);
     }
 </script>
