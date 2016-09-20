@@ -98,7 +98,7 @@ namespace PropSpect.Api.Controllers
                 db.Owners.Add(owner);
                 db.SaveChanges();
 
-     
+
             }
             else
             {
@@ -139,6 +139,63 @@ namespace PropSpect.Api.Controllers
         public JsonResult List()
         {
             return Json(db.Owners.ToList().Select(x => new OwnerResponse()
+            {
+                OwnerID = x.OwnerID,
+                Type = x.Type,
+                Name = x.Name,
+                UnitNr = x.UnitNr,
+                ComplexName = x.ComplexName,
+                StreetNumber = x.StreetNumber,
+                StreeName = x.StreetName,
+                Suburb = x.Suburb,
+                City = x.City,
+                PostalCode = x.PostalCode,
+                TelWork = x.TelWork,
+                TelMobile = x.TelMobile,
+                Fax = x.Fax,
+                Email = x.Email,
+                Website = x.Website,
+                Title = x.Title,
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                ThirdName = x.ThirdName,
+                LastName = x.LastName,
+                IDNumber = x.IDNumber
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/owner/search/{search}")]
+        public JsonResult Search(string search = "")
+        {
+            var data = db.Owners.AsQueryable();
+            search = search.ToLower();
+            foreach (var word in search.Trim().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                data = data.Where(x =>
+                 x.Type.Contains(word) ||
+                 x.Name.Contains(word) ||
+                 x.UnitNr.Contains(word) ||
+                 x.ComplexName.Contains(word) ||
+                 x.StreetNumber.Contains(word) ||
+                 x.StreetName.Contains(word) ||
+                 x.Suburb.Contains(word) ||
+                 x.City.Contains(word) ||
+                 x.PostalCode.ToString().Contains(word) ||
+                 x.TelWork.Contains(word) ||
+                 x.TelMobile.Contains(word) ||
+                 x.Fax.Contains(word) ||
+                 x.Email.Contains(word) ||
+                 x.Website.Contains(word) ||
+                 x.Title.Contains(word) ||
+                 x.FirstName.Contains(word) ||
+                 x.SecondName.Contains(word) ||
+                 x.ThirdName.Contains(word) ||
+                 x.LastName.Contains(word) ||
+                 x.IDNumber.Contains(word)
+                );
+            }
+
+            return Json(data.Take(20).ToList().Select(x => new OwnerResponse()
             {
                 OwnerID = x.OwnerID,
                 Type = x.Type,

@@ -203,7 +203,7 @@ namespace PropSpect.Web.Controllers
 
             return Redirect("/property/manage/owner/" + ownerID);
         }
-        
+
 
         [HttpPost]
         [Route("property/manage/tenant/add/{tenantID}")]
@@ -258,14 +258,14 @@ namespace PropSpect.Web.Controllers
         }
 
         [Route("property/search/{search}")]
-        public JsonResult Search(string search)
+        public JsonResult Search(string search = "")
         {
             List<Property> propertys = new List<Property>();
 
-            propertys = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/search/" + search));
+            if (string.IsNullOrEmpty(search))
+                propertys = Property.CreateList(ApiWrapper.Get<List<PropertyResponse>>("api/property/search/" + search));
 
             return Json(propertys, JsonRequestBehavior.AllowGet);
-
         }
 
     }

@@ -79,7 +79,7 @@ namespace PropSpect.Api.Controllers
                 db.Tenants.Add(tenant);
                 db.SaveChanges();
 
-                
+
 
             }
             else
@@ -111,6 +111,45 @@ namespace PropSpect.Api.Controllers
         [Route("api/tenant")]
         public JsonResult List()
         {
+            return Json(db.Tenants.ToList().Select(x => new TenantResponse()
+            {
+                TenantID = x.TenantID,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                IDNumber = x.IDNumber,
+                LastName = x.LastName,
+                PreferredName = x.PreferredName,
+                SecondName = x.SecondName,
+                TelMobile = x.TelMobile,
+                TelWork = x.TelWork,
+                ThirdName = x.ThirdName,
+                Title = x.Title,
+                Website = x.Website
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/tenant/{search}")]
+        public JsonResult Search(string search = "")
+        {
+            var data = db.Tenants.AsQueryable();
+            search = search.ToLower();
+            foreach (var word in search.Trim().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                data = data.Where(x =>
+                 x.Email.Contains(word) ||
+                x.FirstName.Contains(word) ||
+                x.IDNumber.Contains(word) ||
+                x.LastName.Contains(word) ||
+                x.PreferredName.Contains(word) ||
+                x.SecondName.Contains(word) ||
+                x.TelMobile.Contains(word) ||
+                x.TelWork.Contains(word) ||
+                x.ThirdName.Contains(word) ||
+                x.Title.Contains(word) ||
+                x.Website.Contains(word) 
+                );
+            }
+
             return Json(db.Tenants.ToList().Select(x => new TenantResponse()
             {
                 TenantID = x.TenantID,
