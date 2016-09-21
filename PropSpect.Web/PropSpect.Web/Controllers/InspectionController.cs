@@ -31,7 +31,25 @@ namespace PropSpect.Web.Controllers
                     ItemID = item.ItemID
                 });
             }
-            return View("InspectionRoom",areaItem);
+            InspectionAreaItemsCheck model = new InspectionAreaItemsCheck(page==0,true, areaItem, "","#",page==0?"#":""+(page-1));
+            if (areaItem.Count>0)
+            {
+                try
+                {
+                    int AreaID = ApiWrapper.Get<InspectionAreaResponse>("/api/inspectionarea/" + areaItem[0].InspectionAreaID).AreaID;
+                    model.AreaName = ApiWrapper.Get<AreaResponse>("api/area/get/" + AreaID).Name;
+                }
+                catch (Exception)
+                {
+                }
+                List<InspectionAreaItemResponse> response2 = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page+1);
+                if (response2.Count>0)
+                {
+                    model.lastPage = false;
+                    model.nextLink = ""+(page + 1);
+                }
+            }
+            return View("InspectionRoom",model);
         }
 
         [Route("inspection/start-inspection")]

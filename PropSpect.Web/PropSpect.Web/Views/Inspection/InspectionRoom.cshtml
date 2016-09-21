@@ -1,4 +1,4 @@
-﻿@model List<InspectionAreaItem>
+﻿@model InspectionAreaItemsCheck
 @section styles
 {
     <style>
@@ -20,8 +20,11 @@
     </style>
 }
 <div id="wrapper">
-    @foreach (var areaItem in Model)
-    {
+    <div class="row z-depth-1 long-container white">
+        <div class="col s12 propspect-blue-text"><h4>@Model.AreaName</h4></div>
+    </div>
+    @foreach (var areaItem in Model.items)
+            {
         <div class="row z-depth-1 long-container white">
             <form id="@areaItem.ItemDescription.ToLower().Replace(" ","")-form">
                 <div class="col s12 m2">
@@ -30,15 +33,15 @@
                 <div class="col s12 m5">
                     <div class="input-field col s12">
                         <select name="condition">
-                            <option @((areaItem.ItemCondition.ToLower() == "excellent") ?"selected":"")>1. Excellent</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "good") ?"selected":"")>2. Good</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "average") ?"selected":"")>3. Average</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "bad") ?"selected":"")>4. Bad</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "very bad") ?"selected":"")>5. Very Bad</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "n/a") ?"selected":"")>6. N/A</option>
-                    </select>
-                </div>
-                <div class="col s12">
+                            <option @((areaItem.ItemCondition.ToLower() == "excellent") ? "selected" : "")>1. Excellent</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "good") ? "selected" : "")>2. Good</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "average") ? "selected" : "")>3. Average</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "bad") ? "selected" : "")>4. Bad</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "very bad") ? "selected" : "")>5. Very Bad</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "n/a") ? "selected" : "")>6. N/A</option>
+                        </select>
+                    </div>
+                    <div class="col s12">
                         <input type="hidden" name="name" value="@areaItem.ItemDescription" />
                         <input type="hidden" name="inspectionAreaItemID" value="@areaItem.InspectionAreaItemID" />
                         <div class="file-field input-field">
@@ -56,7 +59,7 @@
                         <div class="switch">
                             <label>
                                 No
-                                <input type="checkbox" name="repair-needed" @((areaItem.ItemRepair.ToLower() == "y") ?"checked":"")>
+                                <input type="checkbox" name="repair-needed" @((areaItem.ItemRepair.ToLower() == "y") ? "checked" : "")>
                                 <span class="lever"></span>
                                 Yes
                             </label>
@@ -79,6 +82,26 @@
             </form>
         </div>
     }
+    <div class="row z-depth-1 long-container white">
+        <div class="row">
+            <div class="col s3">
+                @if (!Model.firstPage)
+                {
+                    <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.backLink"><i class="material-icons left">keyboard_arrow_left</i> Back</a>
+                }
+                else
+                {
+                    <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.backLink"></a>
+                }
+            </div>
+            <div class="col s6">
+                <h5 class="center"></h5>
+            </div>
+            <div class="col s3">
+                <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.nextLink"><i class="material-icons right">keyboard_arrow_right</i>@(Model.lastPage?"Confirm":"Next")</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts

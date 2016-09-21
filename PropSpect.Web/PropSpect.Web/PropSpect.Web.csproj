@@ -155,6 +155,7 @@
     <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
     <Compile Include="Models\FormModels\InspectionAreaItem.cs" />
+    <Compile Include="Models\FormModels\InspectionAreaItemsCheck.cs" />
     <Compile Include="Models\FormModels\InspectionPart.cs" />
     <Compile Include="Models\FormModels\LandlordAdmin.cs" />
     <Compile Include="Models\FormModels\LandlordAgent.cs" />

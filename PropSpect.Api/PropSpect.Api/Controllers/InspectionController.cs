@@ -121,7 +121,7 @@ namespace PropSpect.Api.Controllers
                 List<InspectionArea> areas = db.InspectionAreas.Where(x => x.InspectionID == InspectionID).ToList();
                 area = areas[page];
             }
-            catch (IndexOutOfRangeException)
+            catch (Exception)
             {
                 return Json(new List<InspectionAreaItem>(), JsonRequestBehavior.AllowGet);
             }
