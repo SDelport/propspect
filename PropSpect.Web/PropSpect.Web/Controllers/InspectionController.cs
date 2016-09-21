@@ -18,25 +18,6 @@ namespace PropSpect.Web.Controllers
         {
             List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
             response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
-            response.Clear();
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Good",
-                ItemDescription = "Kettle",
-                ItemID = 0,
-                ItemRepair = "Yes"
-            });
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Bad",
-                ItemDescription = "Door",
-                ItemID = 0,
-                ItemRepair = "No"
-            });
             List<InspectionAreaItem> areaItem = new List<InspectionAreaItem>();
             foreach (var item in response)
             {
@@ -74,10 +55,10 @@ namespace PropSpect.Web.Controllers
 
 
         [Route("inspection/submitpart")]
-        public ActionResult SubmitPart(List<InspectionPart> Data, string Signature)
+        public JsonResult SubmitPart(List<InspectionPart> Data, string Signature)
         {
             CreateInspectionAreaItemRequest request = new CreateInspectionAreaItemRequest();
-
+            request.ItemRepair = "n";
             foreach (var item in Data)
             {
                 if (item.name == "areaID")
@@ -85,14 +66,16 @@ namespace PropSpect.Web.Controllers
                 else if (item.name == "name")
                     request.ItemDescription = item.value;
                 else if (item.name == "condition")
-                    request.ItemCondition = item.value;
-                else if (item.name == "repair")
-                    request.ItemRepair = item.value;
+                    request.ItemCondition = item.value.Substring(3);
+                else if (item.name == "repair-needed")
+                    request.ItemRepair = "y";
+                else if (item.name == "inspectionAreaItemID")
+                    request.InspectionAreaItemID = int.Parse(item.value);
             }
 
-            var response = ApiWrapper.Post<AreaItemResponse>("api/areaitem/add", request);
+            var response = ApiWrapper.Post<CreateInspectionAreaItemRequest>("api/inspection/editPart", request);
 
-            return View("Confirm");
+            return response!=null?Json(new { success = true, responseText= "Successfuly sent the information!"}, JsonRequestBehavior.AllowGet): Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
         }
 
     }

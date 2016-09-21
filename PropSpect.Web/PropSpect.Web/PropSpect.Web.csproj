@@ -181,6 +181,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\loading.svg" />
     <Content Include="Content\Images\olea.png" />
     <Content Include="Content\Images\PropSpect.png" />
     <Content Include="Content\materialize\css\materialize.css" />
