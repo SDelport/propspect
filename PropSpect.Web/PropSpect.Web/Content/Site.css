@@ -223,6 +223,13 @@ main {
     margin-right: 3px !important ;
 }
 
+.selectable-heading-icon{
+    margin-right: 0px !important ;
+    margin-top: 6px;
+    color: #D3D3D3;
+
+}
+
 /* ====== Pre inspection check ===== */
 .final-item{
     min-height: 64px !important;
