@@ -47,7 +47,7 @@
                         <div class="file-field input-field">
                             <div class="btn propspect-blue-background">
                                 <span>Image</span>
-                                <input type="file" id="@areaItem.ItemDescription.ToLower().Replace(" ","")-file">
+                                <input type="file" class="fileUploadAsync"  name="file" data-url="../../inspection/submitimage/@areaItem.InspectionAreaItemID">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" name="file">
@@ -143,18 +143,22 @@
         window.onresize = resizeCanvas;
         resizeCanvas();
 
+        $(function () {
+            $('.fileUploadAsync').each(function (i, fileElement) {
+                $(this).fileupload({
+                    dataType: 'json',
+                    add: function (e, data) {
+                        data.submit();
+                    },
+                    done: function (e, data) {
+                        alert('Upload Finished');
+                    }
+                });
+            });
+        });
+
         function submitItem(name, variablename, signature) {
             $('#' + variablename + '-loading').slideDown("slow");
-            $('#' + variablename + '-file').fileupload({
-                dataType: 'json',
-                submit: function (e, data) {
-                var $this = $(this);
-                $.getJSON('../../inspection/submitimage', function (result) {
-                    data.formData = result; // e.g. {id: 123}
-                    data.jqXHR = $this.fileupload('send', data);
-                });
-            } 
-            });
             $.ajax(
             {
                 url: '../../inspection/submitpart',

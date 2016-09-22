@@ -4,6 +4,7 @@ using PropSpect.Web.Controllers.Helpers;
 using PropSpect.Web.Models.FormModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -96,16 +97,13 @@ namespace PropSpect.Web.Controllers
             return response!=null?Json(new { success = true, responseText= "Successfuly sent the information!"}, JsonRequestBehavior.AllowGet): Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        [Route("inspection/submitimage")]
-        public JsonResult SubmitImage(IEnumerable<HttpPostedFileBase> files)
+        [Route("inspection/submitimage/{InspectionAreaItemID}")]
+        public JsonResult SubmitImage(HttpPostedFileBase file,int InspectionAreaItemID)
         {
-            //foreach (var file in files)
-            //{
-            //    var filename = Path.Combine(Server.MapPath("~/App_Data"), file.FileName);
-            //    file.SaveAs(filename);
-            //}
-            String response = null;
-            return response != null ? Json(new { success = true, responseText = "Successfuly sent the information!" }, JsonRequestBehavior.AllowGet) : Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
+            MemoryStream target = new MemoryStream();
+            file.InputStream.CopyTo(target);
+            byte[] data = target.ToArray();
+            return data != null ? Json(new { success = true, responseText = "Successfuly sent the information!" }, JsonRequestBehavior.AllowGet) : Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
