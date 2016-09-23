@@ -23,6 +23,8 @@ namespace PropSpect.Web.Controllers.PDF
 
         public void GeneratePDF()
         {
+            //Initialise
+            #region initialise
             // Create New PDF
             PdfDocument document = new PdfDocument();
             document.Info.Title = "In-Out Inspection Report";
@@ -38,20 +40,185 @@ namespace PropSpect.Web.Controllers.PDF
             DrawHeaderAndFooter(document, page, gfx, "In-Out Inspection");
             currentLine = 80;
             currentWidth = 20;
+            #endregion
 
             //Inspection Detais
+            #region Inspection Details
             currentSection = "Inspection Details";
-            
-            p.GenerateHeadingBlock(currentSection,page, gfx, currentWidth, currentLine);
-            
 
-            // Create a font
-            XFont font = new XFont("Verdana", 20, XFontStyle.BoldItalic);
+            p.GenerateHeadingBlock(currentSection, page, gfx, currentWidth, currentLine);
+            currentLine += 35;
 
-            // Draw the text            
-            gfx.DrawString("In-Out Inspection", font, XBrushes.Black,
-            new XRect(0, 0, page.Width, page.Height),
-            XStringFormats.Center);
+            gfx.DrawString("Address:", p.Font12Bold, XBrushes.Black, 40, currentLine);
+            gfx.DrawString("163 Koedoe Street Wierda Park", p.Font12, XBrushes.Black, 120, currentLine);
+
+            gfx.DrawString("Date of inspection:", p.Font12Bold, XBrushes.Black, page.Width / 2, currentLine);
+            gfx.DrawString(DateTime.Now.ToString("yyyy-MM-dd"), p.Font12, XBrushes.Black, page.Width / 2 + 140, currentLine);
+
+            currentLine += 15;
+
+            gfx.DrawString("Tenant:", p.Font12Bold, XBrushes.Black, 40, currentLine);
+            gfx.DrawString("Eckardt Briedenhann", p.Font12, XBrushes.Black, 120, currentLine);
+
+            gfx.DrawString("Type of inspection:", p.Font12Bold, XBrushes.Black, page.Width / 2, currentLine);
+            gfx.DrawString("In-Out Inspection", p.Font12, XBrushes.Black, page.Width / 2 + 140, currentLine);
+
+            currentLine += 15;
+
+            gfx.DrawString("Agent:", p.Font12Bold, XBrushes.Black, 40, currentLine);
+            gfx.DrawString("Stefan Delport", p.Font12, XBrushes.Black, 120, currentLine);
+
+            currentLine += 20;
+            #endregion
+
+            //Inspection Results
+            #region Inspection Results
+            currentSection = "Inspection Results";
+            p.GenerateHeadingBlock(currentSection, page, gfx, currentWidth, currentLine);
+            currentLine += 30;
+
+            PDFTestData testData = new PDFTestData();
+
+            //Per Area -- This needs to be done in a foreach
+            #region Front Door
+            p.GenerateTitle("Front Door", page, gfx, currentWidth, currentLine);
+            currentLine += 30;
+
+            p.GenerateTableHeader(new string[]
+            {
+                "Area Item",
+                "Condition",
+                "Repair Needed"
+            }, page, gfx, currentWidth, currentLine);
+            currentLine += 14;
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+            currentLine += 2;
+
+            foreach (var item in testData.FrontDoor)
+            {
+                if (currentLine >= page.Height - 40)
+                {
+                    p.CreateNewPage(ref document, ref page, ref gfx);
+                    DrawHeaderAndFooter(document, page, gfx, "");
+                    currentLine = 80;
+                    p.GenerateTableHeader(new string[]
+                    {
+                        "Area Item",
+                        "Condition",
+                        "Repair Needed"
+                    }, page, gfx, currentWidth, currentLine);
+                    currentLine += 14;
+                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
+                    currentLine += 2;
+                }
+
+                p.GenerateTableRow(new string[]
+                {
+                    item.ItemDescription,
+                    item.ItemCondition,
+                    item.ItemRepair
+                }, page, gfx, currentWidth, currentLine);
+                currentLine += 16;
+            }
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+
+            currentLine += 30;
+            #endregion Front Door
+
+            #region Hallway
+            p.GenerateTitle("Hallway", page, gfx, currentWidth, currentLine);
+            currentLine += 30;
+
+            p.GenerateTableHeader(new string[]
+            {
+                "Area Item",
+                "Condition",
+                "Repair Needed"
+            }, page, gfx, currentWidth, currentLine);
+            currentLine += 14;
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+            currentLine += 2;
+
+            foreach (var item in testData.Hallway)
+            {
+                if (currentLine >= page.Height - 40)
+                {
+                    p.CreateNewPage(ref document, ref page, ref gfx);
+                    DrawHeaderAndFooter(document, page, gfx, "");
+                    currentLine = 80;
+                    p.GenerateTableHeader(new string[]
+                    {
+                        "Area Item",
+                        "Condition",
+                        "Repair Needed"
+                    }, page, gfx, currentWidth, currentLine);
+                    currentLine += 14;
+                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
+                    currentLine += 2;
+                }
+
+                p.GenerateTableRow(new string[]
+                {
+                    item.ItemDescription,
+                    item.ItemCondition,
+                    item.ItemRepair
+                }, page, gfx, currentWidth, currentLine);
+                currentLine += 16;
+            }
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+            currentLine += 30;
+            #endregion Hallway
+
+
+            #region Kitchen
+            p.GenerateTitle("Kitchen", page, gfx, currentWidth, currentLine);
+            currentLine += 30;
+
+            p.GenerateTableHeader(new string[]
+            {
+                "Area Item",
+                "Condition",
+                "Repair Needed"
+            }, page, gfx, currentWidth, currentLine);
+            currentLine += 14;
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+            currentLine += 2;
+
+            foreach (var item in testData.Kitchen)
+            {
+                if (currentLine >= page.Height - 40)
+                {
+                    p.CreateNewPage(ref document, ref page, ref gfx);
+                    DrawHeaderAndFooter(document, page, gfx, "");
+                    currentLine = 80;
+                    p.GenerateTableHeader(new string[]
+                    {
+                        "Area Item",
+                        "Condition",
+                        "Repair Needed"
+                    }, page, gfx, currentWidth, currentLine);
+                    currentLine += 14;
+                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
+                    currentLine += 2;
+                }
+
+                p.GenerateTableRow(new string[]
+                {
+                    item.ItemDescription,
+                    item.ItemCondition,
+                    item.ItemRepair
+                }, page, gfx, currentWidth, currentLine);
+                currentLine += 16;
+            }
+            p.GenerateDivider(page, gfx, currentWidth, currentLine);
+
+            #endregion Kitchen
+
+            #endregion Inspection Details
+
+
+
+
 
             p.Save(document);
         }
@@ -60,7 +227,7 @@ namespace PropSpect.Web.Controllers.PDF
         {
             //PropSpect Logo
             var filename = Path.Combine(p.ServerProperty.MapPath("~/Content/Images"), "PropSpect.png");
-            XImage image = XImage.FromFile(filename);           
+            XImage image = XImage.FromFile(filename);
             gfx.DrawImage(image, 20, 20, 120, 50);
 
 
@@ -70,33 +237,32 @@ namespace PropSpect.Web.Controllers.PDF
             gfx.DrawString(title, p.Font16Bold, XBrushes.Black, rect, XStringFormats.TopCenter);
 
             //Title Date
-            rect.Inflate(0,-18);
-            gfx.DrawString("Date: " + DateTime.Now.ToString("yyyy-MM-dd"), p.Font14, XBrushes.Black, rect, XStringFormats.TopCenter);
+            if (!string.IsNullOrEmpty(title))
+            {
+                rect.Inflate(0, -18);
+                gfx.DrawString("Date: " + DateTime.Now.ToString("yyyy-MM-dd"), p.Font14, XBrushes.Black, rect, XStringFormats.TopCenter);
+            }            
 
             //Customer Logo
             filename = Path.Combine(p.ServerProperty.MapPath("~/Content/Images"), "olea.png");
             image = XImage.FromFile(filename);
-            gfx.DrawImage(image, page.Width-20-120, 20, 120, 50);
+            gfx.DrawImage(image, page.Width - 20 - 120, 20, 120, 50);
 
 
             //Footer
-
-
-
-
-            
-            rect.Offset(0, 5);
+            rect = new XRect(20, page.Height - 20, page.Width - 40, 10);
             XStringFormat format = new XStringFormat();
             format.Alignment = XStringAlignment.Near;
             format.LineAlignment = XLineAlignment.Far;
             gfx.DrawString("Copyright: Paideia Solutions 2016", p.Font8Italic, XBrushes.Black, rect, format);
 
-            
+
             format.Alignment = XStringAlignment.Far;
             gfx.DrawString(document.PageCount.ToString(), p.Font8Italic, XBrushes.Black, rect, format);
 
-            document.Outlines.Add(title, page, true);
-
+            //document.Outlines.Add(title, page, true);
         }
+
+
     }
 }

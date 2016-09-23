@@ -110,7 +110,53 @@ namespace PropSpect.Web.Controllers.PDF
             gfx.DrawRectangle(PropspectBrush, currentWidth, currentLine, page.Width - currentWidth * 2, 18);
             gfx.DrawString(title, Font16Bold, XBrushes.White, headerRect, XStringFormats.Center);
         }
-        
 
+        public void GenerateTitle(string title, PdfPage page, XGraphics gfx, double currentWidth, double currentLine)
+        {
+            XRect rect = new XRect(currentWidth, currentLine, page.Width - currentWidth * 2, 17);
+            gfx.DrawString(title, Font16Bold, PropspectBrush, rect, XStringFormats.Center);
+        }
+
+        public void GenerateDivider(PdfPage page, XGraphics gfx, double currentWidth, double currentLine)
+        {
+            XRect rect = new XRect(20, currentLine, page.Width - currentWidth * 2, 1);
+            gfx.DrawRectangle(PropspectBrush, rect);
+        }
+
+        public void CreateNewPage(ref PdfDocument document, ref PdfPage page, ref XGraphics gfx)
+        {
+            page = document.AddPage();
+            page.Size = PageSize.A4;
+            gfx = XGraphics.FromPdfPage(page);
+        }
+
+
+        #region Table Methods
+        public void GenerateTableHeader(string[] headerArray, PdfPage page, XGraphics gfx, double currentWidth, double currentLine)
+        {
+            double tableCol = currentWidth;
+            foreach (string item in headerArray)
+            {
+                double colSize = (page.Width - currentWidth * 2) / headerArray.Length;
+                XRect rect = new XRect(tableCol, currentLine, colSize, 12);
+                gfx.DrawString(item, Font12Bold, XBrushes.Black, rect, XStringFormats.TopLeft);
+                tableCol += colSize;
+            }
+        }
+
+        public void GenerateTableRow(string[] headerArray, PdfPage page, XGraphics gfx, double currentWidth, double currentLine)
+        {
+            double tableCol = currentWidth;
+            foreach (string item in headerArray)
+            {
+                double colSize = (page.Width - currentWidth * 2) / headerArray.Length;
+                XRect rect = new XRect(tableCol, currentLine, colSize, 10);
+                gfx.DrawString(item, Font10, XBrushes.Black, rect,XStringFormats.TopLeft);
+                tableCol += colSize;
+            }
+            XRect divRect = new XRect(20, currentLine + 14, page.Width - currentWidth * 2, 0.4);
+            gfx.DrawRectangle(XBrushes.LightGray, divRect);
+        }
+        #endregion
     }
 }

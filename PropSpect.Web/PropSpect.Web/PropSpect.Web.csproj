@@ -151,6 +151,7 @@
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\AreaItemController.cs" />
     <Compile Include="Controllers\PDF\InOutInspectionPDF.cs" />
+    <Compile Include="Controllers\PDF\PDFTestData.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LandLordController.cs" />
