@@ -19,25 +19,7 @@ namespace PropSpect.Web.Controllers
         {
             List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
             response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
-            response.Clear();
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Good",
-                ItemDescription = "Kettle",
-                ItemID = 0,
-                ItemRepair = "Yes"
-            });
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Bad",
-                ItemDescription = "Door",
-                ItemID = 0,
-                ItemRepair = "No"
-            });
+
             List<InspectionAreaItem> areaItem = new List<InspectionAreaItem>();
             foreach (var item in response)
             {

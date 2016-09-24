@@ -122,6 +122,7 @@ namespace PropSpect.Api.Controllers
             }
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         [Route("api/inspection/editPart/")]
         public JsonResult editPart(CreateInspectionAreaItemRequest request)
@@ -132,6 +133,7 @@ namespace PropSpect.Api.Controllers
             db.SaveChanges();
             return Json(item, JsonRequestBehavior.AllowGet);
         }
+
         [Route("api/inspection/details/{inspectionTemplateID}/{inspectionAreaID}")]
         public JsonResult List(int inspectionTemplateID, int inspectionAreaID)
         {
