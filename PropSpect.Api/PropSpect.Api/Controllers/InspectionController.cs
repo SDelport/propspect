@@ -99,9 +99,10 @@ namespace PropSpect.Api.Controllers
             List<InspectionAreaItem> areaItems = new List<InspectionAreaItem>();
             try
             {
-                area = db.InspectionAreas.Where(x => x.InspectionID == InspectionID).ToList()[page];
+                List<InspectionArea> areas = db.InspectionAreas.Where(x => x.InspectionID == InspectionID).ToList();
+                area = areas[page];
             }
-            catch (IndexOutOfRangeException)
+            catch (Exception)
             {
                 return Json(new List<InspectionAreaItem>(), JsonRequestBehavior.AllowGet);
             }
@@ -116,10 +117,20 @@ namespace PropSpect.Api.Controllers
                     ItemCondition = item.ItemCondition,
                     ItemDescription = item.ItemDescription,
                     ItemID = item.ItemID,
-                    ItemRepair = item.ItemRepair
+                    ItemRepair = item.ItemRepair??"n"
                 });
             }
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Route("api/inspection/editPart/")]
+        public JsonResult editPart(CreateInspectionAreaItemRequest request)
+        {
+            InspectionAreaItem item = db.InspectionAreaItems.Where(x => x.InspectionAreaItemID == request.InspectionAreaItemID).FirstOrDefault();
+            item.ItemCondition = request.ItemCondition;
+            item.ItemRepair = request.ItemRepair;
+            db.SaveChanges();
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
         [Route("api/inspection/details/{inspectionTemplateID}/{inspectionAreaID}")]
         public JsonResult List(int inspectionTemplateID, int inspectionAreaID)

@@ -1,4 +1,4 @@
-﻿@model List<InspectionAreaItem>
+﻿@model InspectionAreaItemsCheck
 @section styles
 {
     <style>
@@ -20,9 +20,11 @@
     </style>
 }
 <div id="wrapper">
-    @foreach (var areaItem in Model)
-    {
-
+    <div class="row z-depth-1 long-container white">
+        <div class="col s12 propspect-blue-text"><h4>@Model.AreaName</h4></div>
+    </div>
+    @foreach (var areaItem in Model.items)
+            {
         <div class="row z-depth-1 long-container white">
             <form id="@areaItem.ItemDescription.ToLower().Replace(" ","")-form">
                 <div class="col s12 m2">
@@ -31,22 +33,21 @@
                 <div class="col s12 m5">
                     <div class="input-field col s12">
                         <select name="condition">
-                            <option @((areaItem.ItemCondition.ToLower() == "excellent") ?"selected":"")>1. Excellent</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "good") ?"selected":"")>2. Good</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "average") ?"selected":"")>3. Average</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "bad") ?"selected":"")>4. Bad</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "very bad") ?"selected":"")>5. Very Bad</option>
-                            <option @((areaItem.ItemCondition.ToLower() == "n/a") ?"selected":"")>6. N/A</option>
-                    </select>
-
-                </div>
-
-                <div class="col s12">
+                            <option @((areaItem.ItemCondition.ToLower() == "excellent") ? "selected" : "")>1. Excellent</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "good") ? "selected" : "")>2. Good</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "average") ? "selected" : "")>3. Average</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "bad") ? "selected" : "")>4. Bad</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "very bad") ? "selected" : "")>5. Very Bad</option>
+                            <option @((areaItem.ItemCondition.ToLower() == "n/a") ? "selected" : "")>6. N/A</option>
+                        </select>
+                    </div>
+                    <div class="col s12">
                         <input type="hidden" name="name" value="@areaItem.ItemDescription" />
+                        <input type="hidden" name="inspectionAreaItemID" value="@areaItem.InspectionAreaItemID" />
                         <div class="file-field input-field">
                             <div class="btn propspect-blue-background">
                                 <span>Image</span>
-                                <input type="file">
+                                <input type="file" class="fileUploadAsync"  name="file" data-url="../../inspection/submitimage/@areaItem.InspectionAreaItemID">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" name="file">
@@ -58,27 +59,49 @@
                         <div class="switch">
                             <label>
                                 No
-                                <input type="checkbox" name="repair-needed" @((areaItem.ItemRepair.ToLower() == "yes") ?"checked":"")>
+                                <input type="checkbox" name="repair-needed" @((areaItem.ItemRepair.ToLower() == "y") ? "checked" : "")>
                                 <span class="lever"></span>
                                 Yes
                             </label>
                         </div>
                     </div>
                 </div>
-
                 <div class="col s12 m5 verticalLine-left">
                     <div class="col s8 propspect-blue-text "><h4>Signature</h4></div>
-                    <a id="@areaItem.ItemDescription.ToLower().Replace(" ","")-clear" class="btn-floating btn-large waves-effect waves-light right propspect-blue-background "><i class="material-icons">not_interested</i></a>
                     <br />
+                    <a id="@areaItem.ItemDescription.ToLower().Replace(" ","")-clear" class="btn-floating btn-large waves-effect waves-light right propspect-blue-background "><i class="material-icons">not_interested</i></a>
                     <a id="@areaItem.ItemDescription.ToLower().Replace(" ","")-submit" data-part="@areaItem.ItemDescription" class="btn-floating btn-large waves-effect waves-light right propspect-blue-background over-content">Done</a>
+                    <div style="width:100px; height: 100px;float:right;">
+                        <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="@areaItem.ItemDescription.ToLower().Replace(" ","")-loading" style="display:none; width:100px; height: 100px;top:-50px;"></object>
+                    </div>
+                    <br />
                     <div class="signature-cell">
                         <canvas id="@areaItem.ItemDescription.ToLower().Replace(" ","")" class="signature"></canvas>
                     </div>
-
                 </div>
             </form>
         </div>
     }
+    <div class="row z-depth-1 long-container white">
+        <div class="row">
+            <div class="col s3">
+                @if (!Model.firstPage)
+                {
+                    <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.backLink"><i class="material-icons left">keyboard_arrow_left</i> Back</a>
+                }
+                else
+                {
+                    <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.backLink"></a>
+                }
+            </div>
+            <div class="col s6">
+                <h5 class="center"></h5>
+            </div>
+            <div class="col s3">
+                <a class="waves-effect waves-teal btn-flat left propspect-blue-text" href="@Model.nextLink"><i class="material-icons right">keyboard_arrow_right</i>@(Model.lastPage?"Confirm":"Next")</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts
@@ -120,10 +143,25 @@
         window.onresize = resizeCanvas;
         resizeCanvas();
 
+        $(function () {
+            $('.fileUploadAsync').each(function (i, fileElement) {
+                $(this).fileupload({
+                    dataType: 'json',
+                    add: function (e, data) {
+                        data.submit();
+                    },
+                    done: function (e, data) {
+                        alert('Upload Finished');
+                    }
+                });
+            });
+        });
+
         function submitItem(name, variablename, signature) {
+            $('#' + variablename + '-loading').slideDown("slow");
             $.ajax(
             {
-                url: 'inspection/submitpart',
+                url: '../../inspection/submitpart',
                 data: JSON.stringify({
                     Data: $('#' + variablename + '-form').serializeArray(),
                     Signature: signature.toDataURL("image/jpeg")
@@ -133,7 +171,7 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (result) {
-                    successmethod(result);
+                    $('#' + variablename + '-loading').slideUp("slow");
                 },
                 error: function (result) {
                     alert("An error occured")
@@ -143,5 +181,4 @@
             );
         }
     </script>
-
 }

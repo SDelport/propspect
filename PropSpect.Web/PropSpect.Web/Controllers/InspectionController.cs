@@ -4,6 +4,7 @@ using PropSpect.Web.Controllers.Helpers;
 using PropSpect.Web.Models.FormModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,8 +18,26 @@ namespace PropSpect.Web.Controllers
         public ActionResult CreateInspection(int inspectionID, int page)
         {
             List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
-            response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
-
+            response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
+            response.Clear();
+            response.Add(new InspectionAreaItemResponse()
+            {
+                InspectionAreaID = 0,
+                InspectionAreaItemID = 0,
+                ItemCondition = "Good",
+                ItemDescription = "Kettle",
+                ItemID = 0,
+                ItemRepair = "Yes"
+            });
+            response.Add(new InspectionAreaItemResponse()
+            {
+                InspectionAreaID = 0,
+                InspectionAreaItemID = 0,
+                ItemCondition = "Bad",
+                ItemDescription = "Door",
+                ItemID = 0,
+                ItemRepair = "No"
+            });
             List<InspectionAreaItem> areaItem = new List<InspectionAreaItem>();
             foreach (var item in response)
             {
@@ -32,7 +51,25 @@ namespace PropSpect.Web.Controllers
                     ItemID = item.ItemID
                 });
             }
-            return View("InspectionRoom",areaItem);
+            InspectionAreaItemsCheck model = new InspectionAreaItemsCheck(page==0,true, areaItem, "","#",page==0?"#":""+(page-1));
+            if (areaItem.Count>0)
+            {
+                try
+                {
+                    int AreaID = ApiWrapper.Get<InspectionAreaResponse>("/api/inspectionarea/" + areaItem[0].InspectionAreaID).AreaID;
+                    model.AreaName = ApiWrapper.Get<AreaResponse>("api/area/get/" + AreaID).Name;
+                }
+                catch (Exception)
+                {
+                }
+                List<InspectionAreaItemResponse> response2 = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page+1);
+                if (response2.Count>0)
+                {
+                    model.lastPage = false;
+                    model.nextLink = ""+(page + 1);
+                }
+        }
+            return View("InspectionRoom",model);
         }
 
         [Route("inspection/start-inspection")]
@@ -73,10 +110,10 @@ namespace PropSpect.Web.Controllers
 
 
         [Route("inspection/submitpart")]
-        public ActionResult SubmitPart(List<InspectionPart> Data, string Signature)
+        public JsonResult SubmitPart(List<InspectionPart> Data, string Signature)
         {
             CreateInspectionAreaItemRequest request = new CreateInspectionAreaItemRequest();
-
+            request.ItemRepair = "n";
             foreach (var item in Data)
             {
                 if (item.name == "areaID")
@@ -84,15 +121,25 @@ namespace PropSpect.Web.Controllers
                 else if (item.name == "name")
                     request.ItemDescription = item.value;
                 else if (item.name == "condition")
-                    request.ItemCondition = item.value;
-                else if (item.name == "repair")
-                    request.ItemRepair = item.value;
+                    request.ItemCondition = item.value.Substring(3);
+                else if (item.name == "repair-needed")
+                    request.ItemRepair = "y";
+                else if (item.name == "inspectionAreaItemID")
+                    request.InspectionAreaItemID = int.Parse(item.value);
             }
 
-            var response = ApiWrapper.Post<AreaItemResponse>("api/areaitem/add", request);
+            var response = ApiWrapper.Post<CreateInspectionAreaItemRequest>("api/inspection/editPart", request);
 
-            return View("Confirm");
+            return response!=null?Json(new { success = true, responseText= "Successfuly sent the information!"}, JsonRequestBehavior.AllowGet): Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
+        [Route("inspection/submitimage/{InspectionAreaItemID}")]
+        public JsonResult SubmitImage(HttpPostedFileBase file,int InspectionAreaItemID)
+        {
+            MemoryStream target = new MemoryStream();
+            file.InputStream.CopyTo(target);
+            byte[] data = target.ToArray();
+            return data != null ? Json(new { success = true, responseText = "Successfuly sent the information!" }, JsonRequestBehavior.AllowGet) : Json(new { success = false, responseText = "Failed to send the information!" }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
