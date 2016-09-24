@@ -22,70 +22,51 @@ namespace PropSpect.Api.Controllers
 
         [HttpPost]
         [Route("api/inspection/add")]
-        public JsonResult Add(CreateLandLordRequest request)
+        public JsonResult Add(CreateInspectionRequest request)
         {
-            if (request.LandlordID <= 0)
+            Inspection inspection = new Inspection()
             {
-                Landlord landlord = new Landlord();
-                landlord.Title = request.Title;
-                landlord.Name = request.Name;
-                landlord.FirstName = request.FirstName;
-                landlord.LastName = request.LastName;
-                landlord.SecondName = request.SecondName;
-                landlord.ThirdName = request.ThirdName;
-                landlord.Type = request.Type;
-                landlord.IDNumber = request.IDNumber;
-                landlord.AddressUnitNr = request.AddressUnitNr;
-                landlord.ComplexName = request.ComplexName;
-                landlord.StreetNumber = request.StreetNumber;
-                landlord.StreetName = request.StreetName;
-                landlord.CityName = request.CityName;
-                landlord.PostalCode = request.PostalCode;
-                landlord.TelWork = request.TelWork;
-                landlord.TelMobile = request.TelMobile;
-                landlord.Fax = request.Fax;
-                landlord.Email = request.Email;
-                landlord.Website = request.Website;
-                landlord.RegNumber = request.RegNumber;
-                landlord.VatNumber = request.VatNumber;
-                
+                PropertyID = request.PropertyID,
+                OverallComments = "Test on " + DateTime.Now.ToShortTimeString()
+            };
 
-                db.LandLords.Add(landlord);
-                db.SaveChanges();
-            }
-            else
+            db.Inspections.Add(inspection);
+            db.SaveChanges();
+
+            var propertyAreas = db.Areas.Where(x => x.PropertyID == request.PropertyID).ToList();
+
+            foreach (var propertyArea in propertyAreas)
             {
-                Landlord landlord = db.LandLords.Where(x => x.LandlordID == request.LandlordID).FirstOrDefault();
-                if (landlord != null)
+                InspectionArea area = new InspectionArea()
                 {
-                    landlord.Title = request.Title;
-                    landlord.Name = request.Name;
-                    landlord.FirstName = request.FirstName;
-                    landlord.LastName = request.LastName;
-                    landlord.SecondName = request.SecondName;
-                    landlord.ThirdName = request.ThirdName;
-                    landlord.Type = request.Type;
-                    landlord.IDNumber = request.IDNumber;
-                    landlord.AddressUnitNr = request.AddressUnitNr;
-                    landlord.ComplexName = request.ComplexName;
-                    landlord.StreetNumber = request.StreetNumber;
-                    landlord.StreetName = request.StreetName;
-                    landlord.CityName = request.CityName;
-                    landlord.PostalCode = request.PostalCode;
-                    landlord.TelWork = request.TelWork;
-                    landlord.TelMobile = request.TelMobile;
-                    landlord.Fax = request.Fax;
-                    landlord.Email = request.Email;
-                    landlord.Website = request.Website;
-                    landlord.RegNumber = request.RegNumber;
-                    landlord.VatNumber = request.VatNumber;
+                    InspectionID = inspection.InspectionID,
+                    AreaID = propertyArea.AreaID
+                };
 
+                db.InspectionAreas.Add(area);
+                db.SaveChanges();
+
+                var areaItems = db.AreaItems.Where(x => x.AreaID == propertyArea.AreaID).ToList();
+
+                foreach (var areaItem in areaItems)
+                {
+                    InspectionAreaItem item = new InspectionAreaItem()
+                    {
+                        InspectionAreaID = area.InspectionAreaID,
+                        ItemID = areaItem.AreaItemID,
+                        ItemDescription = areaItem.RoomItem,
+                    };
+
+                    db.InspectionAreaItems.Add(item);
                     db.SaveChanges();
                 }
-
+                
             }
 
-            return Json("true");
+            InspectionResponse response = new InspectionResponse();
+            response.InspectionID = inspection.InspectionID;
+
+            return Json(response);
         }
 
 
@@ -124,7 +105,7 @@ namespace PropSpect.Api.Controllers
             {
                 return Json(new List<InspectionAreaItem>(), JsonRequestBehavior.AllowGet);
             }
-            areaItems = db.InspectionAreaItems.Where(x => x.InspectionAreaID == area.AreaID).ToList();
+            areaItems = db.InspectionAreaItems.Where(x => x.InspectionAreaID == area.InspectionAreaID).ToList();
             List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
             foreach (var item in areaItems)
             {

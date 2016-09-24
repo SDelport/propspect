@@ -388,10 +388,17 @@
                         </li>
                     </ul>
                 </div>
-
-                <div class="col s10 offset-s1 m8 offset-m2">                   
-                    <a class="waves-effect waves-light btn btn-block center propspect-blue-background" onclick="step_change('step6', 'next')">Confirm</a>
-                </div>
+                <form action="/inspection/prepost" method="post">
+                    <div class="col s10 offset-s1 m8 offset-m2">
+                        <button role="submit" class="waves-effect waves-light btn btn-block center propspect-blue-background" onclick="step_change('step6', 'next')">Confirm</button>
+                    </div>
+                    <input type="hidden" name="inspectiontype" id="inspectypevalue" />
+                    <input type="hidden" name="latitude" id="latvalue" />
+                    <input type="hidden" name="longitude" id="longvalue" />
+                    <input type="hidden" name="propertyID" id="propvalue" />
+                    <input type="hidden" name="tenantID" id="tenvalue" />
+                    <input type="hidden" name="ownerID" id="ownervalue"/>
+                </form>
             </div>
 
             <p class="white-text">.</p>
@@ -476,7 +483,7 @@
                 }
                 if (currentStep == 'step5') {
                     change_step_up(5);
-                    $('#inspectype').text(inspectionType);
+                    $('#inspectype').text(inspectionType== 'InOut' ? "In/Out":"Quarterly");
                     $('#lat').text(lastlatitude);
                     $('#long').text(lastlongitude);
                     $('#tenant').text(tenantModel.selected().FirstName + ' '+tenantModel.selected().LastName);
@@ -485,6 +492,13 @@
                         $('#owner').text(ownerModel.selected().FirstName + ' '+ownerModel.selected().LastName);
                     else
                         $('#owner').text(ownerModel.selected().Name);
+
+                    $('#inspectypevalue').val(inspectionType);
+                    $('#latvalue').val(lastlatitude);
+                    $('#longvalue').val(lastlongitude);
+                    $('#propvalue').val(propertyModel.selected().PropertyID);
+                    $('#tenvalue').val(tenantModel.selected().TenantID);
+                    $('#ownervalue').val(ownerModel.selected().OwnerID);
                 }
                 if (currentStep == 'step6') {
                     change_step_up(6);

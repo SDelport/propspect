@@ -17,26 +17,8 @@ namespace PropSpect.Web.Controllers
         public ActionResult CreateInspection(int inspectionID, int page)
         {
             List<InspectionAreaItemResponse> response = new List<InspectionAreaItemResponse>();
-            response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("/api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
-            response.Clear();
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Good",
-                ItemDescription = "Kettle",
-                ItemID = 0,
-                ItemRepair = "Yes"
-            });
-            response.Add(new InspectionAreaItemResponse()
-            {
-                InspectionAreaID = 0,
-                InspectionAreaItemID = 0,
-                ItemCondition = "Bad",
-                ItemDescription = "Door",
-                ItemID = 0,
-                ItemRepair = "No"
-            });
+            response = ApiWrapper.Get<List<InspectionAreaItemResponse>>("api/inspection/inspectionRoomDetails/" + inspectionID + "/" + page);
+
             List<InspectionAreaItem> areaItem = new List<InspectionAreaItem>();
             foreach (var item in response)
             {
@@ -44,9 +26,9 @@ namespace PropSpect.Web.Controllers
                 {
                     InspectionAreaID = item.InspectionAreaID,
                     InspectionAreaItemID = item.InspectionAreaItemID,
-                    ItemCondition = item.ItemCondition,
-                    ItemDescription = item.ItemDescription,
-                    ItemRepair = item.ItemRepair,
+                    ItemCondition = item.ItemCondition ?? "",
+                    ItemDescription = item.ItemDescription ?? "",
+                    ItemRepair = item.ItemRepair ?? "",
                     ItemID = item.ItemID
                 });
             }
@@ -63,6 +45,23 @@ namespace PropSpect.Web.Controllers
 
 
             return View("PreInspectionChecks",model);
+        }
+
+        [Route("inspection/prepost")]
+        public ActionResult ConfirmDetails(string inspectiontype, string latitude,string longitude,int propertyID, int tenantID, int ownerID)
+        {
+            CreateInspectionRequest request = new CreateInspectionRequest()
+            {
+                Latitude = latitude,
+                Longitude = longitude,
+                OwnerID = ownerID,
+                PropertyID = propertyID,
+                TenantID = tenantID
+            };
+
+            var response = ApiWrapper.Post<InspectionResponse>("api/inspection/add", request);
+                
+            return Redirect("/inspection/"+response.InspectionID+"/0");
         }
 
 
