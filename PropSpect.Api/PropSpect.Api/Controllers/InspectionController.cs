@@ -92,6 +92,32 @@ namespace PropSpect.Api.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/inspection/areas/{InspectionID}")]
+        public JsonResult GetInspectionAreas(int InspectionID)
+        {    
+            return Json(db.InspectionAreas.Where(x => x.InspectionID == InspectionID).ToList().Select(x => new InspectionAreaResponse()
+            {
+                AreaID = x.AreaID,
+                InspectionAreaID = x.InspectionAreaID,
+                InspectionID = x.InspectionID
+            }), JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("api/inspection/areaItems/{AreaID}")]
+        public JsonResult GetInspectionAreaItems(int AreaID)
+        {
+            return Json(db.InspectionAreaItems.Where(x => x.InspectionAreaID == AreaID).ToList().Select(x => new InspectionAreaItemResponse()
+            {
+                InspectionAreaID = x.InspectionAreaItemID,
+                InspectionAreaItemID = x.InspectionAreaItemID,
+                ItemCondition = x.ItemCondition,
+                ItemDescription = x.ItemDescription,
+                ItemID = x.ItemID,
+                ItemRepair = x.ItemRepair
+               
+            }), JsonRequestBehavior.AllowGet);
+        }
+
         [Route("api/inspection/inspectionRoomDetails/{InspectionID}/{page}")]
         public JsonResult GetInspectionRoomPersistent(int InspectionID, int page)
         {

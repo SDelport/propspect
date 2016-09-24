@@ -1,6 +1,8 @@
 ﻿using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using PropSpect.Api.Models.Response;
+using PropSpect.Web.Controllers.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +23,7 @@ namespace PropSpect.Web.Controllers.PDF
         }
 
 
-        public void GeneratePDF()
+        public void GeneratePDF(int inspectionID)
         {
             //Initialise
             #region initialise
@@ -77,149 +79,72 @@ namespace PropSpect.Web.Controllers.PDF
             p.GenerateHeadingBlock(currentSection, page, gfx, currentWidth, currentLine);
             currentLine += 30;
 
-            PDFTestData testData = new PDFTestData();
+            List<InspectionAreaResponse> Areas = new List<InspectionAreaResponse>();
+            Areas = ApiWrapper.Get<List<InspectionAreaResponse>>($"/api/inspection/areas/{inspectionID}");
 
-            //Per Area -- This needs to be done in a foreach
-            #region Front Door
-            p.GenerateTitle("Front Door", page, gfx, currentWidth, currentLine);
-            currentLine += 30;
 
-            p.GenerateTableHeader(new string[]
+            //Per Area
+            foreach (var inspectionArea in Areas)
             {
-                "Area Item",
-                "Condition",
-                "Repair Needed"
-            }, page, gfx, currentWidth, currentLine);
-            currentLine += 14;
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
-            currentLine += 2;
+                AreaResponse area = ApiWrapper.Get<AreaResponse>($"/api/area/get/{inspectionArea.AreaID}");
 
-            foreach (var item in testData.FrontDoor)
-            {
-                if (currentLine >= page.Height - 40)
+                if (area != null)
                 {
-                    p.CreateNewPage(ref document, ref page, ref gfx);
-                    DrawHeaderAndFooter(document, page, gfx, "");
-                    currentLine = 80;
-                    p.GenerateTableHeader(new string[]
+                    List<InspectionAreaItemResponse> areaItems = ApiWrapper.Get<List<InspectionAreaItemResponse>>($"/api/inspection/areaItems/{inspectionArea.InspectionAreaID}");
+
+                    if (areaItems.Count > 0)
                     {
-                        "Area Item",
-                        "Condition",
-                        "Repair Needed"
-                    }, page, gfx, currentWidth, currentLine);
-                    currentLine += 14;
-                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
-                    currentLine += 2;
+                        #region Table Generation
+                        p.GenerateTitle(area.Name, page, gfx, currentWidth, currentLine);
+                        currentLine += 30;
+
+                        p.GenerateTableHeader(new string[]
+                        {
+                            "Area Item",
+                            "Condition",
+                            "Repair Needed"
+                        }, page, gfx, currentWidth, currentLine);
+                        currentLine += 14;
+                        p.GenerateDivider(page, gfx, currentWidth, currentLine);
+                        currentLine += 2;
+
+                        foreach (var item in areaItems)
+                        {
+                            if (currentLine >= page.Height - 40)
+                            {
+                                p.CreateNewPage(ref document, ref page, ref gfx);
+                                DrawHeaderAndFooter(document, page, gfx, "");
+                                currentLine = 80;
+                                p.GenerateTableHeader(new string[]
+                                {
+                                    "Area Item",
+                                    "Condition",
+                                    "Repair Needed"
+                                }, page, gfx, currentWidth, currentLine);
+                                currentLine += 14;
+                                p.GenerateDivider(page, gfx, currentWidth, currentLine);
+                                currentLine += 2;
+                            }
+
+                            p.GenerateTableRow(new string[]
+                            {
+                                item.ItemDescription,
+                                item.ItemCondition,
+                                item.ItemRepair
+                            }, page, gfx, currentWidth, currentLine);
+                            currentLine += 16;
+                        }
+                        p.GenerateDivider(page, gfx, currentWidth, currentLine);
+
+                        currentLine += 30;
+                        #endregion Table generation
+
+                    }
                 }
-
-                p.GenerateTableRow(new string[]
-                {
-                    item.ItemDescription,
-                    item.ItemCondition,
-                    item.ItemRepair
-                }, page, gfx, currentWidth, currentLine);
-                currentLine += 16;
             }
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
 
-            currentLine += 30;
-            #endregion Front Door
-
-            #region Hallway
-            p.GenerateTitle("Hallway", page, gfx, currentWidth, currentLine);
-            currentLine += 30;
-
-            p.GenerateTableHeader(new string[]
-            {
-                "Area Item",
-                "Condition",
-                "Repair Needed"
-            }, page, gfx, currentWidth, currentLine);
-            currentLine += 14;
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
-            currentLine += 2;
-
-            foreach (var item in testData.Hallway)
-            {
-                if (currentLine >= page.Height - 40)
-                {
-                    p.CreateNewPage(ref document, ref page, ref gfx);
-                    DrawHeaderAndFooter(document, page, gfx, "");
-                    currentLine = 80;
-                    p.GenerateTableHeader(new string[]
-                    {
-                        "Area Item",
-                        "Condition",
-                        "Repair Needed"
-                    }, page, gfx, currentWidth, currentLine);
-                    currentLine += 14;
-                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
-                    currentLine += 2;
-                }
-
-                p.GenerateTableRow(new string[]
-                {
-                    item.ItemDescription,
-                    item.ItemCondition,
-                    item.ItemRepair
-                }, page, gfx, currentWidth, currentLine);
-                currentLine += 16;
-            }
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
-            currentLine += 30;
-            #endregion Hallway
-
-
-            #region Kitchen
-            p.GenerateTitle("Kitchen", page, gfx, currentWidth, currentLine);
-            currentLine += 30;
-
-            p.GenerateTableHeader(new string[]
-            {
-                "Area Item",
-                "Condition",
-                "Repair Needed"
-            }, page, gfx, currentWidth, currentLine);
-            currentLine += 14;
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
-            currentLine += 2;
-
-            foreach (var item in testData.Kitchen)
-            {
-                if (currentLine >= page.Height - 40)
-                {
-                    p.CreateNewPage(ref document, ref page, ref gfx);
-                    DrawHeaderAndFooter(document, page, gfx, "");
-                    currentLine = 80;
-                    p.GenerateTableHeader(new string[]
-                    {
-                        "Area Item",
-                        "Condition",
-                        "Repair Needed"
-                    }, page, gfx, currentWidth, currentLine);
-                    currentLine += 14;
-                    p.GenerateDivider(page, gfx, currentWidth, currentLine);
-                    currentLine += 2;
-                }
-
-                p.GenerateTableRow(new string[]
-                {
-                    item.ItemDescription,
-                    item.ItemCondition,
-                    item.ItemRepair
-                }, page, gfx, currentWidth, currentLine);
-                currentLine += 16;
-            }
-            p.GenerateDivider(page, gfx, currentWidth, currentLine);
-
-            #endregion Kitchen
 
             #endregion Inspection Details
-
-
-
-
-
             p.Save(document);
         }
 

@@ -149,10 +149,13 @@ namespace PropSpect.Web.Controllers.PDF
             double tableCol = currentWidth;
             foreach (string item in headerArray)
             {
-                double colSize = (page.Width - currentWidth * 2) / headerArray.Length;
-                XRect rect = new XRect(tableCol, currentLine, colSize, 10);
-                gfx.DrawString(item, Font10, XBrushes.Black, rect,XStringFormats.TopLeft);
-                tableCol += colSize;
+                if (!string.IsNullOrEmpty(item))
+                {
+                    double colSize = (page.Width - currentWidth * 2) / headerArray.Length;
+                    XRect rect = new XRect(tableCol, currentLine, colSize, 10);
+                    gfx.DrawString(item, Font10, XBrushes.Black, rect, XStringFormats.TopLeft);
+                    tableCol += colSize;
+                }               
             }
             XRect divRect = new XRect(20, currentLine + 14, page.Width - currentWidth * 2, 0.4);
             gfx.DrawRectangle(XBrushes.LightGray, divRect);
