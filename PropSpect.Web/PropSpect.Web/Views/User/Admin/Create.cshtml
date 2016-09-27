@@ -3,13 +3,16 @@
     ViewBag.Title = "Create";
 
     MvcHtmlString ButtonText;
+    MvcHtmlString HeaderText;
     if (Model.LandlordAdminID > 0)
     {
         ButtonText = new MvcHtmlString("Save");
+        HeaderText = new MvcHtmlString("Edit");
     }
     else
     {
         ButtonText = new MvcHtmlString("Create");
+        HeaderText = new MvcHtmlString("Add");
     }
 }
 
@@ -18,7 +21,7 @@
 
         <form action="/user/add-user/a" method="POST" class="z-depth-1 white">
             <div class="lg-upper-form">
-                <h5 class="center-align"> Add @PropSpect.Api.Models.Helpers.Associations.GetLoginRole(Model.Type) </h5>
+                <h5 class="center-align"> @HeaderText Administrator </h5>
             </div>
             <div class="lg-lower-form">
 
@@ -52,7 +55,7 @@
                         <a onclick="return confirm('Are you sure you want to discard all changes?')" href="/user/list/admin">Discard</a>
                         @if (Model.LandlordAdminID > 0)
                         {
-                            <a onclick="return confirm('Are you sure you want to delete this owner?')" href="/user/delete/admin/@Model.LandlordAdminID" style="margin-left: 20px;" class="btn btn-primary red">Delete</a>
+                            <a onclick="return confirm('Are you sure you want to delete this administrator?')" href="/user/delete/admin/@Model.LandlordAdminID" style="margin-left: 20px;" class="btn btn-primary red">Delete</a>
                         }
                         <button style="margin-left: 20px;" class="btn btn-primary propspect-blue-background" role="submit">@ButtonText</button>
                     </div>
@@ -60,7 +63,7 @@
                         <a onclick="return confirm('Are you sure you want to discard all changes?')" href="/user/list/admin">Discard</a>
                         @if (Model.LandlordAdminID > 0)
                         {
-                            <a onclick="return confirm('Are you sure you want to delete this owner?')" href="/user/delete/admin/@Model.LandlordAdminID" style="margin-left: 20px;" class="btn btn-primary red btn-block">Delete</a>
+                            <a onclick="return confirm('Are you sure you want to delete this administrator?')" href="/user/delete/admin/@Model.LandlordAdminID" style="margin-left: 20px;" class="btn btn-primary red btn-block">Delete</a>
                         }
                         <button class="btn btn-primary propspect-blue-background btn-block" role="submit">@ButtonText</button>
                     </div>

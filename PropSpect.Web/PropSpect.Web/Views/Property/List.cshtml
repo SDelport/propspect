@@ -15,16 +15,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col m8 hide-on-small-and-down">
+            <div class="input-field col m2 s4 right">
+                <button data-bind="click: Search" class="btn btn-block">Search</button>
             </div>
-            <div class="input-field col m3 s8">
+            <div class="input-field col m3 s8 right">
                 <i class="material-icons prefix">search</i>
                 <input data-bind="value: SearchString" id="Property-search" type="text" class="validate">
                 <label for="icon_telephone">Search</label>
-            </div>
-            <div class="input-field col m1 s4">
-                <button data-bind="click: Search" class="btn btn-block">Search</button>
-            </div>
+            </div>           
             <div class="col s12">
                 <table class="highlight bordered">
                     <thead>
@@ -55,7 +53,7 @@
                                 }
                                 if (header == Model.Control.Headers.Last())
                                 {
-                                    <td><a data-bind="click: Edit">Edit</a> /  <a data-bind="attr: { href: 'manageAreas/' + PropertyID() }">Manage Areas</a></td>
+                                    <td><a href="#" data-bind="click: Edit">Edit</a> /  <a data-bind="attr: { href: 'manageAreas/' + PropertyID() }">Manage Areas</a></td>
                                 }
                             }
                         </tr>

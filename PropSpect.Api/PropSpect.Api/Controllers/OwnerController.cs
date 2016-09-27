@@ -172,26 +172,26 @@ namespace PropSpect.Api.Controllers
             foreach (var word in search.Trim().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
             {
                 data = data.Where(x =>
-                 x.Type.Contains(word) ||
-                 x.Name.Contains(word) ||
-                 x.UnitNr.Contains(word) ||
-                 x.ComplexName.Contains(word) ||
-                 x.StreetNumber.Contains(word) ||
-                 x.StreetName.Contains(word) ||
-                 x.Suburb.Contains(word) ||
-                 x.City.Contains(word) ||
+                 x.Type.ToLower().Contains(word) ||
+                 x.Name.ToLower().Contains(word) ||
+                 x.UnitNr.ToLower().Contains(word) ||
+                 x.ComplexName.ToLower().Contains(word) ||
+                 x.StreetNumber.ToLower().Contains(word) ||
+                 x.StreetName.ToLower().Contains(word) ||
+                 x.Suburb.ToLower().Contains(word) ||
+                 x.City.ToLower().Contains(word) ||
                  x.PostalCode.ToString().Contains(word) ||
                  x.TelWork.Contains(word) ||
                  x.TelMobile.Contains(word) ||
                  x.Fax.Contains(word) ||
-                 x.Email.Contains(word) ||
-                 x.Website.Contains(word) ||
-                 x.Title.Contains(word) ||
-                 x.FirstName.Contains(word) ||
-                 x.SecondName.Contains(word) ||
-                 x.ThirdName.Contains(word) ||
-                 x.LastName.Contains(word) ||
-                 x.IDNumber.Contains(word)
+                 x.Email.ToLower().Contains(word) ||
+                 x.Website.ToLower().Contains(word) ||
+                 x.Title.ToLower().Contains(word) ||
+                 x.FirstName.ToLower().Contains(word) ||
+                 x.SecondName.ToLower().Contains(word) ||
+                 x.ThirdName.ToLower().Contains(word) ||
+                 x.LastName.ToLower().Contains(word) ||
+                 x.IDNumber.ToLower().Contains(word)
                 );
             }
 

@@ -136,21 +136,21 @@ namespace PropSpect.Api.Controllers
             foreach (var word in search.Trim().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
             {
                 data = data.Where(x =>
-                 x.Email.Contains(word) ||
-                x.FirstName.Contains(word) ||
+                 x.Email.ToLower().Contains(word) ||
+                x.FirstName.ToLower().Contains(word) ||
                 x.IDNumber.Contains(word) ||
-                x.LastName.Contains(word) ||
-                x.PreferredName.Contains(word) ||
-                x.SecondName.Contains(word) ||
+                x.LastName.ToLower().Contains(word) ||
+                x.PreferredName.ToLower().Contains(word) ||
+                x.SecondName.ToLower().Contains(word) ||
                 x.TelMobile.Contains(word) ||
                 x.TelWork.Contains(word) ||
-                x.ThirdName.Contains(word) ||
-                x.Title.Contains(word) ||
-                x.Website.Contains(word) 
+                x.ThirdName.ToLower().Contains(word) ||
+                x.Title.ToLower().Contains(word) ||
+                x.Website.ToLower().Contains(word) 
                 );
             }
 
-            return Json(db.Tenants.ToList().Select(x => new TenantResponse()
+            return Json(data.Take(20).ToList().Select(x => new TenantResponse()
             {
                 TenantID = x.TenantID,
                 Email = x.Email,

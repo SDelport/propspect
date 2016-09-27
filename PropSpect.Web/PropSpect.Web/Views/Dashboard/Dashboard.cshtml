@@ -30,7 +30,7 @@
 
     @if (ProfileInfo.GetProfileInfo().Role == PropSpect.Api.Models.Response.LoginRole.SuperAdmin)
     {
-        @UI.Tile("Manage Admins", url: "/user/list/admin", icon: "supervisor_account");
+        @UI.Tile("Manage Administrators", url: "/user/list/admin", icon: "supervisor_account");
         @UI.Tile("Manage Landlords", url: "/landlord/list", icon: "contacts");
         @UI.Tile("Manage Agents", url: "/user/list/agent", icon: "assignment_ind");
         @UI.Tile("Manage Owners", url: "/user/list/owner", icon: "account_box");

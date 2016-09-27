@@ -100,7 +100,7 @@
                 
 
                 <h5 class="center">Is this where you are?</h5>
-                <p>If this is not your current location, make sure geolocation is enabled on your device.</p>
+                <p class="center">If this is not your current location, make sure geolocation is enabled on your device.</p>
                 <img id="map" src="" />
 
                 <div id="error"></div>
@@ -577,6 +577,7 @@
                     {
                         if(this.propertysearch() != '')
                             ServiceProxy.Get('/property/search/' + this.propertysearch(), this.SearchSuccess);
+                        console.log('Property Search initiated.');
                     }
                 };
 
@@ -599,6 +600,7 @@
                     {
                         if(this.ownersearch() != '')
                             ServiceProxy.Get('/owner/search/' + this.ownersearch(), this.SearchSuccess);
+                        console.log('Owner Search initiated.');
                     }
                 };
 
@@ -621,6 +623,7 @@
                     {
                         if(this.tenantsearch() != '')
                             ServiceProxy.Get('/tenant/search/' + this.tenantsearch(), this.SearchSuccess);
+                        console.log('Tenant Search initiated.');
                     }
                 };
 
