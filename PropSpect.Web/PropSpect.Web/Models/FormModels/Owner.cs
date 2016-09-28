@@ -36,6 +36,10 @@ namespace PropSpect.Web.Models.FormModels
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("ID Number")]
+        [MinLength(13, ErrorMessage = "Not a valid ID Number")]
+        [MaxLength(13, ErrorMessage = "Not a valid ID Number")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Not a valid ID Number")]
+        [Required]
         public string IDNumber { get; set; }
 
         [ListOptions(Hide = true)]

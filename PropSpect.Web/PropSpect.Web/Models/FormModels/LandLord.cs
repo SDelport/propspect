@@ -85,6 +85,10 @@ namespace PropSpect.Web.Models.FormModels
         public string ThirdName { get; set; }
         [ListOptions(Hide = true)]
         [EditOptions(Type = ControlType.Hidden)]
+        [MinLength(13, ErrorMessage = "Not a valid ID Number")]
+        [MaxLength(13, ErrorMessage = "Not a valid ID Number")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Not a valid ID Number")]
+        [Required]
         public string IDNumber { get; set; }
 
        

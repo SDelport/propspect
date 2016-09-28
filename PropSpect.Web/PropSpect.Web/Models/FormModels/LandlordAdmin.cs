@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,10 @@ namespace PropSpect.Web.Models.FormModels
         [DisplayName("Surname")]
         public string LastName { get; set; }
         [DisplayName("ID Number")]
+        [MinLength(13, ErrorMessage = "Not a valid ID Number")]
+        [MaxLength(13, ErrorMessage = "Not a valid ID Number")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Not a valid ID Number")]
+        [Required]
         public string IDNumber { get; set; }
         [DisplayName("Work Number")]
         public string TelWork { get; set; }
