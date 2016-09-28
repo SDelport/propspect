@@ -74,7 +74,6 @@
                         <h5 class="center">In/Out Inspection</h5>
                     </div>
                 </div>
-
                 <div class="col s6 m4 offset-m2 " onclick="step_change('step1', 'next', 'Quaterly')">
                     <div class="menu-item card-panel propspect-blue-background waves-effect waves-propspect">
                         <h5 class="center"><i class="medium material-icons">restore</i></h5>
@@ -82,40 +81,33 @@
                     </div>
                 </div>
             </div>
-
             @*  ==============   STEP 2 ================ *@
             <div id="step2" class="hide">
-
                 <div class="row">
                     <div class="col s3">
-                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>                            
+                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
                     </div>
                     <div class="col s6">
                         <h5 class="center">Location</h5>
                     </div>
                     <div class="col s3">
-                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'next')"><i class="material-icons right">keyboard_arrow_right</i>Confirm</a>                  
+                        <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step2', 'next')"><i class="material-icons right">keyboard_arrow_right</i>Confirm</a>
                     </div>
                 </div>
-                
 
                 <h5 class="center">Is this where you are?</h5>
                 <p class="center">If this is not your current location, make sure geolocation is enabled on your device.</p>
                 <img id="map" src="" />
-
                 <div id="error"></div>
-
-                    @*<div class="col s12 m10 offset-m1">
-                        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step2', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-                        <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step2', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
-                    </div>*@
+                @*<div class="col s12 m10 offset-m1">
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step2', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn right propspect-blue-background" onclick="step_change('step2', 'next')"><i class="material-icons right">skip_next</i>Confirm</a>
+                </div>*@
             </div>
-
-
 
             @*  ==============   STEP 3 ================ *@
             <div id="step3" class="hide">
-                <div id="propertysection">      
+                <div id="propertysection">
                     <div class="row">
                         <div class="col s3">
                             <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step3', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
@@ -124,7 +116,6 @@
                             <h5 class="center">Property Selection</h5>
                         </div>
                     </div>
-
 
                     <div class="row no-marg-bot">
                         <form class="col s12 pull-right">
@@ -140,7 +131,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div id="PropSearchMessage" data-bind="css:{hide : properties().length > 0 }">
                         <div class="col s12">
                             <br /><br />
@@ -164,7 +154,6 @@
                             <br /><br />
                         </div>
                     </div>
-
                     <div class="col s12">
                         <table class="highlight bordered" data-bind="css:{hide : properties().length == 0 }">
                             <thead>
@@ -192,16 +181,13 @@
                     </div>
                 </div>
                 @*<div class="col s12 m10 offset-m1">
-        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-    </div>*@
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step3', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                </div>*@
             </div>
-
-
 
             @*  ==============   STEP 4 ================ *@
             <div id="step4" class="hide">
                 <div id="tenantsection">
-
                     <div class="row">
                         <div class="col s3">
                             <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step4', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
@@ -210,7 +196,6 @@
                             <h5 class="center">Tenant Selection</h5>
                         </div>
                     </div>
-
                     <div class="row no-marg-bot">
                         <form class="col s12 pull-right">
                             <div class="row no-marg-bot">
@@ -225,7 +210,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div id="PropSearchMessage" data-bind="css:{hide : tenants().length > 0 }">
                         <div class="col s12 center" style="display:none;" id="tenant-search-loading">
                             <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
@@ -249,7 +233,6 @@
                             <h6 class="center">No tenants matching your search terms were found</h6>
                         </div>
                     </div>
-
                     <div class="col s12">
                         <table class="highlight bordered" data-bind="css:{hide : tenants().length == 0 }">
                             <thead>
@@ -276,17 +259,14 @@
                         </table>
                     </div>
                 </div>
-
                 @*<div class="col s12 m10 offset-m1">
-        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
-    </div>*@
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step4', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                </div>*@
             </div>
 
-
             @*  ==============   STEP 5 ================ *@
-            <div id="step5" class="hide">                
+            <div id="step5" class="hide">
                 <div id="ownersection">
-
                     <div class="row">
                         <div class="col s3">
                             <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step5', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
@@ -295,7 +275,6 @@
                             <h5 class="center">Owner Selection</h5>
                         </div>
                     </div>
-
                     <div class="row no-marg-bot">
                         <form class="col s12 pull-right">
                             <div class="row no-marg-bot">
@@ -310,7 +289,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div id="PropSearchMessage" data-bind="css:{hide : owners().length > 0 }">
                         <div class="col s12 center" style="display:none;" id="owner-search-loading">
                             <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
@@ -334,7 +312,6 @@
                             <h6 class="center">No owners matching your search terms were found</h6>
                         </div>
                     </div>
-
                     <div class="col s12">
                         <table class="highlight bordered" data-bind="css:{hide : owners().length == 0 }">
                             <thead>
@@ -364,17 +341,14 @@
                         </table>
                     </div>
                 </div>
-
                 @*<div class="col s12 m10 offset-m1">
-        <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
+                    <a class="waves-effect waves-light btn left propspect-blue-background" onclick="step_change('step5', 'back')"><i class="material-icons left">skip_previous</i>Back</a>
 
-    </div>*@
+                </div>*@
             </div>
 
-
             @*  ==============   STEP 6: Details ================ *@
-            <div id="step6" class="hide">                
-
+            <div id="step6" class="hide">
                 <div class="row">
                     <div class="col s3">
                         <a class="waves-effect waves-teal btn-flat left propspect-blue-text" onclick="step_change('step6', 'back')"><i class="material-icons left">keyboard_arrow_left</i>Back</a>
@@ -383,7 +357,6 @@
                         <h5 class="center">Final Details</h5>
                     </div>
                 </div>
-              
 
                 <div class="col s12">
                     <ul class="collection">
@@ -392,28 +365,28 @@
                             <strong><span class="title">Inspection Type</span></strong>
                             <p>
                                 <span id="inspectype"></span>
-                            </p>                           
+                            </p>
                         </li>
                         <li class="collection-item avatar final-item">
                             <i class="material-icons circle propspect-blue-background">room</i>
                             <strong><span class="title">Location</span></strong>
                             <p>
                                 <span id="long"></span> <span id="lat"></span>
-                            </p>                           
+                            </p>
                         </li>
                         <li class="collection-item avatar final-item">
                             <i class="material-icons circle propspect-blue-background">home</i>
                             <strong><span class="title">Property</span></strong>
                             <p>
                                 <span id="prop"></span>
-                            </p>                           
+                            </p>
                         </li>
                         <li class="collection-item avatar final-item">
                             <i class="material-icons circle propspect-blue-background">account_circle</i>
                             <strong><span class="title">Tenant</span></strong>
                             <p>
                                 <span id="tenant"></span>
-                            </p>                           
+                            </p>
                         </li>
                         <li class="collection-item avatar final-item">
                             <i class="material-icons circle propspect-blue-background">account_box</i>
@@ -433,15 +406,27 @@
                     <input type="hidden" name="longitude" id="longvalue" />
                     <input type="hidden" name="propertyID" id="propvalue" />
                     <input type="hidden" name="tenantID" id="tenvalue" />
-                    <input type="hidden" name="ownerID" id="ownervalue"/>
+                    <input type="hidden" name="ownerID" id="ownervalue" />
                 </form>
+            </div>
+            <div id="step7" class="hide">
+                <div>
+                    <div class="col s12">
+                        <br /><br />
+                        <div class="col s12 center">
+                            <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
+                        </div>
+                        <br />
+                        <h6 class="center">Please wait while your inspection forms are generated</h6>
+                        <br /><br />
+                    </div>
+                </div>
             </div>
 
             <p class="white-text">.</p>
             <div class="progress">
                 <div id="progress-p" class="determinate" style="width: 100%"></div>
             </div>
-
 
         </div>
     </div>
