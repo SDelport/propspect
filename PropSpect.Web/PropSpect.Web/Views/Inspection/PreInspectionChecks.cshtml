@@ -144,11 +144,16 @@
                     <div id="PropSearchMessage" data-bind="css:{hide : properties().length > 0 }">
                         <div class="col s12">
                             <br /><br />
-                            <div class="col s12 center">
-                                <i class="material-icons center propspect-blue-text font-42">info</i>
+                            <div class="col s12 center" style="display:none;" id="property-search-loading">
+                                <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
                             </div>
-                            <br />
-                            <h6 class="center">Please search for the <strong>property</strong> you would like to select for the inspection</h6>
+                            <div id="property-search-defaultmsg">
+                                <div class="col s12 center">
+                                    <i class="material-icons center propspect-blue-text font-42">info</i>
+                                </div>
+                                <br />
+                                <h6 class="center">Please search for the <strong>property</strong> you would like to select for the inspection</h6>
+                            </div>
                             <br /><br />
                         </div>
                     </div>
@@ -215,14 +220,19 @@
                     </div>
 
                     <div id="PropSearchMessage" data-bind="css:{hide : tenants().length > 0 }">
-                        <div class="col s12">
-                            <br /><br />
-                            <div class="col s12 center">
-                                <i class="material-icons center propspect-blue-text font-42">info</i>
+                        <div class="col s12 center" style="display:none;" id="tenant-search-loading">
+                            <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
+                        </div>
+                        <div id="tenant-search-defaultmsg">
+                            <div class="col s12">
+                                <br /><br />
+                                <div class="col s12 center">
+                                    <i class="material-icons center propspect-blue-text font-42">info</i>
+                                </div>
+                                <br />
+                                <h6 class="center">Please search for the <strong>tenant</strong> you would like to select for the inspection</h6>
+                                <br /><br />
                             </div>
-                            <br />
-                            <h6 class="center">Please search for the <strong>tenant</strong> you would like to select for the inspection</h6>
-                            <br /><br />
                         </div>
                     </div>
 
@@ -288,14 +298,19 @@
                     </div>
 
                     <div id="PropSearchMessage" data-bind="css:{hide : owners().length > 0 }">
-                        <div class="col s12">
-                            <br /><br />
-                            <div class="col s12 center">
-                                <i class="material-icons center propspect-blue-text font-42">info</i>
+                        <div class="col s12 center" style="display:none;" id="owner-search-loading">
+                            <object data="..\..\..\content/images/loading.svg" type="image/svg+xml" id="property-loading" style="width:100px; height: 100px;top:-50px;"></object>
+                        </div>
+                        <div id="owner-search-defaultmsg">
+                            <div class="col s12">
+                                <br /><br />
+                                <div class="col s12 center">
+                                    <i class="material-icons center propspect-blue-text font-42">info</i>
+                                </div>
+                                <br />
+                                <h6 class="center">Please search for the <strong>owner</strong> you would like to select for the inspection</h6>
+                                <br /><br />
                             </div>
-                            <br />
-                            <h6 class="center">Please search for the <strong>owner</strong> you would like to select for the inspection</h6>
-                            <br /><br />
                         </div>
                     </div>
 
@@ -576,13 +591,23 @@
                     Search: function()
                     {
                         if(this.propertysearch() != '')
+                        {
+                            propertyModel.properties([]);
+                            $("#property-search-defaultmsg").slideUp("slow");
+                            $("#property-search-loading").slideDown("slow");
                             ServiceProxy.Get('/property/search/' + this.propertysearch(), this.SearchSuccess);
+                        }
+                        else{
+                            propertyModel.properties([]);
+                            $("#property-search-defaultmsg").slideDown("slow");
+                        }
                         console.log('Property Search initiated.');
                     }
                 };
 
             propertyModel.SearchSuccess= function(items)
             {
+                $("#property-search-loading").slideUp("slow");
                 propertyModel.properties(items)
             }
 
@@ -598,14 +623,25 @@
                     },
                     Search: function()
                     {
+
                         if(this.ownersearch() != '')
+                        {
+                            ownerModel.owners([]);
+                            $("#owner-search-defaultmsg").slideUp("slow");
+                            $("#owner-search-loading").slideDown("slow");
                             ServiceProxy.Get('/owner/search/' + this.ownersearch(), this.SearchSuccess);
+                        }
+                        else{
+                            ownerModel.owners([]);
+                            $("#owner-search-defaultmsg").slideDown("slow");
+                        }
                         console.log('Owner Search initiated.');
                     }
                 };
 
             ownerModel.SearchSuccess= function(items)
             {
+                $("#owner-search-loading").slideUp("slow");
                 ownerModel.owners(items)
             }
 
@@ -622,13 +658,23 @@
                     Search: function()
                     {
                         if(this.tenantsearch() != '')
+                        {
+                            tenantModel.tenants([]);
+                            $("#tenant-search-defaultmsg").slideUp("slow");
+                            $("#tenant-search-loading").slideDown("slow");
                             ServiceProxy.Get('/tenant/search/' + this.tenantsearch(), this.SearchSuccess);
+                        }
+                        else{
+                            tenantModel.tenants([]);
+                            $("#tenant-search-defaultmsg").slideDown("slow");
+                        }
                         console.log('Tenant Search initiated.');
                     }
                 };
 
             tenantModel.SearchSuccess= function(items)
             {
+                $("#tenant-search-loading").slideUp("slow");
                 tenantModel.tenants(items)
             }
 
