@@ -154,6 +154,13 @@
                                 <br />
                                 <h6 class="center">Please search for the <strong>property</strong> you would like to select for the inspection</h6>
                             </div>
+                            <div id="property-search-noresults" style="display:none;">
+                                <div class="col s12 center">
+                                    <i class="material-icons center propspect-blue-text font-42">info</i>
+                                </div>
+                                <br />
+                                <h6 class="center">No properties matching your search terms were found</h6>
+                            </div>
                             <br /><br />
                         </div>
                     </div>
@@ -234,6 +241,13 @@
                                 <br /><br />
                             </div>
                         </div>
+                        <div id="tenant-search-noresults" style="display:none;">
+                            <div class="col s12 center">
+                                <i class="material-icons center propspect-blue-text font-42">info</i>
+                            </div>
+                            <br />
+                            <h6 class="center">No tenants matching your search terms were found</h6>
+                        </div>
                     </div>
 
                     <div class="col s12">
@@ -311,6 +325,13 @@
                                 <h6 class="center">Please search for the <strong>owner</strong> you would like to select for the inspection</h6>
                                 <br /><br />
                             </div>
+                        </div>
+                        <div id="owner-search-noresults" style="display:none;">
+                            <div class="col s12 center">
+                                <i class="material-icons center propspect-blue-text font-42">info</i>
+                            </div>
+                            <br />
+                            <h6 class="center">No owners matching your search terms were found</h6>
                         </div>
                     </div>
 
@@ -590,6 +611,7 @@
                     },
                     Search: function()
                     {
+                        $("#property-search-noresults").hide();
                         if(this.propertysearch() != '')
                         {
                             propertyModel.properties([]);
@@ -607,8 +629,10 @@
 
             propertyModel.SearchSuccess= function(items)
             {
-                $("#property-search-loading").slideUp("slow");
-                propertyModel.properties(items)
+                $("#property-search-loading").slideUp("slow",function(){
+                    propertyModel.properties(items)
+                    $("#property-search-noresults").slideDown("slow");
+                });
             }
 
             ownerModel =
@@ -623,7 +647,7 @@
                     },
                     Search: function()
                     {
-
+                        $("#owner-search-noresults").hide();
                         if(this.ownersearch() != '')
                         {
                             ownerModel.owners([]);
@@ -641,8 +665,10 @@
 
             ownerModel.SearchSuccess= function(items)
             {
-                $("#owner-search-loading").slideUp("slow");
-                ownerModel.owners(items)
+                $("#owner-search-loading").slideUp("slow",function(){
+                    ownerModel.owners(items)
+                    $("#owner-search-noresults").slideDown("slow");
+                });
             }
 
             tenantModel =
@@ -657,6 +683,7 @@
                     },
                     Search: function()
                     {
+                        $("#tenant-search-noresults").hide();
                         if(this.tenantsearch() != '')
                         {
                             tenantModel.tenants([]);
@@ -674,8 +701,10 @@
 
             tenantModel.SearchSuccess= function(items)
             {
-                $("#tenant-search-loading").slideUp("slow");
-                tenantModel.tenants(items)
+                $("#tenant-search-loading").slideUp("slow",function(){
+                    tenantModel.tenants(items)
+                    $("#tenant-search-noresults").slideDown("slow");
+                });
             }
 
 
