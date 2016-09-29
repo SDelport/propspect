@@ -54,6 +54,13 @@ namespace PropSpect.Web.Controllers
             return View("InspectionRoom",model);
         }
 
+        [Route("inspection/view/list")]
+        public ActionResult List()
+        {
+            List<InspectionResponse> response = ApiWrapper.Get<List<InspectionResponse>>("/api/inspection");
+            ListAsyncFormModel formModel = ListAsyncFormModel.Create(InspectionItem.ToList(response));
+            return View("List",formModel);
+        }
         [Route("inspection/start-inspection")]
         public ActionResult SelectProperty()
         {

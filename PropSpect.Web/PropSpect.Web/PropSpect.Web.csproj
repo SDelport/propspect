@@ -166,6 +166,8 @@
     <Compile Include="Models\FormModels\Area.cs" />
     <Compile Include="Models\FormModels\AreaItem.cs" />
     <Compile Include="Models\FormModels\Dashboard.cs" />
+    <Compile Include="Models\FormModels\Inspection.cs" />
+    <Compile Include="Models\FormModels\InspectionItem.cs" />
     <Compile Include="Models\FormModels\InspectionAreaItem.cs" />
     <Compile Include="Models\FormModels\InspectionAreaItemsCheck.cs" />
     <Compile Include="Models\FormModels\InspectionPart.cs" />
@@ -399,6 +401,7 @@
     <Content Include="Views\Area\ManageAreas.cshtml" />
     <Content Include="Views\AreaItem\ManageAreaItems.cshtml" />
     <Content Include="Views\Area\selectAreaToAdd.cshtml" />
+    <Content Include="Views\Inspection\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

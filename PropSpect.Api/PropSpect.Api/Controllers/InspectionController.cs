@@ -86,6 +86,7 @@ namespace PropSpect.Api.Controllers
                 CarpetsComments = x.CarpetsComments,
                 GardenClean = x.GardenClean,
                 GardenComments = x.GardenComments,
+                PropertyID = x.PropertyID,
                 PoolClean = x.PoolClean,
                 PoolComments = x.PoolComments,
                 OverallComments = x.OverallComments
