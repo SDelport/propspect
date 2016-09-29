@@ -61,6 +61,44 @@ namespace PropSpect.Web.Controllers
             ListAsyncFormModel formModel = ListAsyncFormModel.Create(InspectionItem.ToList(response));
             return View("List",formModel);
         }
+        [Route("inspectionitem/search")]
+        public JsonResult SearchInspectionNoFilter()
+        {
+            List<InspectionResponse> response = ApiWrapper.Get<List<InspectionResponse>>("/api/inspection");
+            List<InspectionItem> items = InspectionItem.ToList(response);
+            return Json(items, JsonRequestBehavior.AllowGet);
+        }
+        [Route("inspectionitem/search/{searchTerm}")]
+        public JsonResult SearchInspection(string searchTerm)
+        {
+            List<InspectionResponse> response = ApiWrapper.Get<List<InspectionResponse>>("/api/inspection");
+            List<InspectionItem> items = InspectionItem.ToList(response);
+            List<InspectionItem> filteredItems = new List<InspectionItem>();
+            foreach (var item in items)
+            {
+                PropertyResponse property = ApiWrapper.Get<PropertyResponse>("api/property/" + item.PropertyID);
+                if (property!=null)
+                {
+                    if (property.StreetName!=null)
+                    {
+                        if (property.StreetName.Contains(searchTerm))
+                        {
+                            filteredItems.Add(item);
+                            continue;
+                        }
+                    }
+                }
+                if (item.Date!=null)
+                {
+                    if (item.Date.ToString().Contains(searchTerm))
+                    {
+                        filteredItems.Add(item);
+                        continue;
+                    }
+                }
+            }
+            return Json(filteredItems, JsonRequestBehavior.AllowGet);
+        }
         [Route("inspection/start-inspection")]
         public ActionResult SelectProperty()
         {
