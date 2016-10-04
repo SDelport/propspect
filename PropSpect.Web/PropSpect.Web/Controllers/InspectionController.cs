@@ -145,8 +145,6 @@ namespace PropSpect.Web.Controllers
             {
                 if (item.name == "areaID")
                     request.AreaID = int.Parse(item.value);
-                else if (item.name == "name")
-                    request.ItemDescription = item.value;
                 else if (item.name == "condition")
                     request.ItemCondition = item.value.Substring(3);
                 else if (item.name == "repair-needed")
