@@ -20,6 +20,33 @@ namespace PropSpect.Api.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("api/inspection/{id}/completed")]
+        public JsonResult Completed(int id)
+        {
+            Inspection inspection = db.Inspections.Where(x => x.InspectionID == id).FirstOrDefault();
+            inspection.Completed = true;
+            db.SaveChanges();
+            InspectionResponse response = new InspectionResponse()
+            {
+                InspectionID = inspection.InspectionID,
+                Type = inspection.Type,
+                Date = inspection.Date,
+                EntityType = inspection.EntityType,
+                EntityID = inspection.EntityID,
+                HouseClean = inspection.HouseClean,
+                HouseComments = inspection.HouseComments,
+                CarpetsClean = inspection.CarpetsClean,
+                CarpetsComments = inspection.CarpetsComments,
+                GardenClean = inspection.GardenClean,
+                GardenComments = inspection.GardenComments,
+                PropertyID = inspection.PropertyID,
+                PoolClean = inspection.PoolClean,
+                PoolComments = inspection.PoolComments,
+                OverallComments = inspection.OverallComments,
+                Completed = inspection.Completed
+            };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [Route("api/inspection/add")]
         public JsonResult Add(CreateInspectionRequest request)
@@ -65,7 +92,7 @@ namespace PropSpect.Api.Controllers
 
             InspectionResponse response = new InspectionResponse();
             response.InspectionID = inspection.InspectionID;
-
+            response.Completed = false;
             return Json(response);
         }
 
@@ -89,7 +116,8 @@ namespace PropSpect.Api.Controllers
                 PropertyID = x.PropertyID,
                 PoolClean = x.PoolClean,
                 PoolComments = x.PoolComments,
-                OverallComments = x.OverallComments
+                OverallComments = x.OverallComments,
+                Completed = x.Completed
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -190,7 +218,8 @@ namespace PropSpect.Api.Controllers
                 GardenComments = x.GardenComments,
                 PoolClean = x.PoolClean,
                 PoolComments = x.PoolComments,
-                OverallComments = x.OverallComments
+                OverallComments = x.OverallComments,
+                Completed = x.Completed
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
     }

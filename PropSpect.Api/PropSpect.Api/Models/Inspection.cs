@@ -39,5 +39,7 @@ namespace PropSpect.Api.Models
         public string PoolComments { get; set; }
         [Column("prop_inspection_overall_comments")]
         public string OverallComments { get; set; }
+        [Column("prop_inspection_completed")]
+        public Boolean Completed { get; set; }
     }
 }

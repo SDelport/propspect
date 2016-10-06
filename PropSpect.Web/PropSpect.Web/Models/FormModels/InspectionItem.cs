@@ -36,6 +36,7 @@ namespace PropSpect.Web.Models.FormModels
         public string PoolComments { get; set; }
         [DisplayName("Overall Comments")]
         public string OverallComments { get; set; }
+        public string Completed { get; set; }
         public InspectionItem()
         {
 
@@ -57,6 +58,7 @@ namespace PropSpect.Web.Models.FormModels
             this.PoolComments = response.PoolComments;
             this.PropertyID = response.PropertyID;
             this.Type = response.Type;
+            this.Completed = response.Completed ? "Y":"N";
         }
         public static List<InspectionItem> ToList(List<InspectionResponse> responses)
         {

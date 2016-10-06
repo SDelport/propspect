@@ -23,5 +23,6 @@ namespace PropSpect.Api.Models.Response
         public string PoolClean { get; set; }
         public string PoolComments { get; set; }
         public string OverallComments { get; set; }
+        public bool Completed { get; set; }
     }
 }

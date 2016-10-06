@@ -14,6 +14,13 @@ namespace PropSpect.Web.Controllers
     [LoggedIn]
     public class InspectionController : Controller
     {
+        [Route("inspection/{inspectionID}/completed")]
+        public ActionResult InspectionCompleted(int inspectionID)
+        {
+            ApiWrapper.Get<InspectionResponse>("/api/inspection/" + inspectionID + "/completed/");
+            return Redirect("/inspection/view/list");
+        }
+
         [Route("inspection/{inspectionID}/{page}")]
         public ActionResult CreateInspection(int inspectionID, int page)
         {
@@ -33,7 +40,7 @@ namespace PropSpect.Web.Controllers
                     ItemID = item.ItemID
                 });
             }
-            InspectionAreaItemsCheck model = new InspectionAreaItemsCheck(page==0,true, areaItem, "","#",page==0?"#":""+(page-1));
+            InspectionAreaItemsCheck model = new InspectionAreaItemsCheck(page==0,true, areaItem, "","completed",page==0?"#":""+(page-1));
             if (areaItem.Count>0)
             {
                 try
